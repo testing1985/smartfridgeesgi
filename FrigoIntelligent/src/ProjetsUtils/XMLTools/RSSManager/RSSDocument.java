@@ -45,7 +45,6 @@ public class RSSDocument {
 			}
 			
 			m_vEntries.add( new RSSEntry( sTitle , sURL , sContent , sPubDate ) );
-			System.out.println( m_vEntries.lastElement() );
 		}
 	}
 }
