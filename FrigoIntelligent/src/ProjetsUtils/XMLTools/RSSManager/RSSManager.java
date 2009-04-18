@@ -8,12 +8,30 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap; 
+import java.util.Set;
 
 public class RSSManager {
 	
 	private Map<String , RSSDocument> m_mDocuments = null;
-	private DocumentBuilderFactory 	  m_oFactory	= null;
+	private DocumentBuilderFactory 	  m_oFactory   = null;
 	private DocumentBuilder 	      m_oBuilder   = null;
+	
+	public String[] getFeedList()
+	{
+		return (String[]) m_mDocuments.keySet().toArray();
+	}
+	
+	public void setFeedList( String[] vList )
+	{
+		m_mDocuments.clear();
+		addFeedList( vList );
+	}
+	
+	public void addFeedList( String[] vList )
+	{
+		for( int i = 0 ; i < vList.length ; i++ )
+			addFeed( vList[i] );
+	}
 	
 	public RSSManager()
 	{
@@ -28,11 +46,11 @@ public class RSSManager {
 		}
 	}
 	
-	public Boolean AddFeed( String sFeedURL )
+	public Boolean addFeed( String sFeedURL )
 	{
 		try {
-			m_mDocuments.put( sFeedURL , new RSSDocument ( m_oBuilder.parse( sFeedURL ) ) );
-			
+			if( ! m_mDocuments.containsKey(sFeedURL) )
+				m_mDocuments.put( sFeedURL , new RSSDocument ( m_oBuilder.parse( sFeedURL ) ) );
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

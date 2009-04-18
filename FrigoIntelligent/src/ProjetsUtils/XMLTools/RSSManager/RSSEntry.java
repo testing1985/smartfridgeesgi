@@ -34,15 +34,15 @@ public class RSSEntry {
 		return m_sContent;
 	}
 
-	public void setM_sContent(String sContent) {
+	public void setContent(String sContent) {
 		m_sContent = sContent;
 	}
 
-	public String getM_sPubDate() {
+	public String getPubDate() {
 		return m_sPubDate;
 	}
 
-	public void setM_sPubDate(String sPubDate) {
+	public void setPubDate(String sPubDate) {
 		m_sPubDate = sPubDate;
 	}
 

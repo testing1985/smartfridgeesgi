@@ -12,7 +12,7 @@ public class SmartFridgeApp {
 	{
 		m_oRSSManager = new RSSManager();
 		
-		m_oRSSManager.AddFeed( "http://www.developpez.com/rss.php" );
+		m_oRSSManager.addFeed( "http://www.developpez.com/rss.php" );
 	}
 
 }
