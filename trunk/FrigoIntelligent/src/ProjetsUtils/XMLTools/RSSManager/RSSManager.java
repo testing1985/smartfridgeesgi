@@ -16,9 +16,18 @@ public class RSSManager {
 	private DocumentBuilderFactory 	  m_oFactory   = null;
 	private DocumentBuilder 	      m_oBuilder   = null;
 	
+	public int getFeedCount()
+	{
+		return m_mDocuments.size();
+	}
+	
 	public String[] getFeedList()
 	{
-		return (String[]) m_mDocuments.keySet().toArray();
+		Object[] vArray = m_mDocuments.keySet().toArray();
+		String[] vResult = new String[ vArray.length ];
+		for( int i = 0 ; i < vArray.length ; i++ )
+			vResult[i] = (String)vArray[i];
+		return vResult;
 	}
 	
 	public void setFeedList( String[] vList )
@@ -29,6 +38,7 @@ public class RSSManager {
 	
 	public void addFeedList( String[] vList )
 	{
+		
 		for( int i = 0 ; i < vList.length ; i++ )
 			addFeed( vList[i] );
 	}
