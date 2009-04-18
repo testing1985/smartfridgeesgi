@@ -48,6 +48,4 @@ public class RSSDocument {
 			System.out.println( m_vEntries.lastElement() );
 		}
 	}
-	
-	
 }
