@@ -1,14 +1,14 @@
 import ProjetsUtils.XMLTools.RSSManager.*;
 
-public class FrigoIntelligentApp {
+public class SmartFridgeApp {
 
 	private RSSManager m_oRSSManager;
 	
 	public static void main(String[] args) {
-		FrigoIntelligentApp oApp = new FrigoIntelligentApp();
+		SmartFridgeApp oApp = new SmartFridgeApp();
 	}
 	
-	public FrigoIntelligentApp()
+	public SmartFridgeApp()
 	{
 		m_oRSSManager = new RSSManager();
 		
