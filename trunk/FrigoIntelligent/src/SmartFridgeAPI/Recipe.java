@@ -22,27 +22,27 @@ public class Recipe {
 		m_vRecipeStages.add( new RecipeStage() );
 	}
 
-	public Vector<RecipeStage> getM_RecipeStages() {
+	public Vector<RecipeStage> getRecipeStages() {
 		return m_vRecipeStages;
 	}
 
-	public void setM_RecipeStages(Vector<RecipeStage> recipeStages) {
+	public void setRecipeStages(Vector<RecipeStage> recipeStages) {
 		m_vRecipeStages = recipeStages;
 	}
 
-	public String getM_sName() {
+	public String getName() {
 		return m_sName;
 	}
 
-	public void setM_sName(String name) {
+	public void setName(String name) {
 		m_sName = name;
 	}
 
-	public int getM_iType() {
+	public int getType() {
 		return m_iType;
 	}
 
-	public void setM_iType(int type) {
+	public void setType(int type) {
 		m_iType = type;
 	}
 	

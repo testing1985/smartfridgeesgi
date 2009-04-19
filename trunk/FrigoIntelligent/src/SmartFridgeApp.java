@@ -21,7 +21,7 @@ public class SmartFridgeApp {
 		SmartFridgeApp Fridge = new SmartFridgeApp();
 		for( int i = 0; i < Fridge.m_vAliments.size() ; i++ )
 		{
-			System.out.println( Fridge.m_vAliments.elementAt(i).getM_sName() );
+			System.out.println( Fridge.m_vAliments.elementAt(i).getName() );
 		}
 		
 	}
@@ -47,27 +47,27 @@ public class SmartFridgeApp {
 		
 	}
 		
-	public Vector<Menu> getM_Menus() {
+	public Vector<Menu> getMenus() {
 		return m_vMenus;
 	}
 
-	public void setM_Menus(Vector<Menu> menus) {
+	public void setMenus(Vector<Menu> menus) {
 		m_vMenus = menus;
 	}
 
-	public Vector<Aliment> getM_Aliments() {
+	public Vector<Aliment> getAliments() {
 		return m_vAliments;
 	}
 
-	public void setM_Aliments(Vector<Aliment> aliments) {
+	public void setAliments(Vector<Aliment> aliments) {
 		m_vAliments = aliments;
 	}
 
-	public RSSManager getM_oRSSManager() {
+	public RSSManager getRSSManager() {
 		return m_oRSSManager;
 	}
 
-	public void setM_oRSSManager(RSSManager manager) {
+	public void setRSSManager(RSSManager manager) {
 		m_oRSSManager = manager;
 	}
 		

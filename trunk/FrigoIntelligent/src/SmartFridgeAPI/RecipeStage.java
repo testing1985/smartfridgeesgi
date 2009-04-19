@@ -29,35 +29,35 @@ public class RecipeStage {
 		m_sDescription = description;
 	}
 
-	public int getM_iTime() {
+	public int getTime() {
 		return m_iTime;
 	}
 
-	public void setM_iTime(int time) {
+	public void setTime(int time) {
 		m_iTime = time;
 	}
 
-	public int getM_iDifficulty() {
+	public int getDifficulty() {
 		return m_iDifficulty;
 	}
 
-	public void setM_iDifficulty(int difficulty) {
+	public void setDifficulty(int difficulty) {
 		m_iDifficulty = difficulty;
 	}
 
-	public Vector<Aliment> getM_Aliments() {
+	public Vector<Aliment> getAliments() {
 		return m_vAliments;
 	}
 
-	public void setM_Aliments(Vector<Aliment> aliments) {
+	public void setAliments(Vector<Aliment> aliments) {
 		m_vAliments = aliments;
 	}
 
-	public String getM_sDescription() {
+	public String getDescription() {
 		return m_sDescription;
 	}
 
-	public void setM_sDescription(String description) {
+	public void setDescription(String description) {
 		m_sDescription = description;
 	}
 }

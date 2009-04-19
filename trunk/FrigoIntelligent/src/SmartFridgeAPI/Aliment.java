@@ -34,43 +34,43 @@ public class Aliment {
 		m_iPeremption = peremption;
 	}
 
-	public String getM_sName() {
+	public String getName() {
 		return m_sName;
 	}
 
-	public void setM_sName(String name) {
+	public void setName(String name) {
 		m_sName = name;
 	}
 
-	public int getM_iType() {
+	public int getType() {
 		return m_iType;
 	}
 
-	public void setM_iType(int type) {
+	public void setType(int type) {
 		m_iType = type;
 	}
 
-	public int getM_iQuantity() {
+	public int getQuantity() {
 		return m_iQuantity;
 	}
 
-	public void setM_iQuantity(int quantity) {
+	public void setQuantity(int quantity) {
 		m_iQuantity = quantity;
 	}
 
-	public float getM_iPrice() {
+	public float getPrice() {
 		return m_iPrice;
 	}
 
-	public void setM_iPrice(float price) {
+	public void setPrice(float price) {
 		m_iPrice = price;
 	}
 
-	public long getM_iPeremption() {
+	public long getPeremption() {
 		return m_iPeremption;
 	}
 
-	public void setM_iPeremption(long peremption) {
+	public void setPeremption(long peremption) {
 		m_iPeremption = peremption;
 	}
 	
