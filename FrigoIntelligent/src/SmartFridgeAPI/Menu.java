@@ -21,19 +21,19 @@ public class Menu {
 		m_vRecipes = recipes;
 	}
 
-	public String getM_sName() {
+	public String getName() {
 		return m_sName;
 	}
 
-	public void setM_sName(String name) {
+	public void setName(String name) {
 		m_sName = name;
 	}
 
-	public Vector<Recipe> getM_Recipes() {
+	public Vector<Recipe> getRecipes() {
 		return m_vRecipes;
 	}
 
-	public void setM_Recipes(Vector<Recipe> recipes) {
+	public void setRecipes(Vector<Recipe> recipes) {
 		m_vRecipes = recipes;
 	}
 }
