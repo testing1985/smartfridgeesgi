@@ -1,0 +1,3 @@
+¤ Install mysql driver:
+  Copy mysql-connector-java-5.1.7-bin.jar in the ClassPath 
+    Maybe in 'C:\Program Files\Java\jre1.6.0_07\lib\ext'
