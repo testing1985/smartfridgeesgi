@@ -1,8 +1,5 @@
 package SmartFridgeAPI;
 
-
-
-
 public class Aliment {
 	private String m_sName;
 	
@@ -72,6 +69,11 @@ public class Aliment {
 
 	public void setPeremption(long peremption) {
 		m_iPeremption = peremption;
+	}
+	
+	public void print()
+	{
+		System.out.println( m_iQuantity + " " + m_sName + " for " + m_iPrice + "€, best before " + m_iPeremption + ", type is " + m_iType ) ;
 	}
 	
 }

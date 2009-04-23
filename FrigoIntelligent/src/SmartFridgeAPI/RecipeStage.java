@@ -60,4 +60,10 @@ public class RecipeStage {
 	public void setDescription(String description) {
 		m_sDescription = description;
 	}
+	
+	public void print()
+	{
+		System.out.println( "This stage takes " + m_iTime + " minutes and its difficulty is " + m_iDifficulty );
+		System.out.println( m_sDescription );
+	}
 }

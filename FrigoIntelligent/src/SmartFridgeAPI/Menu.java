@@ -36,4 +36,13 @@ public class Menu {
 	public void setRecipes(Vector<Recipe> recipes) {
 		m_vRecipes = recipes;
 	}
+	
+	public void print()
+	{
+		System.out.println( m_sName ) ;
+		int size = m_vRecipes.size();
+		for( int i = 0; i < size; i++ ){
+			m_vRecipes.elementAt( i ).print();
+		}
+	}
 }

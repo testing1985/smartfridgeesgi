@@ -55,4 +55,14 @@ public class Recipe {
 	    calendar2.set( calendar.get(calendar.YEAR), calendar.get(calendar.MONTH),calendar.get(calendar.DAY_OF_MONTH) + amount );
 	    return calendar2.getTime();
 	}
+	
+	public void print()
+	{
+		System.out.println( "Recipe type is " + m_iType ) ;
+		int size = m_vRecipeStages.size();
+		for( int i = 0; i < size; i++ ){
+			System.out.println( "Stage " + i ) ;
+			m_vRecipeStages.elementAt( i ).print();
+		}
+	}
 }
