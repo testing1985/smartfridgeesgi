@@ -12,32 +12,44 @@ import java.util.Vector;
 
 public class SmartFridgeApp {
 	private SmartFridge m_oSmartFridge;
-	private RSSManager m_oRSSManager;
+	private RSSManager  m_oRSSManager;
+	private Session     m_oSession = null;
 	
 	public static void main( String[] args )
 	{		
-		SmartFridgeApp sma = new SmartFridgeApp();
-		
+		SmartFridgeApp oSmartFridgeApp = new SmartFridgeApp();		
 	}
 	
 	public SmartFridgeApp()
 	{
 		try {
-			XMLManager.encodeToFile(m_oRSSManager, "RSSManager.xml");
-			m_oRSSManager = (RSSManager) XMLManager.decodeFromFile("RSSManager.xml");
-
-		} catch (FileNotFoundException e) {
+			initializeConnection();
+			m_oRSSManager  = (RSSManager) XMLManager.decodeFromFile("RSSManager.xml");
+			m_oSmartFridge = new SmartFridge();
+			m_oSession     = new Session();
+			
+			if( m_oSession.connect("esgi", "esgi") )
+				System.out.println("esgi connected");
+			else System.out.println("esgi not connected");
+			
+			DBConnectionManager.getInstance().closeConnection();
+		}
+		catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public void initializeConnection()
+	{
 		try {
-			m_oSmartFridge = new SmartFridge();
-		} catch (Exception e) {
+			Class.forName("com.mysql.jdbc.Driver");
+			String sURL = "jdbc:mysql://88.191.18.27:3306/isilgardh_smartfridge";
+			DBConnectionManager.getInstance().setConnectionData(sURL, "esgi", "g6f3s9j3");			
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 	}
 		
 	public RSSManager getRSSManager() {
