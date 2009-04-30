@@ -10,6 +10,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.SwingUtilities;
+
 public class SmartFridgeApp {
 	private SmartFridge m_oSmartFridge;
 	private RSSManager  m_oRSSManager;
@@ -17,7 +19,19 @@ public class SmartFridgeApp {
 	
 	public static void main( String[] args )
 	{		
-		SmartFridgeApp oSmartFridgeApp = new SmartFridgeApp();		
+		SmartFridgeApp oSmartFridgeApp = new SmartFridgeApp();
+		Runnable r = new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				new Window();
+				
+			}
+			
+		};
+		
+		SwingUtilities.invokeLater(r);
 	}
 	
 	public SmartFridgeApp()
@@ -26,11 +40,11 @@ public class SmartFridgeApp {
 			initializeConnection();
 			m_oRSSManager  = (RSSManager) XMLManager.decodeFromFile("RSSManager.xml");
 			m_oSmartFridge = new SmartFridge();
-			m_oSession     = new Session();
+			//m_oSession     = new Session();
 			
-			if( m_oSession.connect("esgi", "esgi") )
+			/*if( m_oSession.connect("esgi", "esgi") )
 				System.out.println("esgi connected");
-			else System.out.println("esgi not connected");
+			else System.out.println("esgi not connected");*/
 			
 			DBConnectionManager.getInstance().closeConnection();
 		}
@@ -43,13 +57,13 @@ public class SmartFridgeApp {
 	
 	public void initializeConnection()
 	{
-		try {
+		/*try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String sURL = "jdbc:mysql://88.191.18.27:3306/isilgardh_smartfridge";
 			DBConnectionManager.getInstance().setConnectionData(sURL, "esgi", "g6f3s9j3");			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 		
 	public RSSManager getRSSManager() {

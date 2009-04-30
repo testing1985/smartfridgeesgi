@@ -9,8 +9,6 @@ public class SmartFridge {
 	public SmartFridge(){
 		try{
 			m_vAliments = new Vector<Aliment>();
-			m_vAliments.addElement( new Aliment( "Carotte", 5,1,2,1 ) );
-			m_vAliments.addElement( new Aliment( "Tomate" ) );
 			m_vMenus = new Vector<Menu>();
 			m_vMenus.addElement( new Menu() );
 		}catch( Exception e ){
