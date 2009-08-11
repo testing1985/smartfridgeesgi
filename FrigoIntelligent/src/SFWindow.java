@@ -23,7 +23,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	
 	public SFWindow( SmartFridgeApp oSF ){
 		m_oParent = oSF;
-		FileAction oFileAction = new FileAction( m_oParent );
+		FileAction oFileAction = new FileAction( m_oParent , this );
 		
 		JMenuBar menuBar = new JMenuBar();
 		
@@ -32,7 +32,7 @@ public class SFWindow extends JFrame implements ActionListener {
 		
 			// BEGIN - NEW MENU
 		JMenu newMenu  = new JMenu( "New" );
-		JMenuItem newRecipeMI = new JMenuItem(" New recipe");
+		JMenuItem newRecipeMI = new JMenuItem("New recipe");
 		newRecipeMI.addActionListener( oFileAction );		
 		newMenu.add( newRecipeMI );
 		
@@ -84,6 +84,16 @@ public class SFWindow extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 
+	}
+	
+	public void hideAllPanel() {
+		m_oAddRecipePanel.setVisible( false );
+		m_oRecipeListPanel.setVisible( false );
+	}
+	
+	public void newRecipeAction() {
+		hideAllPanel();
+		m_oAddRecipePanel.setVisible( true );
 	}
 	
 }

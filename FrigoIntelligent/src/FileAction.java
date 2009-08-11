@@ -8,9 +8,11 @@ import javax.swing.JOptionPane;
 public class FileAction implements ActionListener {
 	
 	SmartFridgeApp m_oSmartFridge;
+	SFWindow m_oFrame;
 	
-	FileAction( SmartFridgeApp o ) {
-		m_oSmartFridge = o;
+	FileAction( SmartFridgeApp oApp , SFWindow oFrame ) {
+		m_oSmartFridge = oApp;
+		m_oFrame = oFrame;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -27,7 +29,7 @@ public class FileAction implements ActionListener {
 		
 		else if( ((JMenuItem)(e.getSource())).getText().equals("New recipe") )
 		{
-			
+			m_oFrame.newRecipeAction();
 		}
 	}
 
