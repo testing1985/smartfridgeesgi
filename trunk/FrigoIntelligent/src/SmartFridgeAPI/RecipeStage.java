@@ -21,19 +21,18 @@ public class RecipeStage {
 		m_sDescription = "Cassez l'oeuf dans un bol";
 	}
 	
-	public RecipeStage( int time, int difficulty, Vector< Aliment > aliments, String description  )
-	{
+	public RecipeStage( int time, int difficulty, Vector< Aliment > aliments, String description ){
 		m_iTime = time;
 		m_iDifficulty = difficulty;
 		m_vAliments = aliments;
 		m_sDescription = description;
 	}
 
-	public int getTime() {
+	public int getTime(){
 		return m_iTime;
 	}
 
-	public void setTime(int time) {
+	public void setTime( int time ){
 		m_iTime = time;
 	}
 
@@ -41,23 +40,23 @@ public class RecipeStage {
 		return m_iDifficulty;
 	}
 
-	public void setDifficulty(int difficulty) {
+	public void setDifficulty( int difficulty ){
 		m_iDifficulty = difficulty;
 	}
 
-	public Vector<Aliment> getAliments() {
+	public Vector<Aliment> getAliments(){
 		return m_vAliments;
 	}
 
-	public void setAliments(Vector<Aliment> aliments) {
+	public void setAliments( Vector<Aliment> aliments ){
 		m_vAliments = aliments;
 	}
 
-	public String getDescription() {
+	public String getDescription(){
 		return m_sDescription;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription( String description ){
 		m_sDescription = description;
 	}
 	

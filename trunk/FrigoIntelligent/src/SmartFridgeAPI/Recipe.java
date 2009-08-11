@@ -8,25 +8,33 @@ public class Recipe {
 	private String m_sName;
 	
 	// type of Recipe
-	private int m_iType;
+	private String m_iType;
 	
 	Vector< RecipeStage > m_vRecipeStages = null;
 	
 	public Recipe()
 	{
 		m_sName = "Recette";
-		m_iType = 0;
+		m_iType = "Entrée";
 		
 		m_vRecipeStages = new Vector< RecipeStage >();
 		
 		m_vRecipeStages.add( new RecipeStage() );
 	}
 
+	public Recipe( String name, String type, Vector< RecipeStage > RecipeStages ){
+		m_sName = name;
+		m_iType = type;
+		
+		m_vRecipeStages = RecipeStages;
+		
+	}
+	
 	public Vector<RecipeStage> getRecipeStages() {
 		return m_vRecipeStages;
 	}
 
-	public void setRecipeStages(Vector<RecipeStage> recipeStages) {
+	public void setRecipeStages( Vector<RecipeStage> recipeStages ) {
 		m_vRecipeStages = recipeStages;
 	}
 
@@ -34,20 +42,20 @@ public class Recipe {
 		return m_sName;
 	}
 
-	public void setName(String name) {
+	public void setName( String name ) {
 		m_sName = name;
 	}
 
-	public int getType() {
+	public String getType() {
 		return m_iType;
 	}
 
-	public void setType(int type) {
+	public void setType( String type ) {
 		m_iType = type;
 	}
 	
 	// returns the date that is amount days after Startdate 
-	public static Date addDays( Date startDate ,int amount){
+	public static Date addDays( Date startDate ,int amount ){
 	    Calendar calendar = Calendar.getInstance();
 	    calendar.setTime( startDate );
 	    Calendar calendar2 = Calendar.getInstance();
