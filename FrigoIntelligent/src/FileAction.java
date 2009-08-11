@@ -16,7 +16,7 @@ public class FileAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if( ((JMenuItem)(e.getSource())).getText().equals("Quit") )
 		{
-			int answer = JOptionPane.showConfirmDialog(null, "Do you really want to quit ?", "Quit", JOptionPane.YES_NO_OPTION );
+			int answer = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment quitter le programme ?", "Quitter ?", JOptionPane.YES_NO_OPTION );
 			
 			if(answer == JOptionPane.YES_OPTION) {
 				m_oSmartFridge.quitAction();

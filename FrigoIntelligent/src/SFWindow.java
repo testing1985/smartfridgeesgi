@@ -16,6 +16,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.RecipeStage;
 
 @SuppressWarnings("serial")
@@ -30,6 +31,11 @@ public class SFWindow extends JFrame implements ActionListener {
 	Vector< SFAddRecipeStageFormPanel > m_vAddRecipeStageFormList;
 	JList m_lAddRecipeStageList;
 	// END - Ajout d'une recette
+	
+	// BEGIN - Affichage des recettes
+	Vector< SFListRecipePanel > m_vAddRecipeList;
+	JList m_lAddRecipeList;
+	// END - Affichage des recettes
 	
 	public JList list;
 	
@@ -46,18 +52,18 @@ public class SFWindow extends JFrame implements ActionListener {
 		
 			// BEGIN - NEW MENU
 		JMenu newMenu  = new JMenu( "New" );
-		JMenuItem newRecipeMI = new JMenuItem("New recipe");
+		JMenuItem newRecipeMI = new JMenuItem( "New recipe" );
 		newRecipeMI.addActionListener( oFileAction );		
 		newMenu.add( newRecipeMI );
 		
-		JMenuItem newMenuMI = new JMenuItem("New menu");
+		JMenuItem newMenuMI = new JMenuItem( "New menu" );
 		newMenuMI.addActionListener( oFileAction );		
 		newMenu.add( newMenuMI );
 				
 		menuFile.add( newMenu );
 			// END - NEW MENU
 
-		JMenuItem quitMI = new JMenuItem("Quit");
+		JMenuItem quitMI = new JMenuItem( "Quit" );
 		quitMI.addActionListener( oFileAction );		
 		menuFile.add( quitMI );
 		// END - MENU FILE
@@ -74,32 +80,44 @@ public class SFWindow extends JFrame implements ActionListener {
 		
 		// BEGIN - Liste des recettes : Panel du milieu
 		m_oRecipeListPanel = new JPanel();
-		m_oRecipeListPanel.setPreferredSize( new Dimension( 500 , 500 ));
+		m_oRecipeListPanel.setPreferredSize( new Dimension( 500 , 500 ) );
 		m_oRecipeListPanel.setLayout( new BorderLayout() );
-		m_oRecipeListPanel.add( new JLabel( "Liste des recettes" ) , BorderLayout.NORTH );
+		m_oRecipeListPanel.add( new JLabel( "Liste des recettes" ), BorderLayout.NORTH );
+		
+		m_vAddRecipeList = new Vector< SFListRecipePanel >();
+		m_vAddRecipeList.addElement( new SFListRecipePanel( new Recipe() ) );
+		
+		m_vAddRecipeList.addElement( new SFListRecipePanel( new Recipe() ) );
+		
+		m_lAddRecipeList = new JList( m_vAddRecipeList );
+		m_lAddRecipeList.setSelectedIndex( 0 );
+		m_lAddRecipeList.setCellRenderer( oListRenderer );
+		
+		m_oRecipeListPanel.add( m_lAddRecipeList, BorderLayout.CENTER );
 		centerPanel.add( m_oRecipeListPanel );
+		
 		// END - Liste des recettes : Panel du milieu
 		
 		// BEGIN - Ajout d'une recette : Panel du milieu
 		m_oAddRecipePanel = new JPanel();
 		m_oAddRecipePanel.setPreferredSize( new Dimension( 500 , 500 ));
 		m_oAddRecipePanel.setLayout( new BorderLayout() );
-		m_oAddRecipePanel.add( new JLabel( "Ajout d'une recette" ) , BorderLayout.NORTH );
+		m_oAddRecipePanel.add( new JLabel( "Ajout d'une recette" ), BorderLayout.NORTH );
 		JPanel oAddRecipePanelCenter = new JPanel();
 		oAddRecipePanelCenter.setLayout( new BorderLayout() );
 		
 		JPanel oAddRecipeTitlePanel = new JPanel();
-		oAddRecipeTitlePanel.setLayout( new GridLayout(1,2) );
-		oAddRecipeTitlePanel.add( new JLabel("Titre :"));
+		oAddRecipeTitlePanel.setLayout( new GridLayout( 1, 2 ) );
+		oAddRecipeTitlePanel.add( new JLabel( "Titre :" ) );
 		m_oNewRecipeTitle = new JTextField();
-		oAddRecipeTitlePanel.add(m_oNewRecipeTitle);
+		oAddRecipeTitlePanel.add( m_oNewRecipeTitle );
 		oAddRecipePanelCenter.add( oAddRecipeTitlePanel , BorderLayout.NORTH );
 		m_vAddRecipeStageFormList = new Vector< SFAddRecipeStageFormPanel >();
-		m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel(1) );
+		m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel( 1 ) );
 		m_lAddRecipeStageList = new JList( m_vAddRecipeStageFormList );
-		m_lAddRecipeStageList.setSelectedIndex(0);
+		m_lAddRecipeStageList.setSelectedIndex( 0 );
 		m_lAddRecipeStageList.setCellRenderer( oListRenderer );
-		oAddRecipePanelCenter.add( m_lAddRecipeStageList , BorderLayout.CENTER );
+		oAddRecipePanelCenter.add( m_lAddRecipeStageList, BorderLayout.CENTER );
 		
 		m_oAddRecipePanel.add( oAddRecipePanelCenter , BorderLayout.CENTER );
 				
