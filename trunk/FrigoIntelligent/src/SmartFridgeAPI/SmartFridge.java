@@ -23,6 +23,10 @@ public class SmartFridge {
 	public void setMenus(Vector<Menu> menus) {
 		m_vMenus = menus;
 	}
+	
+	public void addMenu( Menu oM ) {
+		m_vMenus.add( oM );
+	}
 
 	public Vector<Aliment> getAliments() {
 		return m_vAliments;
