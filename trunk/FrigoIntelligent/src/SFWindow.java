@@ -9,11 +9,14 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+import SmartFridgeAPI.RecipeStage;
 
 @SuppressWarnings("serial")
 public class SFWindow extends JFrame implements ActionListener {
@@ -24,12 +27,16 @@ public class SFWindow extends JFrame implements ActionListener {
 	// BEGIN - Ajout d'une recette
 	JPanel m_oAddRecipePanel;
 	JTextField m_oNewRecipeTitle;
+	Vector< SFAddRecipeStageFormPanel > m_vAddRecipeStageFormList;
+	JList m_lAddRecipeStageList;
 	// END - Ajout d'une recette
 	
 	public JList list;
 	
 	public SFWindow( SmartFridgeApp oSF ){
 		m_oParent = oSF;
+		JListRenderer oListRenderer = new JListRenderer();
+		
 		FileAction oFileAction = new FileAction( m_oParent );
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -87,9 +94,15 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oNewRecipeTitle = new JTextField();
 		oAddRecipeTitlePanel.add(m_oNewRecipeTitle);
 		oAddRecipePanelCenter.add( oAddRecipeTitlePanel , BorderLayout.NORTH );
+		m_vAddRecipeStageFormList = new Vector< SFAddRecipeStageFormPanel >();
+		m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel(1) );
+		m_lAddRecipeStageList = new JList( m_vAddRecipeStageFormList );
+		m_lAddRecipeStageList.setSelectedIndex(0);
+		m_lAddRecipeStageList.setCellRenderer( oListRenderer );
+		oAddRecipePanelCenter.add( m_lAddRecipeStageList , BorderLayout.CENTER );
+		
 		m_oAddRecipePanel.add( oAddRecipePanelCenter , BorderLayout.CENTER );
-		
-		
+				
 		centerPanel.add( m_oAddRecipePanel );
 		m_oAddRecipePanel.setVisible( false );
 		// END - Ajout d'une recette : Panel du milieu		
