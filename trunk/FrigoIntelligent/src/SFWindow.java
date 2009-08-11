@@ -29,7 +29,8 @@ public class SFWindow extends JFrame implements ActionListener {
 	JPanel m_oAddRecipePanel;
 	JTextField m_oNewRecipeTitle;
 	Vector< SFAddRecipeStageFormPanel > m_vAddRecipeStageFormList;
-	JList m_lAddRecipeStageList;
+	JPanel m_lAddRecipeStageList;
+	JButton m_oAddStageFormBt;
 	// END - Ajout d'une recette
 	
 	// BEGIN - Affichage des recettes
@@ -42,6 +43,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	public SFWindow( SmartFridgeApp oSF ){
 		m_oParent = oSF;
 		JListRenderer oListRenderer = new JListRenderer();
+		JTableRenderer oTableRenderer = new JTableRenderer();
 		
 		FileAction oFileAction = new FileAction( m_oParent );
 		
@@ -112,11 +114,13 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oNewRecipeTitle = new JTextField();
 		oAddRecipeTitlePanel.add( m_oNewRecipeTitle );
 		oAddRecipePanelCenter.add( oAddRecipeTitlePanel , BorderLayout.NORTH );
+		m_lAddRecipeStageList = new JPanel( new FlowLayout() );
+		m_oAddStageFormBt = new JButton("Ajouter une étape");
+		m_oAddStageFormBt.addActionListener( this );
+		m_lAddRecipeStageList.add( m_oAddStageFormBt );
 		m_vAddRecipeStageFormList = new Vector< SFAddRecipeStageFormPanel >();
-		m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel( 1 ) );
-		m_lAddRecipeStageList = new JList( m_vAddRecipeStageFormList );
-		m_lAddRecipeStageList.setSelectedIndex( 0 );
-		m_lAddRecipeStageList.setCellRenderer( oListRenderer );
+		m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel (1) );
+		m_lAddRecipeStageList.add( m_vAddRecipeStageFormList.elementAt(0) );
 		oAddRecipePanelCenter.add( m_lAddRecipeStageList, BorderLayout.CENTER );
 		
 		m_oAddRecipePanel.add( oAddRecipePanelCenter , BorderLayout.CENTER );
@@ -135,7 +139,12 @@ public class SFWindow extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-
+		if( e.getSource().equals( m_oAddStageFormBt ) ) {
+			m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel ( m_vAddRecipeStageFormList.size() + 1 ) );
+			m_lAddRecipeStageList.add( m_vAddRecipeStageFormList.lastElement() );
+			m_oAddRecipePanel.revalidate();
+			super.repaint();
+		}
 	}
 	
 	public void hideAllPanel() {
