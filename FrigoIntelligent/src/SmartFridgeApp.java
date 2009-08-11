@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class SmartFridgeApp {
+	public SFWindow    m_oApp;
 	private SmartFridge m_oSmartFridge;
 	private RSSManager  m_oRSSManager;
 	private Session     m_oSession = null;
@@ -24,14 +25,15 @@ public class SmartFridgeApp {
 	public static void main( String[] args )
 	{	
 		Runnable r = new Runnable(){
-			SmartFridgeApp oApp = new SmartFridgeApp();
-			public void run() { new SFWindow( oApp ); }
+			public void run() { new SmartFridgeApp(); }
 		};
 		SwingUtilities.invokeLater(r);
 	}
 	
 	public SmartFridgeApp()
 	{
+		m_oApp = new SFWindow(this);
+		
 		try {
 			initializeConnection();
 			m_oRSSManager  = (RSSManager) XMLManager.decodeFromFile("RSSManager.xml");
