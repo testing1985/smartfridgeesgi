@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -23,7 +24,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	
 	public SFWindow( SmartFridgeApp oSF ){
 		m_oParent = oSF;
-		FileAction oFileAction = new FileAction( m_oParent , this );
+		FileAction oFileAction = new FileAction( m_oParent );
 		
 		JMenuBar menuBar = new JMenuBar();
 		
@@ -61,14 +62,16 @@ public class SFWindow extends JFrame implements ActionListener {
 		// BEGIN - Panel du milieu : Liste des recettes
 		m_oRecipeListPanel = new JPanel();
 		m_oRecipeListPanel.setPreferredSize( new Dimension( 500 , 500 ));
-		m_oRecipeListPanel.setBackground( new Color(0 , 0 , 0 ) );
+		m_oRecipeListPanel.setLayout( new BorderLayout() );
+		m_oRecipeListPanel.add( new JLabel( "Liste des recettes" ) , BorderLayout.NORTH );
 		centerPanel.add( m_oRecipeListPanel );
 		// END - Panel du milieu : Liste des recettes
 		
 		// BEGIN - Panel du milieu : Ajout d'une recette
 		m_oAddRecipePanel = new JPanel();
 		m_oAddRecipePanel.setPreferredSize( new Dimension( 500 , 500 ));
-		m_oAddRecipePanel.setBackground( new Color(255 , 255 , 0 ) );
+		m_oAddRecipePanel.setLayout( new BorderLayout() );
+		m_oAddRecipePanel.add( new JLabel( "Ajout d'une recette" ) , BorderLayout.NORTH );
 		centerPanel.add( m_oAddRecipePanel );
 		m_oAddRecipePanel.setVisible( false );
 		// END - Panel du milieu : Ajout d'une recette		
