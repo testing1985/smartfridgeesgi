@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +20,11 @@ public class SFWindow extends JFrame implements ActionListener {
 
 	SmartFridgeApp m_oParent;
 	JPanel m_oRecipeListPanel;
+	
+	// BEGIN - Ajout d'une recette
 	JPanel m_oAddRecipePanel;
+	JTextField m_oNewRecipeTitle;
+	// END - Ajout d'une recette
 	
 	public JList list;
 	
@@ -59,22 +65,34 @@ public class SFWindow extends JFrame implements ActionListener {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout( new FlowLayout() );
 		
-		// BEGIN - Panel du milieu : Liste des recettes
+		// BEGIN - Liste des recettes : Panel du milieu
 		m_oRecipeListPanel = new JPanel();
 		m_oRecipeListPanel.setPreferredSize( new Dimension( 500 , 500 ));
 		m_oRecipeListPanel.setLayout( new BorderLayout() );
 		m_oRecipeListPanel.add( new JLabel( "Liste des recettes" ) , BorderLayout.NORTH );
 		centerPanel.add( m_oRecipeListPanel );
-		// END - Panel du milieu : Liste des recettes
+		// END - Liste des recettes : Panel du milieu
 		
-		// BEGIN - Panel du milieu : Ajout d'une recette
+		// BEGIN - Ajout d'une recette : Panel du milieu
 		m_oAddRecipePanel = new JPanel();
 		m_oAddRecipePanel.setPreferredSize( new Dimension( 500 , 500 ));
 		m_oAddRecipePanel.setLayout( new BorderLayout() );
 		m_oAddRecipePanel.add( new JLabel( "Ajout d'une recette" ) , BorderLayout.NORTH );
+		JPanel oAddRecipePanelCenter = new JPanel();
+		oAddRecipePanelCenter.setLayout( new BorderLayout() );
+		
+		JPanel oAddRecipeTitlePanel = new JPanel();
+		oAddRecipeTitlePanel.setLayout( new GridLayout(1,2) );
+		oAddRecipeTitlePanel.add( new JLabel("Titre :"));
+		m_oNewRecipeTitle = new JTextField();
+		oAddRecipeTitlePanel.add(m_oNewRecipeTitle);
+		oAddRecipePanelCenter.add( oAddRecipeTitlePanel , BorderLayout.NORTH );
+		m_oAddRecipePanel.add( oAddRecipePanelCenter , BorderLayout.CENTER );
+		
+		
 		centerPanel.add( m_oAddRecipePanel );
 		m_oAddRecipePanel.setVisible( false );
-		// END - Panel du milieu : Ajout d'une recette		
+		// END - Ajout d'une recette : Panel du milieu		
 		
 		this.add( centerPanel , BorderLayout.CENTER );		
 		
