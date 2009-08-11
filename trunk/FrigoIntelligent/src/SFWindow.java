@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,8 +16,9 @@ import javax.swing.JMenuItem;
 public class SFWindow extends JFrame implements ActionListener {
 
 	SmartFridgeApp m_oParent;
-	public JPanel leftPanel, centerPanel, rightPanel;
-	public JButton testButton1;
+	JPanel m_oRecipeListPanel;
+	JPanel m_oAddRecipePanel;
+	
 	public JList list;
 	
 	public SFWindow( SmartFridgeApp oSF ){
@@ -45,8 +47,7 @@ public class SFWindow extends JFrame implements ActionListener {
 		quitMI.addActionListener( oFileAction );		
 		menuFile.add( quitMI );
 		// END - MENU FILE
-		
-				
+						
 		menuBar.add( menuFile );		
 		setJMenuBar( menuBar );
 		
@@ -54,10 +55,25 @@ public class SFWindow extends JFrame implements ActionListener {
 		setLocation( 100, 100 );
 		setLayout( new BorderLayout() );
 		
-		JPanel oListeRecettesPanel = new JPanel();
-		oListeRecettesPanel.setPreferredSize( new Dimension( 500 , 500 ));
+		JPanel centerPanel = new JPanel();
+		centerPanel.setLayout( new FlowLayout() );
 		
-		this.add( oListeRecettesPanel , BorderLayout.CENTER );
+		// BEGIN - Panel du milieu : Liste des recettes
+		m_oRecipeListPanel = new JPanel();
+		m_oRecipeListPanel.setPreferredSize( new Dimension( 500 , 500 ));
+		m_oRecipeListPanel.setBackground( new Color(0 , 0 , 0 ) );
+		centerPanel.add( m_oRecipeListPanel );
+		// END - Panel du milieu : Liste des recettes
+		
+		// BEGIN - Panel du milieu : Ajout d'une recette
+		m_oAddRecipePanel = new JPanel();
+		m_oAddRecipePanel.setPreferredSize( new Dimension( 500 , 500 ));
+		m_oAddRecipePanel.setBackground( new Color(255 , 255 , 0 ) );
+		centerPanel.add( m_oAddRecipePanel );
+		m_oAddRecipePanel.setVisible( false );
+		// END - Panel du milieu : Ajout d'une recette		
+		
+		this.add( centerPanel , BorderLayout.CENTER );		
 		
 		setResizable( false );
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -67,9 +83,7 @@ public class SFWindow extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-		if( e.getSource() == testButton1 ){
-			
-		}		
+
 	}
 	
 }
