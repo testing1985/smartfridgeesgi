@@ -1,3 +1,6 @@
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -10,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class SmartFridgeApp {
@@ -18,19 +22,11 @@ public class SmartFridgeApp {
 	private Session     m_oSession = null;
 	
 	public static void main( String[] args )
-	{		
-		SmartFridgeApp oSmartFridgeApp = new SmartFridgeApp();
+	{	
 		Runnable r = new Runnable(){
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				new Window();
-				
-			}
-			
+			SmartFridgeApp oApp = new SmartFridgeApp();
+			public void run() { new SFWindow( oApp ); }
 		};
-		
 		SwingUtilities.invokeLater(r);
 	}
 	
@@ -53,6 +49,7 @@ public class SmartFridgeApp {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	public void initializeConnection()
@@ -81,7 +78,10 @@ public class SmartFridgeApp {
 	public void setSmartFridge(SmartFridge fridge) {
 		m_oSmartFridge = fridge;
 	}
-		
+	
+	public void quitAction() {
+		System.exit(0);
+	}
 }
 
 
