@@ -6,16 +6,13 @@ import java.util.Vector;
 
 public class Recipe {
 	private String m_sName;
-	
-	// type of Recipe
 	private String m_iType;
 	
 	Vector< RecipeStage > m_vRecipeStages = new Vector<RecipeStage>();
 	private Vector< Aliment > m_vAliments = new Vector<Aliment>();
 	
 	public Recipe()
-	{
-	}
+	{}
 
 	public Recipe( String name, String type, Vector< RecipeStage > RecipeStages , Vector<Aliment> vAliments ){
 		m_sName = name;

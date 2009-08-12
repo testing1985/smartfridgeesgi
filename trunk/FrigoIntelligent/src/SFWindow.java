@@ -58,6 +58,22 @@ public class SFWindow extends JFrame implements ActionListener {
 		menuFile.add( newMenu );
 			// END - NEW MENU
 
+			// BEGIN - SAVE MENU
+		JMenu saveMenu = new JMenu ("Save");
+		JMenuItem saveXmlMI = new JMenuItem( "In file" );
+		saveXmlMI.addActionListener( oFileAction );
+		saveMenu.add( saveXmlMI );
+		menuFile.add( saveMenu );
+			// END - SAVE MENU
+		
+			// BEGIN - LOAD MENU
+		JMenu loadMenu = new JMenu ("Load");
+		JMenuItem loadXmlMI = new JMenuItem( "From file" );
+		loadXmlMI.addActionListener( oFileAction );
+		loadMenu.add( loadXmlMI );
+		menuFile.add( loadMenu );
+			// END - LOAD MENU
+		
 		JMenuItem quitMI = new JMenuItem( "Quit" );
 		quitMI.addActionListener( oFileAction );		
 		menuFile.add( quitMI );

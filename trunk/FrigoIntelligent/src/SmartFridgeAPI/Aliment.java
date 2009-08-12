@@ -13,6 +13,8 @@ public class Aliment {
 	// Peremption date
 	long m_iPeremption;
 	
+	public Aliment() {}
+	
 	public Aliment( String name )
 	{
 		m_sName = name;
