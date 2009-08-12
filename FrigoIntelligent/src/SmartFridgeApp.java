@@ -44,7 +44,7 @@ public class SmartFridgeApp {
 				System.out.println("esgi connected");
 			else System.out.println("esgi not connected");*/
 			
-			DBConnectionManager.getInstance().closeConnection();
+			//DBConnectionManager.getInstance().closeConnection();
 		}
 		catch (FileNotFoundException e) {
 			System.out.println("Le fichier RSSManager.xml n'existe pas");
