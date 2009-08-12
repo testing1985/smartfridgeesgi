@@ -207,6 +207,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	
 	public void newRecipeAction() {
 		hideAllPanel();
+		m_oAddRecipePanel.reset();
 		m_oAddRecipePanel.setVisible( true );
 	}
 	
