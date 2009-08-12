@@ -35,24 +35,24 @@ public class Session {
 	
 	public static short userExists( String sLogin , String sPasswd )
 	{
-		Connection oBDD = DBConnectionManager.getInstance().getConnection();
-		try {
-			Statement oSt = oBDD.createStatement();
-			String sReq = "" +
-					" SELECT *" +
-					" FROM User" +
-					" WHERE loginUser = \"" + sLogin + "\"" +
-					" AND pwdUser = SHA(\"" + sPasswd + "\")";
-			ResultSet oRS = oSt.executeQuery(sReq);
-			oRS.last();
-			if( oRS.getRow() == 1 )
-			{
-				oRS.first();
-				return oRS.getShort("idUser");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+//		Connection oBDD = DBConnectionManager.getInstance().getConnection();
+//		try {
+//			Statement oSt = oBDD.createStatement();
+//			String sReq = "" +
+//					" SELECT *" +
+//					" FROM User" +
+//					" WHERE loginUser = \"" + sLogin + "\"" +
+//					" AND pwdUser = SHA(\"" + sPasswd + "\")";
+//			ResultSet oRS = oSt.executeQuery(sReq);
+//			oRS.last();
+//			if( oRS.getRow() == 1 )
+//			{
+//				oRS.first();
+//				return oRS.getShort("idUser");
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 		
 		return -1;
 	}
