@@ -7,7 +7,7 @@ import java.beans.SimpleBeanInfo;
 
 public class RSSManagerBeanInfo {
 
-private PropertyDescriptor[] pDescriptors;
+	private PropertyDescriptor[] pDescriptors;
     
     public RSSManagerBeanInfo() {
         try {

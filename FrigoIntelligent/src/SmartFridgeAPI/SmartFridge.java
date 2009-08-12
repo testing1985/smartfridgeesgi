@@ -3,21 +3,17 @@ package SmartFridgeAPI;
 import java.util.Vector;
 
 public class SmartFridge {
-	private Vector< Menu > 	  m_vMenus = null;
+		
+	private Vector< Menu > 	  m_vMenus    = null;
 	private Vector< Aliment > m_vAliments = null;
-	private Vector< Recipe >  m_vRecipes = null;
+	private Vector< Recipe >  m_vRecipes  = null;
 	
 	public SmartFridge(){
-		try{
-			m_vAliments = new Vector<Aliment>();
-			m_vMenus = new Vector<Menu>();
-			m_vMenus.addElement( new Menu() );
-			m_vRecipes = new Vector<Recipe>();
-		}catch( Exception e ){
-			e.printStackTrace();
-		}
+		m_vAliments = new Vector<Aliment>();
+		m_vMenus 	= new Vector<Menu>();
+		m_vRecipes  = new Vector<Recipe>();
 	}
-	
+		
 	public Vector<Menu> getMenus() {
 		return m_vMenus;
 	}
@@ -56,6 +52,31 @@ public class SmartFridge {
 		for( int i = 0; i < size; i++ ){
 			m_vMenus.elementAt( i ).print();
 		}
+	}
+	
+	public Object[] getRecipeArray() {
+		return m_vRecipes.toArray();
+	}
+	
+	public void setRecipeArray( Object[] recipeList ) {
+		for( int i = 0 ; i < recipeList.length ; i++ )
+			m_vRecipes.add((Recipe)recipeList[i]);
+	}
+	
+	public String[] getMenuListAsArray() {
+		return new String[0];
+	}
+	
+	public void setMenuListFromArray( String[] menuList ) {
+		
+	}
+	
+	public String[] getAlimentListAsArray() {
+		return new String[0];
+	}
+	
+	public void setAlimentListFromArray( String[] alimentList ) {
+		
 	}
 		
 }

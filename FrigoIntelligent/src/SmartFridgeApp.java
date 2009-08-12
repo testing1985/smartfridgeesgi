@@ -47,7 +47,7 @@ public class SmartFridgeApp {
 			DBConnectionManager.getInstance().closeConnection();
 		}
 		catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Le fichier RSSManager.xml n'existe pas");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
