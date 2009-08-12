@@ -20,7 +20,7 @@ import javax.swing.border.TitledBorder;
 
 import java.util.Vector;
 
-
+@SuppressWarnings("serial")
 public class SFAddRecipeStageFormPanel extends JPanel /*implements ListCellRenderer*/ {
 	
 	public int m_iID;

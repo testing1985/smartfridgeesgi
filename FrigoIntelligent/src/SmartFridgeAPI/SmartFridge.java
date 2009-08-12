@@ -18,7 +18,7 @@ public class SmartFridge {
 		return m_vMenus;
 	}
 
-	public void setMenus(Vector<Menu> menus) {
+	public void setMenus( Vector<Menu> menus ) {
 		m_vMenus = menus;
 	}
 	
@@ -34,10 +34,18 @@ public class SmartFridge {
 		return m_vAliments;
 	}
 
-	public void setAliments(Vector<Aliment> aliments) {
+	public void setAliments( Vector<Aliment> aliments ) {
 		m_vAliments = aliments;
 	}
 
+	public Vector<Recipe> getRecipes() {
+		return m_vRecipes;
+	}
+
+	public void setRecipes(Vector<Recipe> mVRecipes) {
+		m_vRecipes = mVRecipes;
+	}
+	
 	public void printAliments()
 	{
 		int size = m_vAliments.size();
