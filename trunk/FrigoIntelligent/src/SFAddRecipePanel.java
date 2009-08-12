@@ -70,10 +70,13 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 
 	
 	public void actionPerformed(ActionEvent e) {
+		
 		if( e.getSource().equals( m_oAddStageFormBt ) ) {
 			m_lStageFormList.addElement( new SFAddRecipeStageFormPanel ( m_lStageFormList.size() + 1 ) );
 			m_oStageListPanel.add( m_lStageFormList.lastElement() );
-			super.repaint();
+			super.revalidate();
+			super.repaint();			
+			m_oParent.repaint();
 		}
 		
 		else if( e.getSource().equals( m_oAddValidRecipeBt ) ) {
