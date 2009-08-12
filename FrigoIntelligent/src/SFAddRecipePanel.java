@@ -71,19 +71,18 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 		
 		oCenter.add( oTitleAndButtonPanel , BorderLayout.NORTH );
 		
-		Box oStagesAndAlimentsPanel = Box.createVerticalBox();		
-		
+		JPanel oStagesAndAlimentsPanel = new JPanel( new BorderLayout() );		
 		m_lAlimentFormList.addElement( new SFAddRecipeAlimentFormPanel( 1 ) );
 		m_oAlimentListPanel.setLayout( new BoxLayout( m_oAlimentListPanel , BoxLayout.Y_AXIS ) );
 		m_oAlimentListPanel.add( m_lAlimentFormList.firstElement() );
-		oStagesAndAlimentsPanel.add( new JScrollPane( m_oAlimentListPanel ) );
+		oStagesAndAlimentsPanel.add( new JScrollPane( m_oAlimentListPanel ) , BorderLayout.NORTH );
 		
 		m_lStageFormList.addElement( new SFAddRecipeStageFormPanel (1) );
 		m_oStageListPanel.setLayout( new BoxLayout( m_oStageListPanel , BoxLayout.Y_AXIS ) );
 		m_oStageListPanel.add( m_lStageFormList.firstElement() );
-		oStagesAndAlimentsPanel.add( new JScrollPane( m_oStageListPanel ) );
+		oStagesAndAlimentsPanel.add( new JScrollPane( m_oStageListPanel ) , BorderLayout.CENTER );
 		
-		oCenter.add( oStagesAndAlimentsPanel , BorderLayout.CENTER );		
+		oCenter.add( new JScrollPane( oStagesAndAlimentsPanel ) , BorderLayout.CENTER );		
 		add( oCenter , BorderLayout.CENTER );
 	}
 
