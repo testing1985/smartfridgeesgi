@@ -6,53 +6,70 @@ import java.util.Vector;
 
 public class Recipe {
 	private String m_sName;
-	private String m_iType;
+	private String m_sType;
 	
-	Vector< RecipeStage > m_vRecipeStages = new Vector<RecipeStage>();
-	private Vector< Aliment > m_vAliments = new Vector<Aliment>();
+	Vector< RecipeStage > m_vRecipeStages = null;
 	
 	public Recipe()
 	{}
 
 	public Recipe( String name, String type, Vector< RecipeStage > RecipeStages , Vector<Aliment> vAliments ){
 		m_sName = name;
-		m_iType = type;
+		m_sType = type;
 		
-		m_vRecipeStages = RecipeStages;
-		m_vAliments = vAliments;
+		m_vRecipeStages = new Vector< RecipeStage >();
 		
-	}
-	
-	public Vector<Aliment> getAliments(){
-		return m_vAliments;
+		m_vRecipeStages.add( new RecipeStage() );
 	}
 
-	public void setAliments( Vector<Aliment> aliments ){
-		m_vAliments = aliments;
+	public Recipe( String sName, String sType, Vector< RecipeStage > vRecipeStages ){
+		m_sName = sName;
+		m_sType = sType;
+		m_vRecipeStages = vRecipeStages;
 	}
 	
-	public Vector<RecipeStage> getRecipeStages() {
+	public Vector<RecipeStage> getRecipeStages(){
 		return m_vRecipeStages;
 	}
 
-	public void setRecipeStages( Vector<RecipeStage> recipeStages ) {
+	public void setRecipeStages( Vector<RecipeStage> recipeStages ){
 		m_vRecipeStages = recipeStages;
 	}
+	
+	public int getTime(){
+		int iEtape = m_vRecipeStages.size();
+		int iDuree = 0;
+		for( int i = 0; i < iEtape; i++ ){
+			iDuree += m_vRecipeStages.elementAt( i ).getTime();	
+		}
+		return iDuree;
+	}
+	
+	public int getDifficulty(){
+		int iEtape = m_vRecipeStages.size();
+		int iDifficulte = 0;
+		for( int i = 0; i < iEtape; i++ ){
+			if( m_vRecipeStages.elementAt( i ).getDifficulty() > iDifficulte )
+				iDifficulte = m_vRecipeStages.elementAt( i ).getDifficulty();
+		}
+		return iDifficulte;
+	}
+	
 
-	public String getName() {
+	public String getName(){
 		return m_sName;
 	}
 
-	public void setName( String name ) {
-		m_sName = name;
+	public void setName( String sName ){
+		m_sName = sName;
 	}
 
-	public String getType() {
-		return m_iType;
+	public String getType(){
+		return m_sType;
 	}
 
-	public void setType( String type ) {
-		m_iType = type;
+	public void setType( String sType ){
+		m_sType = sType;
 	}
 	
 	// returns the date that is amount days after Startdate 
@@ -65,9 +82,8 @@ public class Recipe {
 	    return calendar2.getTime();
 	}
 	
-	public void print()
-	{
-		System.out.println( "Recipe type is " + m_iType ) ;
+	public void print(){
+		System.out.println( "Recipe type is " + m_sType ) ;
 		int size = m_vRecipeStages.size();
 		for( int i = 0; i < size; i++ ){
 			System.out.println( "Stage " + i ) ;
