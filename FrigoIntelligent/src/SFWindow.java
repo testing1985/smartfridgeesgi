@@ -2,6 +2,7 @@
 import javax.swing.*;
 
 import java.awt.BorderLayout;
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,7 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 
+import SmartFridgeAPI.Aliment;
 import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.RecipeStage;
 
@@ -26,11 +29,13 @@ public class SFWindow extends JFrame implements ActionListener {
 	JPanel m_oRecipeListPanel;
 	
 	// BEGIN - Ajout d'une recette
-	JPanel m_oAddRecipePanel;
-	JTextField m_oNewRecipeTitle;
-	Vector< SFAddRecipeStageFormPanel > m_vAddRecipeStageFormList;
-	JPanel m_lAddRecipeStageList;
-	JButton m_oAddStageFormBt;
+	Vector< SFAddRecipeStageFormPanel > m_vAddRecipeStageFormList = new Vector< SFAddRecipeStageFormPanel >();
+	JPanel 	   m_oAddRecipePanel	 = new JPanel();
+	JPanel 	   m_oAddStageList 	     = new JPanel();
+	JTextField m_oNewRecipeTitle     = new JTextField();	
+	JButton    m_oAddStageFormBt     = new JButton("Ajouter une étape");
+	JButton    m_oAddValidRecipeBt   = new JButton("Valider la recette");
+	Choice     m_oAddRecipeType		 = new Choice();
 	// END - Ajout d'une recette
 	
 	// BEGIN - Affichage des recettes
@@ -101,28 +106,38 @@ public class SFWindow extends JFrame implements ActionListener {
 		// END - Liste des recettes : Panel du milieu
 		
 		// BEGIN - Ajout d'une recette : Panel du milieu
-		m_oAddRecipePanel = new JPanel();
 		m_oAddRecipePanel.setPreferredSize( new Dimension( 500 , 500 ));
 		m_oAddRecipePanel.setLayout( new BorderLayout() );
-		m_oAddRecipePanel.add( new JLabel( "Ajout d'une recette" ), BorderLayout.NORTH );
+		JPanel oAddRecipePanelTop = new JPanel();
+		oAddRecipePanelTop.add( new JLabel( "Ajout d'une recette :   " ), BorderLayout.NORTH );
+		m_oAddRecipeType.add("Entrée");
+		m_oAddRecipeType.add("Plat");
+		m_oAddRecipeType.add("Dessert");
+		m_oAddRecipeType.add("Boisson");
+		m_oAddRecipeType.add("Amuse-gueule");
+		oAddRecipePanelTop.add(m_oAddRecipeType);
+		
+		m_oAddRecipePanel.add( oAddRecipePanelTop , BorderLayout.NORTH );
 		JPanel oAddRecipePanelCenter = new JPanel();
 		oAddRecipePanelCenter.setLayout( new BorderLayout() );
 		
 		JPanel oAddRecipeTitlePanel = new JPanel();
-		oAddRecipeTitlePanel.setLayout( new GridLayout( 1, 2 ) );
 		oAddRecipeTitlePanel.add( new JLabel( "Titre :" ) );
-		m_oNewRecipeTitle = new JTextField();
+		m_oNewRecipeTitle.setColumns( 40 );
 		oAddRecipeTitlePanel.add( m_oNewRecipeTitle );
 		oAddRecipePanelCenter.add( oAddRecipeTitlePanel , BorderLayout.NORTH );
-		m_lAddRecipeStageList = new JPanel( new FlowLayout() );
-		m_oAddStageFormBt = new JButton("Ajouter une étape");
 		m_oAddStageFormBt.addActionListener( this );
-		m_lAddRecipeStageList.add( m_oAddStageFormBt );
-		m_vAddRecipeStageFormList = new Vector< SFAddRecipeStageFormPanel >();
+		m_oAddValidRecipeBt.addActionListener( this );
+		JPanel lAddRecipeStageList = new JPanel( new BorderLayout() );
+		JPanel oTopAddRecipe 	   = new JPanel( new GridLayout(1,2));
+		oTopAddRecipe.add( m_oAddValidRecipeBt );
+		oTopAddRecipe.add( m_oAddStageFormBt );		
+		lAddRecipeStageList.add( oTopAddRecipe , BorderLayout.NORTH );
 		m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel (1) );
-		m_lAddRecipeStageList.add( m_vAddRecipeStageFormList.elementAt(0) );
-		oAddRecipePanelCenter.add( m_lAddRecipeStageList, BorderLayout.CENTER );
-		
+		m_oAddStageList.setLayout( new BoxLayout( m_oAddStageList , BoxLayout.Y_AXIS ));
+		m_oAddStageList.add( m_vAddRecipeStageFormList.elementAt(0) );
+		lAddRecipeStageList.add( new JScrollPane( m_oAddStageList , JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED , JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) , BorderLayout.CENTER );
+		oAddRecipePanelCenter.add( lAddRecipeStageList , BorderLayout.CENTER );		
 		m_oAddRecipePanel.add( oAddRecipePanelCenter , BorderLayout.CENTER );
 				
 		centerPanel.add( m_oAddRecipePanel );
@@ -141,10 +156,26 @@ public class SFWindow extends JFrame implements ActionListener {
 	public void actionPerformed( ActionEvent e ) {
 		if( e.getSource().equals( m_oAddStageFormBt ) ) {
 			m_vAddRecipeStageFormList.addElement( new SFAddRecipeStageFormPanel ( m_vAddRecipeStageFormList.size() + 1 ) );
-			m_lAddRecipeStageList.add( m_vAddRecipeStageFormList.lastElement() );
+			m_oAddStageList.add( m_vAddRecipeStageFormList.lastElement() );
 			m_oAddRecipePanel.revalidate();
 			super.repaint();
 		}
+		
+		else if( e.getSource().equals( m_oAddValidRecipeBt ) ) {
+			Vector<RecipeStage> v = new Vector<RecipeStage>();
+			for( int i = 0 ; i < m_vAddRecipeStageFormList.size() ; i++ ) {
+				SFAddRecipeStageFormPanel o = m_vAddRecipeStageFormList.elementAt(i);
+				Vector<Aliment> vA = new Vector<Aliment>();
+				v.add( new RecipeStage(Integer.parseInt(o.m_oDuree.getText()) , Integer.parseInt(o.m_oDifficulte.getSelectedItem()) , vA , o.m_oContent.getText()));
+			}
+			m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , m_oAddRecipeType.getSelectedItem() , v ) );
+			listRecipeAction();
+		}
+	}
+	
+	public void listRecipeAction() {
+		hideAllPanel();
+		m_oRecipeListPanel.setVisible( true );
 	}
 	
 	public void hideAllPanel() {

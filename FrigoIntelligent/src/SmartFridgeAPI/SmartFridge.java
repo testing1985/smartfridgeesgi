@@ -3,14 +3,16 @@ package SmartFridgeAPI;
 import java.util.Vector;
 
 public class SmartFridge {
-	private Vector< Menu > m_vMenus = null;
+	private Vector< Menu > 	  m_vMenus = null;
 	private Vector< Aliment > m_vAliments = null;
+	private Vector< Recipe >  m_vRecipes = null;
 	
 	public SmartFridge(){
 		try{
 			m_vAliments = new Vector<Aliment>();
 			m_vMenus = new Vector<Menu>();
 			m_vMenus.addElement( new Menu() );
+			m_vRecipes = new Vector<Recipe>();
 		}catch( Exception e ){
 			e.printStackTrace();
 		}
@@ -22,6 +24,10 @@ public class SmartFridge {
 
 	public void setMenus(Vector<Menu> menus) {
 		m_vMenus = menus;
+	}
+	
+	public void addRecipe( Recipe oR ) {
+		m_vRecipes.add( oR );
 	}
 	
 	public void addMenu( Menu oM ) {
