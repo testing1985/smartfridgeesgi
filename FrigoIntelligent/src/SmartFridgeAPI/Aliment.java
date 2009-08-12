@@ -2,14 +2,13 @@ package SmartFridgeAPI;
 
 public class Aliment {
 	private String m_sName;
-	
-	// type of aliment ( vegetable, fruit, meat, ... )
-	private int m_iType;
-	
+		
 	// Quantity 
 	private int m_iQuantity;
 	
 	private float m_iPrice;
+	
+	private String m_sUnite;
 	
 	// Peremption date
 	long m_iPeremption;
@@ -17,18 +16,17 @@ public class Aliment {
 	public Aliment( String name )
 	{
 		m_sName = name;
-		m_iType = 0;
 		m_iQuantity = 1;
 		m_iPrice = (float) 1.0;
 		m_iPeremption = 0 ;	
 	}
 	
-	public Aliment(String name, int type, int quantity, float price, long peremption) {
+	public Aliment(String name, int quantity, float price, long peremption , String sUnite) {
 		m_sName = name;
-		m_iType = type;
 		m_iQuantity = quantity;
 		m_iPrice = price;
 		m_iPeremption = peremption;
+		m_sUnite = sUnite;
 	}
 
 	public String getName() {
@@ -37,14 +35,6 @@ public class Aliment {
 
 	public void setName(String name) {
 		m_sName = name;
-	}
-
-	public int getType() {
-		return m_iType;
-	}
-
-	public void setType(int type) {
-		m_iType = type;
 	}
 
 	public int getQuantity() {
@@ -73,7 +63,7 @@ public class Aliment {
 	
 	public void print()
 	{
-		System.out.println( m_iQuantity + " " + m_sName + " for " + m_iPrice + "€, best before " + m_iPeremption + ", type is " + m_iType ) ;
+		System.out.println( m_iQuantity + " " + m_sName + " for " + m_iPrice + "€, best before " + m_iPeremption ) ;
 	}
 	
 }
