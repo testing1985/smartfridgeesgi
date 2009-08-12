@@ -26,7 +26,7 @@ public class SFAddRecipeStageFormPanel extends JPanel /*implements ListCellRende
 	public int m_iID;
 	public JTextArea  m_oContent    = new JTextArea( 4 , 40 );
 	public Choice 	  m_oDifficulte = new Choice();
-	public JTextField m_oDuree      = new JTextField( 3 );
+	public JTextField m_oDuree      = new JTextField( "15" , 3 );
 	
 	SFAddRecipeStageFormPanel( int iID ) {
 		super( new BorderLayout() );

@@ -11,8 +11,8 @@ public class SFAddRecipeAlimentFormPanel extends JPanel {
 
 	int 	   m_iID;
 	Choice 	   m_oUnite    = new Choice();
-	JTextField m_oQuantity = new JTextField(3);
-	JTextField m_oName 	   = new JTextField(15);
+	JTextField m_oQuantity = new JTextField( "0" , 3);
+	JTextField m_oName 	   = new JTextField( "Mon ingrédient..." , 13);
 	
 	
 	public SFAddRecipeAlimentFormPanel( int iID ) {
@@ -27,11 +27,12 @@ public class SFAddRecipeAlimentFormPanel extends JPanel {
 		m_oUnite.add("Cuillière à café");
 		m_oUnite.add("Cuillière à soupe");
 		m_oUnite.add("Pincée");
+		m_oUnite.select("g");
 		
 		this.setBorder( BorderFactory.createEtchedBorder() );
-		this.add( new JLabel("Ingrédient n°" + m_iID + "                ") );
+		this.add( new JLabel("Ingrédient n°" + m_iID + " : ") );
 		this.add( m_oName );
-		this.add( new JLabel("     Quantité:") );
+		this.add( new JLabel(" Quantité:") );
 		this.add( m_oQuantity );
 		this.add( m_oUnite );
 	}
