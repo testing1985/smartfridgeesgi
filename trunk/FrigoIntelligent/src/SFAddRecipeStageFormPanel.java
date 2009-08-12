@@ -26,30 +26,25 @@ public class SFAddRecipeStageFormPanel extends JPanel /*implements ListCellRende
 	public int m_iID;
 	public JTextArea  m_oContent    = new JTextArea( 4 , 40 );
 	public Choice 	  m_oDifficulte = new Choice();
-	public JTextField m_oDuree      = new JTextField();
+	public JTextField m_oDuree      = new JTextField( 3 );
 	
 	SFAddRecipeStageFormPanel( int iID ) {
 		super( new BorderLayout() );
-		
 		m_iID = iID;
-		this.setBorder( BorderFactory.createEtchedBorder() );		
+		setBorder( BorderFactory.createEtchedBorder() );		
 		
-		// BEGIN - TOP
-		JPanel oTop = new JPanel();
+		JPanel oNorth = new JPanel();
+		oNorth.add( new JLabel("Etape n°" + m_iID + "                   " ) );
 		
-		oTop.add( new JLabel("Etape n°" + m_iID + "                   " ) );
-		
-		oTop.add( new JLabel( "Difficulté : ") );
+		oNorth.add( new JLabel( "Difficulté : ") );
 		for( int i = 0 ; i < 5 ; i++ )
 			m_oDifficulte.add("" + (i+1) );
-		oTop.add( m_oDifficulte );		
+		oNorth.add( m_oDifficulte );		
 		
-		oTop.add( new JLabel("            Durée : ") );
-		m_oDuree.setColumns( 3 );
-		oTop.add( m_oDuree );
-		oTop.add( new JLabel("(min)") );
-		this.add( oTop , BorderLayout.NORTH );
-		// END - TOP
+		oNorth.add( new JLabel("            Durée : ") );
+		oNorth.add( m_oDuree );
+		oNorth.add( new JLabel("(min)") );
+		this.add( oNorth , BorderLayout.NORTH );
 		
 		m_oContent.setSize( 490 , 50 );
 		this.add( new JScrollPane(m_oContent) , BorderLayout.CENTER );

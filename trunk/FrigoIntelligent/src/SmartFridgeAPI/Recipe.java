@@ -10,24 +10,28 @@ public class Recipe {
 	// type of Recipe
 	private String m_iType;
 	
-	Vector< RecipeStage > m_vRecipeStages = null;
+	Vector< RecipeStage > m_vRecipeStages = new Vector<RecipeStage>();
+	private Vector< Aliment > m_vAliments = new Vector<Aliment>();
 	
 	public Recipe()
 	{
-		m_sName = "Recette";
-		m_iType = "Entrée";
-		
-		m_vRecipeStages = new Vector< RecipeStage >();
-		
-		m_vRecipeStages.add( new RecipeStage() );
 	}
 
-	public Recipe( String name, String type, Vector< RecipeStage > RecipeStages ){
+	public Recipe( String name, String type, Vector< RecipeStage > RecipeStages , Vector<Aliment> vAliments ){
 		m_sName = name;
 		m_iType = type;
 		
 		m_vRecipeStages = RecipeStages;
+		m_vAliments = vAliments;
 		
+	}
+	
+	public Vector<Aliment> getAliments(){
+		return m_vAliments;
+	}
+
+	public void setAliments( Vector<Aliment> aliments ){
+		m_vAliments = aliments;
 	}
 	
 	public Vector<RecipeStage> getRecipeStages() {
