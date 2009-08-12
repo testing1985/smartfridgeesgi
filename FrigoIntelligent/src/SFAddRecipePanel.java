@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,14 +20,19 @@ import SmartFridgeAPI.RecipeStage;
 
 
 public class SFAddRecipePanel extends JPanel implements ActionListener {
+
+	private static final long serialVersionUID = 2929677289590570865L;
 	
 	SFWindow m_oParent;
-	Vector< SFAddRecipeStageFormPanel > m_lStageFormList = new Vector< SFAddRecipeStageFormPanel >();
-	JPanel 	   m_oStageListPanel 	  = new JPanel	 ();	
-	Choice     m_oAddRecipeType		  = new Choice 	 ();
-	JTextField m_oNewRecipeTitle      = new JTextField( 40 );	
-	JButton    m_oAddStageFormBt      = new JButton	 ( "Ajouter une étape" );
-	JButton    m_oAddValidRecipeBt    = new JButton	 ( "Valider la recette");
+	Vector< SFAddRecipeStageFormPanel >   m_lStageFormList   = new Vector< SFAddRecipeStageFormPanel >();
+	Vector< SFAddRecipeAlimentFormPanel > m_lAlimentFormList = new Vector<SFAddRecipeAlimentFormPanel >();
+	JPanel 	   m_oStageListPanel 	  = new JPanel	  ();	
+	JPanel 	   m_oAlimentListPanel    = new JPanel    ();
+	Choice     m_oAddRecipeType		  = new Choice 	  ();
+	JTextField m_oNewRecipeTitle      = new JTextField( "Ma recette..." , 40 );	
+	JButton    m_oAddStageBt      	  = new JButton	  ( "Ajouter une étape"  );
+	JButton    m_oAddValidRecipeBt    = new JButton	  ( "Valider la recette" );
+	JButton    m_oAddAlimentBt		  = new JButton   ( "Ajouter un ingrédient" );
 	
 	
 	public SFAddRecipePanel( SFWindow oParent ) {
@@ -46,32 +52,45 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 		
 		JPanel oCenter = new JPanel( new BorderLayout() );
 		
+		JPanel oTitleAndButtonPanel = new JPanel( new GridLayout( 2 , 1 ) );
 		JPanel oTitlePanel = new JPanel();
 		oTitlePanel.add( new JLabel( "Titre :" ) );
 		oTitlePanel.add( m_oNewRecipeTitle );
-		oCenter.add( oTitlePanel , BorderLayout.NORTH );
+		oTitleAndButtonPanel.add( oTitlePanel );		
 		
-		m_oAddStageFormBt.addActionListener( this );
+		// BEGIN - Buttons
+		m_oAddStageBt.addActionListener( this );
 		m_oAddValidRecipeBt.addActionListener( this );
-		
-		JPanel oStagesAndButtonsPanel = new JPanel( new BorderLayout() );
+		m_oAddAlimentBt.addActionListener( this );		
 		JPanel oButtonPanel    = new JPanel( new GridLayout(1,2));
+		oButtonPanel.add( m_oAddAlimentBt );
 		oButtonPanel.add( m_oAddValidRecipeBt );
-		oButtonPanel.add( m_oAddStageFormBt );		
-		oStagesAndButtonsPanel.add( oButtonPanel , BorderLayout.NORTH );
+		oButtonPanel.add( m_oAddStageBt );
+		oTitleAndButtonPanel.add( oButtonPanel );
+		// END - Buttons
+		
+		oCenter.add( oTitleAndButtonPanel , BorderLayout.NORTH );
+		
+		Box oStagesAndAlimentsPanel = Box.createVerticalBox();		
+		
+		m_lAlimentFormList.addElement( new SFAddRecipeAlimentFormPanel( 1 ) );
+		m_oAlimentListPanel.setLayout( new BoxLayout( m_oAlimentListPanel , BoxLayout.Y_AXIS ) );
+		m_oAlimentListPanel.add( m_lAlimentFormList.firstElement() );
+		oStagesAndAlimentsPanel.add( new JScrollPane( m_oAlimentListPanel ) );
 		
 		m_lStageFormList.addElement( new SFAddRecipeStageFormPanel (1) );
 		m_oStageListPanel.setLayout( new BoxLayout( m_oStageListPanel , BoxLayout.Y_AXIS ) );
-		m_oStageListPanel.add( m_lStageFormList.elementAt(0) );
-		oStagesAndButtonsPanel.add( new JScrollPane( m_oStageListPanel , JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED , JScrollPane.HORIZONTAL_SCROLLBAR_NEVER) , BorderLayout.CENTER );
-		oCenter.add( oStagesAndButtonsPanel , BorderLayout.CENTER );		
+		m_oStageListPanel.add( m_lStageFormList.firstElement() );
+		oStagesAndAlimentsPanel.add( new JScrollPane( m_oStageListPanel ) );
+		
+		oCenter.add( oStagesAndAlimentsPanel , BorderLayout.CENTER );		
 		add( oCenter , BorderLayout.CENTER );
 	}
 
 	
 	public void actionPerformed(ActionEvent e) {
 		
-		if( e.getSource().equals( m_oAddStageFormBt ) ) {
+		if( e.getSource().equals( m_oAddStageBt ) ) {
 			m_lStageFormList.addElement( new SFAddRecipeStageFormPanel ( m_lStageFormList.size() + 1 ) );
 			m_oStageListPanel.add( m_lStageFormList.lastElement() );
 			super.revalidate();
@@ -79,14 +98,29 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 			m_oParent.repaint();
 		}
 		
+		else if( e.getSource().equals( m_oAddAlimentBt ) ) {
+			m_lAlimentFormList.addElement( new SFAddRecipeAlimentFormPanel( m_lAlimentFormList.size() + 1 ) );
+			m_oAlimentListPanel.add( m_lAlimentFormList.lastElement() );
+			super.revalidate();
+			super.repaint();
+			m_oParent.repaint();
+		}
+		
 		else if( e.getSource().equals( m_oAddValidRecipeBt ) ) {
-			Vector<RecipeStage> v = new Vector<RecipeStage>();
-			Vector<Aliment> vA 	  = new Vector<Aliment>();
+			Vector<RecipeStage> vStages   = new Vector<RecipeStage>();
+			Vector<Aliment> 	vAliments = new Vector<Aliment>();
+			
 			for( int i = 0 ; i < m_lStageFormList.size() ; i++ ) {
 				SFAddRecipeStageFormPanel o = m_lStageFormList.elementAt(i);
-				v.add( new RecipeStage(Integer.parseInt(o.m_oDuree.getText()) , Integer.parseInt(o.m_oDifficulte.getSelectedItem()) , o.m_oContent.getText()));
+				vStages.add( new RecipeStage(Integer.parseInt(o.m_oDuree.getText()) , Integer.parseInt(o.m_oDifficulte.getSelectedItem()) , o.m_oContent.getText()));
 			}
-			m_oParent.m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , m_oAddRecipeType.getSelectedItem() , v , vA ) );
+			
+			for( int i = 0 ; i < m_lAlimentFormList.size() ; i++ ) {
+				SFAddRecipeAlimentFormPanel o = m_lAlimentFormList.elementAt(i);
+				vAliments.add( new Aliment(o.m_oName.getText(), Integer.parseInt( o.m_oQuantity.getText() ) , 0, 0, o.m_oUnite.getSelectedItem() ));
+			}
+			
+			m_oParent.m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , m_oAddRecipeType.getSelectedItem() , vStages , vAliments ) );
 			m_oParent.listRecipeAction();
 		}	
 	}
