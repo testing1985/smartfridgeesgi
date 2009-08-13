@@ -34,15 +34,8 @@ public class SFWindow extends JFrame implements ActionListener {
 	SmartFridgeApp m_oParent;
 	JPanel m_oRecipeListPanel;
 	
-	// BEGIN - Ajout d'une recette
-	Vector< SFAddRecipeStageFormPanel > m_vAddRecipeStageFormList = new Vector< SFAddRecipeStageFormPanel >();
-	SFAddRecipePanel m_oAddRecipePanel;
-	JPanel 	   m_oAddStageList 	     = new JPanel();
-	JTextField m_oNewRecipeTitle     = new JTextField();	
-	JButton    m_oAddStageFormBt     = new JButton("Ajouter une étape");
-	JButton    m_oAddValidRecipeBt   = new JButton("Valider la recette");
-	Choice     m_oAddRecipeType		 = new Choice();
-	// END - Ajout d'une recette
+	SFAddRecipePanel 		  m_oAddRecipePanel    = null;
+	SFSaveOnInternetFormPanel m_oSaveInternetPanel = null;
 	
 	// BEGIN - Affichage des recettes
 	Vector < Vector< String > > elements = new Vector < Vector< String > >();
@@ -86,6 +79,10 @@ public class SFWindow extends JFrame implements ActionListener {
 		JMenuItem saveXmlMI = new JMenuItem( "In file" );
 		saveXmlMI.addActionListener( oFileAction );
 		saveMenu.add( saveXmlMI );
+		
+		JMenuItem saveDbMI = new JMenuItem( "On internet" );
+		saveDbMI.addActionListener( oFileAction );
+		saveMenu.add( saveDbMI );
 		menuFile.add( saveMenu );
 			// END - SAVE MENU
 		
@@ -157,6 +154,12 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oAddRecipePanel.setVisible( false );
 		// END - Ajout d'une recette : Panel du milieu		
 		
+		// BEGIN - Enregistrement internet : Panel du milieu
+		m_oSaveInternetPanel = new SFSaveOnInternetFormPanel( this );
+		centerPanel.add( m_oSaveInternetPanel );
+		m_oSaveInternetPanel.setVisible( false );
+		// END - Enregistrement internet : Panel du milieu
+		
 		this.add( centerPanel , BorderLayout.CENTER );		
 		
 		setResizable( false );
@@ -165,7 +168,6 @@ public class SFWindow extends JFrame implements ActionListener {
 		pack();
 	}
 
-	@Override
 	public void actionPerformed( ActionEvent e ) {
 		if( e.getSource().equals( m_oSeeRecipe ) ){
 			if( table.getSelectedRow() != -1 ){
@@ -176,6 +178,17 @@ public class SFWindow extends JFrame implements ActionListener {
 				m_oSeeRecipePanel.setVisible( true );
 				
 			}
+		}
+	}
+	
+	public void saveInternetShowPanel() {
+		if( ! m_oParent.m_oSession.isConnected() ) {
+			hideAllPanel();
+			m_oSaveInternetPanel.reset();
+			m_oSaveInternetPanel.setVisible( true );
+		}
+		else {
+			m_oParent.saveOnInternet();
 		}
 	}
 

@@ -3,10 +3,8 @@ package SmartFridgeAPI;
 import java.util.Vector;
 
 public class RecipeStage {
-	private int m_iTime; 
-	
-	private int m_iDifficulty;
-		
+	private int m_iTime; 	
+	private int m_iDifficulty;		
 	private String m_sDescription;
 	
 	public RecipeStage()

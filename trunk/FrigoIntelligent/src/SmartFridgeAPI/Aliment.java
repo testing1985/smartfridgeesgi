@@ -31,6 +31,14 @@ public class Aliment {
 		m_sUnite = sUnite;
 	}
 
+	public String getUnite() {
+		return m_sUnite;
+	}
+	
+	public void setUnite( String sUnite ) {
+		m_sUnite = sUnite;
+	}
+	
 	public String getName() {
 		return m_sName;
 	}
