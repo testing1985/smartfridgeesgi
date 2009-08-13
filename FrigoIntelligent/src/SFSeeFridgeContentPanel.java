@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+@SuppressWarnings( "serial" )
 public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 
 	SFWindow 	m_oParent;

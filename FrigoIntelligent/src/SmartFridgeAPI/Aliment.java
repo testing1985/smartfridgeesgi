@@ -15,15 +15,15 @@ public class Aliment {
 	
 	public Aliment() {}
 	
-	public Aliment( String name )
+	public Aliment( String sName )
 	{
-		m_sName = name;
+		m_sName = sName;
 		m_iQuantity = 1;
 		m_iPrice = (float) 1.0;
 		m_iPeremption = 0 ;	
 	}
 	
-	public Aliment(String name, int quantity, float price, long peremption , String sUnite) {
+	public Aliment( String name, int quantity, float price, long peremption , String sUnite ){
 		m_sName = name;
 		m_iQuantity = quantity;
 		m_iPrice = price;
