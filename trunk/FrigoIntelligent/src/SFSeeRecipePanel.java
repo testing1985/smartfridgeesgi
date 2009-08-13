@@ -25,11 +25,13 @@ public class SFSeeRecipePanel extends JPanel implements ActionListener {
 	
 	public SFSeeRecipePanel( SFWindow oParent ){
 		super( new BorderLayout() );
-		m_oParent = oParent;		
+		m_oParent = oParent;
 		setPreferredSize( new Dimension( 500 , 500 ) );
 		
 		m_oCenterPanel.setLayout( new BorderLayout() );
 				
+		m_oDescription.setEditable( false );
+		
 		m_oCenterPanel.add( m_oDescription, BorderLayout.CENTER );
 		
 		m_oScrollPane = new JScrollPane( m_oCenterPanel );
@@ -48,23 +50,22 @@ public class SFSeeRecipePanel extends JPanel implements ActionListener {
 		Recipe r = m_oParent.m_oParent.m_oSmartFridge.getRecipes().elementAt( m_iID );
 		m_oTitle.setText( r.getType() + " : " + r.getName() );
 		
-		m_oDescription.setText("");
+		m_oDescription.setText( "" );
 		int size = r.getRecipeStages().size();
 		for( int i = 0; i < size; i++ ){
 			RecipeStage rs = r.getRecipeStages().elementAt( i );
 			
 			System.out.println( String.valueOf( rs.getDifficulty() ) );
-			m_oDescription.append( "Etape " + String.valueOf( i + 1 ) + "\n"  ) ;
-			m_oDescription.append( "Difficulté " + String.valueOf( rs.getDifficulty() ) + "\n"  );
+			m_oDescription.append( "Etape " + ( i + 1 ) + "\n"  ) ;
+			m_oDescription.append( "Difficulté " + rs.getDifficulty() + "\n"  );
 			m_oDescription.append( rs.getDescription() + "\n" );
 			m_oDescription.append( "\n" + "\n" );
 		}
 	}
 	
 	@Override
-	public void actionPerformed( ActionEvent e ) {
-		if( e.getSource().equals( m_oGoBackButton ) ) {
-					
+	public void actionPerformed( ActionEvent e ){
+		if( e.getSource().equals( m_oGoBackButton ) ){	
 			m_oParent.SeeRecipeAction();
 		}
 	}

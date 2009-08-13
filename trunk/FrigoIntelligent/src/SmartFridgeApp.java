@@ -32,7 +32,7 @@ public class SmartFridgeApp {
 	
 	public SmartFridgeApp()
 	{
-		m_oApp 		   = new SFWindow(this);		
+		m_oApp 		   = new SFWindow( this );		
 		m_oSmartFridge = new SmartFridge();
 		m_oSession	   = new Session();
 		
@@ -69,7 +69,7 @@ public class SmartFridgeApp {
 	}
 	
 	public void quitAction() {
-		System.exit(0);
+		System.exit( 0 );
 	}
 	
 	public void saveOnInternet() {

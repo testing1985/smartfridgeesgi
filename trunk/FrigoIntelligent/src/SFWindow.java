@@ -28,7 +28,7 @@ import SmartFridgeAPI.Aliment;
 import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.RecipeStage;
 
-@SuppressWarnings("serial")
+@SuppressWarnings( "serial" )
 public class SFWindow extends JFrame implements ActionListener {
 
 	SmartFridgeApp m_oParent;
@@ -49,17 +49,25 @@ public class SFWindow extends JFrame implements ActionListener {
 	SFSeeRecipePanel m_oSFSeeRecipePanel;
 	// END - Affichage d'une recette
 	
+	// BEGIN - Affichage du contenu du frigo
+	JPanel m_oSeeFridgeContent = new JPanel();
+	SFSeeFridgeContentPanel m_oSFSeeFridgeContent;
+	// END - Affichage du contenu du frigo
+	
+	
 	public JList list;
 	
 	public SFWindow( SmartFridgeApp oSF ){
 		m_oParent = oSF;
 		
 		FileAction oFileAction = new FileAction( m_oParent );
+		FridgeContentAction oFridgeContentAction= new FridgeContentAction( m_oParent );
 		
 		JMenuBar menuBar = new JMenuBar();
 		
 		// BEGIN - MENU FILE
 		JMenu menuFile = new JMenu( "File" );
+		JMenu menuFridgeContent = new JMenu( "Contenu du frigo" );
 		
 			// BEGIN - NEW MENU
 		JMenu newMenu  = new JMenu( "New" );
@@ -99,7 +107,18 @@ public class SFWindow extends JFrame implements ActionListener {
 		menuFile.add( quitMI );
 		// END - MENU FILE
 						
-		menuBar.add( menuFile );		
+		// BEGIN - FridgeContent MENU
+		JMenuItem seeContent = new JMenuItem(  "Voir le contenu"  );
+		seeContent.addActionListener( oFridgeContentAction );
+		menuFridgeContent.add( seeContent );
+		
+		JMenuItem addAliment = new JMenuItem( "Ajouter un aliment" );
+		addAliment.addActionListener( oFridgeContentAction );
+		menuFridgeContent.add( addAliment );
+		// END - FridgeContent MENU
+		
+		menuBar.add( menuFile );	
+		menuBar.add( menuFridgeContent );
 		setJMenuBar( menuBar );
 		
 		setSize( 800, 600 );
@@ -116,14 +135,8 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oRecipeListPanel.add( new JLabel( "Liste des recettes" ), BorderLayout.NORTH );
 		 	    	    	    
 		table = new JTable();
-		
-	    DefaultTableModel model = (DefaultTableModel)table.getModel();
-	    model.addColumn( "ID" );
-	    model.addColumn( "Nom" );
-	    model.addColumn( "Type" );
-	    model.addColumn( "Temps" );
-	    model.addColumn( "Difficulté" );
-	    
+
+		table.setModel( new JRecipeTableModel () );
 	    table.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
 	    table.getTableHeader().setReorderingAllowed( false );
 	    
@@ -147,6 +160,25 @@ public class SFWindow extends JFrame implements ActionListener {
 		centerPanel.add( m_oSeeRecipePanel );
 		m_oSeeRecipePanel.setVisible( false );
 		// END - Affichage d'une recette : Panel du milieu
+		
+		
+		
+		
+		
+		// BEGIN - Affichage d'une recette : Panel du milieu
+		m_oSFSeeFridgeContent = new SFSeeFridgeContentPanel( this );
+	
+		m_oSeeFridgeContent.add( new JLabel( "Liste des aliments" ), BorderLayout.NORTH );
+		m_oSeeFridgeContent.add( m_oSFSeeFridgeContent, BorderLayout.CENTER );
+		
+		centerPanel.add( m_oSeeFridgeContent );
+		m_oSeeFridgeContent.setVisible( false );
+		// END - Affichage d'une recette : Panel du milieu
+		
+		
+		
+		
+		
 		
 		// BEGIN - Ajout d'une recette : Panel du milieu
 		m_oAddRecipePanel = new SFAddRecipePanel( this );
@@ -198,11 +230,11 @@ public class SFWindow extends JFrame implements ActionListener {
 	    
     	Vector < String > recipe = new Vector < String >();
     	Recipe r = m_oParent.m_oSmartFridge.getRecipes().elementAt( size-1 );
-    	recipe.addElement( String.valueOf( size-1 ) );
+    	recipe.addElement( "" + ( size-1 ) );
     	recipe.addElement( r.getName() );
     	recipe.addElement( r.getType() );
-    	recipe.addElement( String.valueOf( r.getTime() + " minutes") );
-    	recipe.addElement( String.valueOf( r.getDifficulty() ) );
+    	recipe.addElement( "" + r.getTime() + " minutes" );
+    	recipe.addElement( "" + r.getDifficulty() );
 	  		
 		model.addRow( recipe );
 	}
@@ -218,10 +250,16 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oRecipeListPanel.setVisible( true );
 	}
 	
+	public void SeeFridgeAction() {
+		hideAllPanel();
+		m_oSeeFridgeContent.setVisible( true );
+	}
+	
 	public void hideAllPanel() {
 		m_oAddRecipePanel.setVisible( false );
 		m_oRecipeListPanel.setVisible( false );
 		m_oSeeRecipePanel.setVisible( false );
+		m_oSeeFridgeContent.setVisible( false );
 	}
 	
 	public void newRecipeAction() {
@@ -229,6 +267,8 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oAddRecipePanel.reset();
 		m_oAddRecipePanel.setVisible( true );
 	}
+	
+	
 	
 }
 	

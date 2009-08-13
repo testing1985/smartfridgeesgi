@@ -21,10 +21,10 @@ public class FileAction implements ActionListener {
 		m_oSmartFridge = oApp;
 	}
 	
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed( ActionEvent e ) {
 		
 		// Quitter l'application
-		if( ((JMenuItem)(e.getSource())).getText().equals("Quit") )
+		if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Quit" ) )
 		{
 			int answer = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment quitter le programme ?", "Quitter ?", JOptionPane.YES_NO_OPTION );
 			
@@ -36,41 +36,41 @@ public class FileAction implements ActionListener {
 		}
 		
 		// Nouvelle recette
-		else if( ((JMenuItem)(e.getSource())).getText().equals("New recipe") )
+		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "New recipe" ) )
 		{
 			m_oSmartFridge.m_oApp.newRecipeAction();
 		}
 		
-		else if( ((JMenuItem)(e.getSource())).getText().equals("On internet") ) {
+		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "On internet" ) ) {
 			m_oSmartFridge.m_oApp.saveInternetShowPanel();
 		}
 		
 		// Sauvegarde dans le fichier xml
-		else if( ((JMenuItem)(e.getSource())).getText().equals("In file") ) {
+		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "In file" ) ) {
 			try {
-				JFileChooser oFC = new JFileChooser( new File(".").getCanonicalPath() );
-				oFC.showSaveDialog(m_oSmartFridge.m_oApp);
+				JFileChooser oFC = new JFileChooser( new File( "." ).getCanonicalPath() );
+				oFC.showSaveDialog( m_oSmartFridge.m_oApp );
 				File fSelected = oFC.getSelectedFile();
 				if( fSelected != null )
-					XMLManager.encodeToFile(m_oSmartFridge.m_oSmartFridge, fSelected.getName() );
-			} catch (FileNotFoundException e1) {
+					XMLManager.encodeToFile( m_oSmartFridge.m_oSmartFridge, fSelected.getName() );
+			} catch ( FileNotFoundException e1 ) {
 				e1.printStackTrace();
-			} catch (IOException e1) {
+			} catch ( IOException e1 ) {
 				e1.printStackTrace();
 			}
 		}
 		
 		// Chargement depuis le fichier xml
-		else if( ((JMenuItem)(e.getSource())).getText().equals("From file") ) {
+		else if( ( (JMenuItem)(e.getSource())).getText().equals( "From file" ) ) {
 			try {
-				JFileChooser oFC = new JFileChooser( new File(".").getCanonicalPath() );
-				oFC.showOpenDialog(m_oSmartFridge.m_oApp);
+				JFileChooser oFC = new JFileChooser( new File( "." ).getCanonicalPath() );
+				oFC.showOpenDialog( m_oSmartFridge.m_oApp );
 				File fSelected = oFC.getSelectedFile();
 				if( fSelected != null )
-					m_oSmartFridge.m_oSmartFridge  = (SmartFridge) XMLManager.decodeFromFile(fSelected.getName());
+					m_oSmartFridge.m_oSmartFridge  = (SmartFridge) XMLManager.decodeFromFile( fSelected.getName() );
 				m_oSmartFridge.m_oApp.listRecipeAction();
-			} catch (FileNotFoundException e1) {
-				System.out.println("Le fichier SmartFridge_db.xml n'existe pas");
+			} catch( FileNotFoundException e1 ){
+				System.out.println( "Le fichier SmartFridge_db.xml n'existe pas" );
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

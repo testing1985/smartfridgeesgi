@@ -35,12 +35,12 @@ public class SFListRecipePanel extends JPanel implements ActionListener {
 		
 		c.gridx = 2;
 		c.gridy = 0;
-		add( new JLabel( " " + String.valueOf( oRecipe.getTime() ) + " minutes" ), c );
+		add( new JLabel( " " + oRecipe.getTime() + " minutes" ), c );
 		
 		c.gridx = 3;
 		c.gridy = 0;
 		c.weightx = 0.5;
-		add( new JLabel( " diffculté : " + String.valueOf( oRecipe.getDifficulty() ) ), c );
+		add( new JLabel( " diffculté : " + oRecipe.getDifficulty() ), c );
 									
 		c.gridx = 4;
 		c.gridy = 0;
@@ -50,7 +50,7 @@ public class SFListRecipePanel extends JPanel implements ActionListener {
 	}
 	
 	 public void actionPerformed( ActionEvent e ){
-		 System.out.println( "CLIC") ;
+		 System.out.println( "CLIC" ) ;
 	 }
 	
 }
