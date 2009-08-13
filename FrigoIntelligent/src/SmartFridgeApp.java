@@ -17,10 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class SmartFridgeApp {
-	public SFWindow     m_oApp;
-	public SmartFridge  m_oSmartFridge;
+	public  SFWindow     m_oApp;
+	public  SmartFridge  m_oSmartFridge;
 	private RSSManager  m_oRSSManager;
-	private Session     m_oSession = null;
+	public  Session     m_oSession = null;
 	
 	public static void main( String[] args )
 	{	
@@ -32,27 +32,20 @@ public class SmartFridgeApp {
 	
 	public SmartFridgeApp()
 	{
-		m_oApp = new SFWindow(this);
-		
+		m_oApp 		   = new SFWindow(this);		
 		m_oSmartFridge = new SmartFridge();
-		initializeConnection();
-			//m_oRSSManager  = (RSSManager) XMLManager.decodeFromFile("RSSManager.xml");			
-			//m_oSession     = new Session();
-			
-			/*if( m_oSession.connect("esgi", "esgi") )
-				System.out.println("esgi connected");
-			else System.out.println("esgi not connected");*/
-			
-			//DBConnectionManager.getInstance().closeConnection();
-
+		m_oSession	   = new Session();
 		
+		initializeConnection();
+			//m_oRSSManager  = (RSSManager) XMLManager.decodeFromFile("RSSManager.xml");
+		DBConnectionManager.getInstance().closeConnection();		
 	}
 	
 	public void initializeConnection()
 	{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			String sURL = "jdbc:mysql://88.191.18.27:3306/isilgardh_smartfridge";
+			String sURL = "jdbc:mysql://88.191.18.27:3306/smartfridge";
 			DBConnectionManager.getInstance().setConnectionData(sURL, "esgi", "g6f3s9j3");			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -77,6 +70,12 @@ public class SmartFridgeApp {
 	
 	public void quitAction() {
 		System.exit(0);
+	}
+	
+	public void saveOnInternet() {
+		if( m_oSession.isConnected() ) {
+			m_oSession.save( m_oSmartFridge );
+		}
 	}
 }
 

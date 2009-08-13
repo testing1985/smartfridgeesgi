@@ -9,23 +9,30 @@ public class Recipe {
 	private String m_sType;
 	
 	Vector< RecipeStage > m_vRecipeStages = null;
+	Vector< Aliment >     m_vAliments 	  = null;
 	
 	public Recipe()
-	{}
+	{
+		m_sName = "";
+		m_sType = "";
+		m_vRecipeStages = new Vector< RecipeStage >();
+		m_vAliments 	= new Vector< Aliment >();
+	}
 
-	public Recipe( String name, String type, Vector< RecipeStage > RecipeStages , Vector<Aliment> vAliments ){
+	public Recipe( String name, String type, Vector< RecipeStage > vRecipeStages , Vector<Aliment> vAliments ){
 		m_sName = name;
 		m_sType = type;
 		
-		m_vRecipeStages = new Vector< RecipeStage >();
-		
-		m_vRecipeStages.add( new RecipeStage() );
-	}
-
-	public Recipe( String sName, String sType, Vector< RecipeStage > vRecipeStages ){
-		m_sName = sName;
-		m_sType = sType;
 		m_vRecipeStages = vRecipeStages;
+		m_vAliments     = vAliments;
+	}
+	
+	public Vector< Aliment > getAliments() {
+		return m_vAliments;
+	}
+	
+	public void setAliments( Vector< Aliment > vAliments ) {
+		m_vAliments = vAliments;
 	}
 	
 	public Vector<RecipeStage> getRecipeStages(){
