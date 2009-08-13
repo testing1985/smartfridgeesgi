@@ -19,9 +19,9 @@ public class Recipe {
 		m_vAliments 	= new Vector< Aliment >();
 	}
 
-	public Recipe( String name, String type, Vector< RecipeStage > vRecipeStages , Vector<Aliment> vAliments ){
-		m_sName = name;
-		m_sType = type;
+	public Recipe( String sName, String sType, Vector< RecipeStage > vRecipeStages , Vector<Aliment> vAliments ){
+		m_sName = sName;
+		m_sType = sType;
 		
 		m_vRecipeStages = vRecipeStages;
 		m_vAliments     = vAliments;

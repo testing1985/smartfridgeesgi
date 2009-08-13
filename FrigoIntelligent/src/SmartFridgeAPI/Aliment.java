@@ -73,7 +73,7 @@ public class Aliment {
 	
 	public void print()
 	{
-		System.out.println( m_iQuantity + " " + m_sName + " for " + m_iPrice + "€, best before " + m_iPeremption ) ;
+		System.out.println( m_iQuantity + " " + m_sName + " for " + m_iPrice + "€, à consommer avant " + m_iPeremption ) ;
 	}
 	
 }
