@@ -1,5 +1,4 @@
 import java.awt.BorderLayout;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -7,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -25,7 +25,7 @@ public class SFAddRecipeStageFormPanel extends JPanel /*implements ListCellRende
 	
 	public int m_iID;
 	public JTextArea  m_oContent    = new JTextArea( 4 , 40 );
-	public Choice 	  m_oDifficulte = new Choice();
+	public JComboBox  m_oDifficulte = new JComboBox();
 	public JTextField m_oDuree      = new JTextField( "15" , 3 );
 	
 	SFAddRecipeStageFormPanel( int iID ) {
@@ -38,7 +38,7 @@ public class SFAddRecipeStageFormPanel extends JPanel /*implements ListCellRende
 		
 		oNorth.add( new JLabel( "Difficulté : " ) );
 		for( int i = 0 ; i < 5 ; i++ )
-			m_oDifficulte.add( "" + ( i+1 ) );
+			m_oDifficulte.addItem("" + (i+1) );
 		oNorth.add( m_oDifficulte );		
 		
 		oNorth.add( new JLabel( "            Durée : " ) );
