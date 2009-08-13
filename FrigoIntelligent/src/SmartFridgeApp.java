@@ -77,6 +77,13 @@ public class SmartFridgeApp {
 			m_oSession.save( m_oSmartFridge );
 		}
 	}
+	
+	public void loadFromInternet() {
+		if( m_oSession.isConnected() ) {
+			m_oSmartFridge = new SmartFridge();
+			m_oSession.load( m_oSmartFridge );
+		}
+	}
 }
 
 

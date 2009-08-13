@@ -34,8 +34,9 @@ public class SFWindow extends JFrame implements ActionListener {
 	SmartFridgeApp m_oParent;
 	JPanel m_oRecipeListPanel;
 	
-	SFAddRecipePanel 		  m_oAddRecipePanel    = null;
-	SFSaveOnInternetFormPanel m_oSaveInternetPanel = null;
+	SFAddRecipePanel 		  m_oAddRecipePanel        = null;
+	SFSaveOnInternetFormPanel m_oSaveInternetPanel     = null;
+	SFLoadFromInternetPanel   m_oLoadFromInternetPanel = null;
 	
 	// BEGIN - Affichage des recettes
 	Vector < Vector< String > > elements = new Vector < Vector< String > >();
@@ -99,6 +100,10 @@ public class SFWindow extends JFrame implements ActionListener {
 		JMenuItem loadXmlMI = new JMenuItem( "From file" );
 		loadXmlMI.addActionListener( oFileAction );
 		loadMenu.add( loadXmlMI );
+		
+		JMenuItem loadDbMI = new JMenuItem( "From internet" );
+		loadDbMI.addActionListener( oFileAction );
+		loadMenu.add( loadDbMI );		
 		menuFile.add( loadMenu );
 			// END - LOAD MENU
 		
@@ -192,6 +197,12 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oSaveInternetPanel.setVisible( false );
 		// END - Enregistrement internet : Panel du milieu
 		
+		// BEGIN - Enregistrement internet : Panel du milieu
+		m_oLoadFromInternetPanel = new SFLoadFromInternetPanel( this );
+		centerPanel.add( m_oLoadFromInternetPanel );
+		m_oLoadFromInternetPanel.setVisible( false );
+		// END - Enregistrement internet : Panel du milieu
+		
 		this.add( centerPanel , BorderLayout.CENTER );		
 		
 		setResizable( false );
@@ -210,6 +221,18 @@ public class SFWindow extends JFrame implements ActionListener {
 				m_oSeeRecipePanel.setVisible( true );
 				
 			}
+		}
+	}
+	
+	public void loadInternetShowPanel() {
+		if( ! m_oParent.m_oSession.isConnected() ) {
+			hideAllPanel();
+			m_oLoadFromInternetPanel.reset();
+			m_oLoadFromInternetPanel.setVisible( true );
+		}
+		else {
+			m_oParent.loadFromInternet();
+			listRecipeAction();
 		}
 	}
 	

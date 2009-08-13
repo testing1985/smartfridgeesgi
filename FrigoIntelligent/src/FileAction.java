@@ -41,8 +41,14 @@ public class FileAction implements ActionListener {
 			m_oSmartFridge.m_oApp.newRecipeAction();
 		}
 		
+		// Sauvegarde sur internet
 		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "On internet" ) ) {
 			m_oSmartFridge.m_oApp.saveInternetShowPanel();
+		}
+		
+		// Chargement depuis internet
+		else if( ((JMenuItem)(e.getSource())).getText().equals("From internet") ) {
+			m_oSmartFridge.m_oApp.loadInternetShowPanel();
 		}
 		
 		// Sauvegarde dans le fichier xml
