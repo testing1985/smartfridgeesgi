@@ -45,6 +45,8 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 		m_oAlimentListPanel.setLayout( new BoxLayout( m_oAlimentListPanel , BoxLayout.Y_AXIS ) );
 		m_oStageListPanel.setLayout  ( new BoxLayout( m_oStageListPanel   , BoxLayout.Y_AXIS ) );
 		
+		m_oNewRecipeTitle  = new JTextField( "Ma recette..." , 40 );
+		
 		reset();
 		
 		JPanel oNorth = new JPanel();
@@ -92,7 +94,7 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 	
 	public void reset() {
 		m_oAddRecipeType.setSelectedItem("Entrée");
-		m_oNewRecipeTitle  = new JTextField( "Ma recette..." , 40 );
+		m_oNewRecipeTitle.setText( "Ma recette..." );
 		
 		m_lStageFormList   = new Vector< SFAddRecipeStageFormPanel >();
 		m_lStageFormList.addElement( new SFAddRecipeStageFormPanel (1) );
