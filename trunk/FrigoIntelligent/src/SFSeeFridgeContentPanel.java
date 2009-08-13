@@ -2,13 +2,18 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
+import SmartFridgeAPI.Aliment;
+import SmartFridgeAPI.Recipe;
 
 @SuppressWarnings( "serial" )
 public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
@@ -39,6 +44,28 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	    add( m_oScrollPane, BorderLayout.CENTER );
 		m_oGoBackButton.addActionListener( this );
 		add( m_oGoBackButton , BorderLayout.SOUTH );
+	}
+	
+	public void Refresh(){
+		DefaultTableModel model = (DefaultTableModel)m_oTable.getModel();
+		
+		int size = model.getRowCount();
+		for( int i = 0; i < size; i++ ){
+			model.removeRow( 0 );
+		}
+		
+		size = m_oParent.m_oParent.m_oSmartFridge.getAliments().size();
+		for( int i = 0; i < size; i++ ){
+		    	Vector < String > aliment = new Vector < String >();
+		    	Aliment a = m_oParent.m_oParent.m_oSmartFridge.getAliments().elementAt( i );
+		    	aliment.addElement( "" + ( i + 1 ) );
+		    	aliment.addElement( a.getName() );
+		    	aliment.addElement( a.getQuantity() + " " +  a.getUnite() );
+		    	aliment.addElement( "" + a.getPrice() + "€" );
+		    	aliment.addElement( "" + a.getPeremption() );
+			  				    	
+				model.addRow( aliment );
+		}
 	}
 	
 	public void actionPerformed(ActionEvent e){

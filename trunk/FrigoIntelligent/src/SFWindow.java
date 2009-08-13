@@ -283,7 +283,7 @@ public class SFWindow extends JFrame implements ActionListener {
 				model.addRow( recipe );
 		}
 	}
-	
+		
 	public void listRecipeAction() {
 		hideAllPanel();
 		m_oRecipeListPanel.setVisible( true );
@@ -298,6 +298,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	public void SeeFridgeAction() {
 		hideAllPanel();
 		m_oSeeFridgeContent.setVisible( true );
+		m_oSFSeeFridgeContent.Refresh();
 	}
 	
 	public void AddAlimentAction() {
