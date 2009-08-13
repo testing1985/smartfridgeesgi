@@ -19,10 +19,7 @@ public class FridgeContentAction implements ActionListener {
 		}
 		// Ajouter un aliment
 		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Ajouter un aliment" )  ){
-			
-			
+			m_oSmartFridge.m_oApp.AddAlimentAction();
 		}
-		
 	}
-
 }
