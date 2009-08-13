@@ -1,7 +1,7 @@
-import java.awt.Choice;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 public class SFAddRecipeAlimentFormPanel extends JPanel {
 
 	int 	   m_iID;
-	Choice 	   m_oUnite    = new Choice();
+	JComboBox  m_oUnite    = new JComboBox();
 	JTextField m_oQuantity = new JTextField( "0" , 3);
 	JTextField m_oName 	   = new JTextField( "Mon ingrédient..." , 13);
 	
@@ -20,14 +20,14 @@ public class SFAddRecipeAlimentFormPanel extends JPanel {
 		
 		m_iID = iID;
 		
-		m_oUnite.add("");
-		m_oUnite.add("g");
-		m_oUnite.add("cl");
-		m_oUnite.add("1/2 sachets");
-		m_oUnite.add("Cuillière à café");
-		m_oUnite.add("Cuillière à soupe");
-		m_oUnite.add("Pincée");
-		m_oUnite.select("g");
+		m_oUnite.addItem("");
+		m_oUnite.addItem("g");
+		m_oUnite.addItem("cl");
+		m_oUnite.addItem("1/2 sachets");
+		m_oUnite.addItem("Cuillière à café");
+		m_oUnite.addItem("Cuillière à soupe");
+		m_oUnite.addItem("Pincée");
+		m_oUnite.setSelectedItem("g");
 		
 		this.setBorder( BorderFactory.createEtchedBorder() );
 		this.add( new JLabel("Ingrédient n°" + m_iID + " : ") );
