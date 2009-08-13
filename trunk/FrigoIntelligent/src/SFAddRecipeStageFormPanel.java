@@ -34,19 +34,19 @@ public class SFAddRecipeStageFormPanel extends JPanel /*implements ListCellRende
 		setBorder( BorderFactory.createEtchedBorder() );		
 		
 		JPanel oNorth = new JPanel();
-		oNorth.add( new JLabel("Etape n°" + m_iID + "                   " ) );
+		oNorth.add( new JLabel( "Etape n°" + m_iID + "                   " ) );
 		
-		oNorth.add( new JLabel( "Difficulté : ") );
+		oNorth.add( new JLabel( "Difficulté : " ) );
 		for( int i = 0 ; i < 5 ; i++ )
-			m_oDifficulte.add("" + (i+1) );
+			m_oDifficulte.add( "" + ( i+1 ) );
 		oNorth.add( m_oDifficulte );		
 		
-		oNorth.add( new JLabel("            Durée : ") );
+		oNorth.add( new JLabel( "            Durée : " ) );
 		oNorth.add( m_oDuree );
-		oNorth.add( new JLabel("(min)") );
+		oNorth.add( new JLabel( "(min)" ) );
 		this.add( oNorth , BorderLayout.NORTH );
 		
 		m_oContent.setSize( 490 , 50 );
-		this.add( new JScrollPane(m_oContent) , BorderLayout.CENTER );
+		this.add( new JScrollPane( m_oContent ) , BorderLayout.CENTER );
 	}
 }

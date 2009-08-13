@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -52,7 +53,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	
 	// BEGIN - Affichage d'une recette
 	JPanel m_oSeeRecipePanel = new JPanel();
-	
+	SFSeeRecipePanel m_oSFSeeRecipePanel;
 	// END - Affichage d'une recette
 	
 	public JList list;
@@ -118,6 +119,7 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oRecipeListPanel.add( new JLabel( "Liste des recettes" ), BorderLayout.NORTH );
 		 	    	    	    
 		table = new JTable();
+		
 	    DefaultTableModel model = (DefaultTableModel)table.getModel();
 	    model.addColumn( "ID" );
 	    model.addColumn( "Nom" );
@@ -126,6 +128,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	    model.addColumn( "Difficulté" );
 	    
 	    table.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
+	    table.getTableHeader().setReorderingAllowed( false );
 	    
 	    TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>( table.getModel() );
 	    table.setRowSorter( sorter );
@@ -133,23 +136,19 @@ public class SFWindow extends JFrame implements ActionListener {
 	    scrollpane = new JScrollPane( table );
 		
 	    m_oRecipeListPanel.add( scrollpane, BorderLayout.CENTER );
+	    m_oSeeRecipe.addActionListener( this );
 	    m_oRecipeListPanel.add( m_oSeeRecipe, BorderLayout.SOUTH );
 	    
 		centerPanel.add( m_oRecipeListPanel );
 		// END - Liste des recettes : Panel du milieu
 		
 		// BEGIN - Affichage d'une recette : Panel du milieu
-		/*m_oSeeRecipePanel = new JPanel();
-		m_oRecipeListPanel.setPreferredSize( new Dimension( 500 , 500 ) );
-		m_oRecipeListPanel.setLayout( new BorderLayout() );
+		m_oSFSeeRecipePanel = new SFSeeRecipePanel( this );
 		
+		m_oSeeRecipePanel.add( m_oSFSeeRecipePanel, BorderLayout.CENTER );
 		
-		m_oRecipeListPanel.add( new JLabel( " Recette " ), BorderLayout.NORTH );
-		
-		
-		
-		centerPanel.add( m_oRecipeListPanel );
-		m_oRecipeListPanel.setVisible( false );*/
+		centerPanel.add( m_oSeeRecipePanel );
+		m_oSeeRecipePanel.setVisible( false );
 		// END - Affichage d'une recette : Panel du milieu
 		
 		// BEGIN - Ajout d'une recette : Panel du milieu
@@ -168,11 +167,18 @@ public class SFWindow extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-		if(  e.getSource().equals( m_oSeeRecipe ) ){
-			
+		if( e.getSource().equals( m_oSeeRecipe ) ){
+			if( table.getSelectedRow() != -1 ){
+				hideAllPanel();
+								
+				m_oSFSeeRecipePanel.ChangeID( table.getValueAt( table.getSelectedRow(), 0 ).toString() );
+				m_oSFSeeRecipePanel.Refresh();
+				m_oSeeRecipePanel.setVisible( true );
+				
+			}
 		}
 	}
-	
+
 	public void DrawRecipePanel(){
 		DefaultTableModel model = (DefaultTableModel)table.getModel();
 		int size = m_oParent.m_oSmartFridge.getRecipes().size();
@@ -199,10 +205,10 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oRecipeListPanel.setVisible( true );
 	}
 	
-	
 	public void hideAllPanel() {
 		m_oAddRecipePanel.setVisible( false );
 		m_oRecipeListPanel.setVisible( false );
+		m_oSeeRecipePanel.setVisible( false );
 	}
 	
 	public void newRecipeAction() {

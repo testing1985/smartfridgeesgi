@@ -105,7 +105,7 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 	}
 
 	
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed( ActionEvent e ) {
 		
 		// Ajout d'une étape
 		if( e.getSource().equals( m_oAddStageBt ) ) {
@@ -133,13 +133,13 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 			Vector<Aliment> 	vAliments = new Vector<Aliment>();
 			
 			for( int i = 0 ; i < m_lStageFormList.size() ; i++ ) {
-				SFAddRecipeStageFormPanel o = m_lStageFormList.elementAt(i);
-				vStages.add( new RecipeStage(Integer.parseInt(o.m_oDuree.getText()) , Integer.parseInt(o.m_oDifficulte.getSelectedItem()) , o.m_oContent.getText()));
+				SFAddRecipeStageFormPanel o = m_lStageFormList.elementAt( i );
+				vStages.add( new RecipeStage(Integer.parseInt( o.m_oDuree.getText() ), Integer.parseInt( o.m_oDifficulte.getSelectedItem()), o.m_oContent.getText() ) );
 			}
 			
 			for( int i = 0 ; i < m_lAlimentFormList.size() ; i++ ) {
-				SFAddRecipeAlimentFormPanel o = m_lAlimentFormList.elementAt(i);
-				vAliments.add( new Aliment(o.m_oName.getText(), Integer.parseInt( o.m_oQuantity.getText() ) , 0, 0, o.m_oUnite.getSelectedItem() ));
+				SFAddRecipeAlimentFormPanel o = m_lAlimentFormList.elementAt( i );
+				vAliments.add( new Aliment( o.m_oName.getText(), Integer.parseInt( o.m_oQuantity.getText() ), 0, 0, o.m_oUnite.getSelectedItem() ) );
 			}
 			
 			m_oParent.m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , m_oAddRecipeType.getSelectedItem() , vStages , vAliments ) );
