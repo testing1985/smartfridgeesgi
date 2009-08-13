@@ -44,7 +44,7 @@ public class FileAction implements ActionListener {
 		// Sauvegarde dans le fichier xml
 		else if( ((JMenuItem)(e.getSource())).getText().equals("In file") ) {
 			try {
-				JFileChooser oFC = new JFileChooser();
+				JFileChooser oFC = new JFileChooser( new File(".").getCanonicalPath() );
 				oFC.showSaveDialog(m_oSmartFridge.m_oApp);
 				File fSelected = oFC.getSelectedFile();
 				if( fSelected != null )
@@ -59,10 +59,11 @@ public class FileAction implements ActionListener {
 		// Chargement depuis le fichier xml
 		else if( ((JMenuItem)(e.getSource())).getText().equals("From file") ) {
 			try {
-				JFileChooser oFC = new JFileChooser();
+				JFileChooser oFC = new JFileChooser( new File(".").getCanonicalPath() );
 				oFC.showOpenDialog(m_oSmartFridge.m_oApp);
-				File fSelected = oFC.getSelectedFile();				
-				m_oSmartFridge.m_oSmartFridge  = (SmartFridge) XMLManager.decodeFromFile(fSelected.getName());
+				File fSelected = oFC.getSelectedFile();
+				if( fSelected != null )
+					m_oSmartFridge.m_oSmartFridge  = (SmartFridge) XMLManager.decodeFromFile(fSelected.getName());
 				m_oSmartFridge.m_oApp.listRecipeAction();
 			} catch (FileNotFoundException e1) {
 				System.out.println("Le fichier SmartFridge_db.xml n'existe pas");
