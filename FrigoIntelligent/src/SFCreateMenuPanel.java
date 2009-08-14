@@ -26,7 +26,6 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 	JTextField m_oName   	  = new JTextField( 15 );
 	JButton    m_oAddRecipeBt = new JButton( "Ajouter une recette" );
 	JButton    m_oValidMenuBt = new JButton( "Ajouter le menu" );	
-	JButton    m_oAutoBt      = new JButton( "Menu automatique" );
 
 	public SFCreateMenuPanel( SFWindow oParent ) {
 		
@@ -37,7 +36,6 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 		m_oRecipeList.setLayout( new BoxLayout( m_oRecipeList , BoxLayout.Y_AXIS ) );
 		m_oAddRecipeBt.addActionListener( this );
 		m_oValidMenuBt.addActionListener( this );
-		m_oAutoBt.addActionListener( this );
 		
 		reset();
 		
@@ -51,7 +49,6 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 		JPanel oNorthButtons = new JPanel();
 		oNorthButtons.add( m_oValidMenuBt );
 		oNorthButtons.add( m_oAddRecipeBt );
-		oNorthButtons.add( m_oAutoBt );
 		oNorth.add( oNorthButtons );
 		
 		JPanel oCenter = new JPanel( new BorderLayout() );
@@ -96,10 +93,6 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 				m_oParent.m_oParent.m_oSmartFridge.addMenu( oMenu );
 				m_oParent.SeeMenuAction();
 			}
-		}
-		
-		else if( e.getSource().equals( m_oAutoBt ) ) {
-			
 		}
 	}
 
