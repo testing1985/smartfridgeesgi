@@ -2,7 +2,6 @@ package ProjetsUtils.XMLTools.RSSManager;
 
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
-import java.beans.SimpleBeanInfo;
 
 
 public class RSSManagerBeanInfo {
@@ -11,7 +10,6 @@ public class RSSManagerBeanInfo {
     
     public RSSManagerBeanInfo() {
         try {
-            Class<RSSManager> c = RSSManager.class;
             PropertyDescriptor feedListDescriptor = new PropertyDescriptor("feedList", RSSManager.class, "getFeedList" , "setFeedList");
             pDescriptors = new PropertyDescriptor[] { feedListDescriptor };
             

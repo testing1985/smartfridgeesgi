@@ -96,7 +96,7 @@ public class Recipe {
 	    calendar.setTime( startDate );
 	    Calendar calendar2 = Calendar.getInstance();
 	    calendar2.clear();
-	    calendar2.set( calendar.get(calendar.YEAR), calendar.get(calendar.MONTH),calendar.get(calendar.DAY_OF_MONTH) + amount );
+	    calendar2.set( calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH) + amount );
 	    return calendar2.getTime();
 	}
 	

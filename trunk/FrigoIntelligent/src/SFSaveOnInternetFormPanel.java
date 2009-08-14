@@ -1,6 +1,6 @@
+
+
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+@SuppressWarnings("serial")
 public class SFSaveOnInternetFormPanel extends JPanel implements ActionListener {
 	
 	SFWindow   m_oParent = null;
@@ -47,12 +48,12 @@ public class SFSaveOnInternetFormPanel extends JPanel implements ActionListener 
 		if( e.getSource().equals( m_oSave )) {
 			String sLogin  = m_oLogin.getText();
 			String sPasswd = m_oPasswd.getText();
-			if( ! m_oParent.m_oParent.m_oSession.connect( sLogin , sPasswd ) ) {
+			if( ! m_oParent.m_oSession.connect( sLogin , sPasswd ) ) {
 				System.out.println("Identifiant incorrect");
 			}
 			else {
 				System.out.println(m_oLogin.getText() + " connected" );
-				m_oParent.m_oParent.saveOnInternet();
+				m_oParent.saveOnInternet();
 				m_oParent.listRecipeAction();
 			}			
 		}		

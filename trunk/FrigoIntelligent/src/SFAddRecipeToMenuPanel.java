@@ -10,6 +10,7 @@ import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.SmartFridge;
 
 
+@SuppressWarnings("serial")
 public class SFAddRecipeToMenuPanel extends JPanel implements ActionListener {
 
 	int m_iID;

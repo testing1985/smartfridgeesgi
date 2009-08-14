@@ -10,9 +10,7 @@ public class MenuBeanInfo extends SimpleBeanInfo {
 	
 	public MenuBeanInfo() {
 		try {
-			
-            Class<Menu> c = Menu.class;
-            
+			            
             PropertyDescriptor oListRecipeDescriptor = new PropertyDescriptor( "listRecipeID", Menu.class , "getListRecipeID" , "setListRecipeID" );
             PropertyDescriptor oMenuNameDescriptor   = new PropertyDescriptor( "name"		 , Menu.class , "getName" 		  , "setName" );
             PropertyDescriptor oRecipesDescriptor    = new PropertyDescriptor( "recipes"	 , Menu.class , "getRecipes" 	  , "setRecipes" );

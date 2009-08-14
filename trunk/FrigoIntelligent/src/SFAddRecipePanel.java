@@ -5,12 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -145,7 +143,7 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 				vAliments.add( new Aliment(o.m_oName.getText(), Integer.parseInt( o.m_oQuantity.getText() ) , 0, 0, (String)o.m_oUnite.getSelectedItem() ));
 			}
 			
-			m_oParent.m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , (String)m_oAddRecipeType.getSelectedItem() , vStages , vAliments , m_oParent.m_oParent.m_oSmartFridge.getRecipes().size() ) );
+			m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , (String)m_oAddRecipeType.getSelectedItem() , vStages , vAliments , m_oParent.m_oSmartFridge.getRecipes().size() ) );
 			m_oParent.listRecipeAction();
 		}	
 	}
