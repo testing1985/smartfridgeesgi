@@ -72,8 +72,10 @@ public class FileAction implements ActionListener {
 				JFileChooser oFC = new JFileChooser( new File( "." ).getCanonicalPath() );
 				oFC.showOpenDialog( m_oSmartFridge.m_oApp );
 				File fSelected = oFC.getSelectedFile();
-				if( fSelected != null )
+				if( fSelected != null ) {
 					m_oSmartFridge.m_oSmartFridge  = (SmartFridge) XMLManager.decodeFromFile( fSelected.getName() );
+					m_oSmartFridge.m_oSmartFridge.createMenusFromIDs();
+				}
 				m_oSmartFridge.m_oApp.listRecipeAction();
 			} catch( FileNotFoundException e1 ){
 				System.out.println( "Le fichier SmartFridge_db.xml n'existe pas" );

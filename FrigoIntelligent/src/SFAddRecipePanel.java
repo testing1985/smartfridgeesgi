@@ -145,7 +145,7 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 				vAliments.add( new Aliment(o.m_oName.getText(), Integer.parseInt( o.m_oQuantity.getText() ) , 0, 0, (String)o.m_oUnite.getSelectedItem() ));
 			}
 			
-			m_oParent.m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , (String)m_oAddRecipeType.getSelectedItem() , vStages , vAliments ) );
+			m_oParent.m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , (String)m_oAddRecipeType.getSelectedItem() , vStages , vAliments , m_oParent.m_oParent.m_oSmartFridge.getRecipes().size() ) );
 			m_oParent.listRecipeAction();
 		}	
 	}

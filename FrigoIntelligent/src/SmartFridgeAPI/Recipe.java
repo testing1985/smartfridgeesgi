@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Vector;
 
 public class Recipe {
+	private int	   m_iID;
 	private String m_sName;
 	private String m_sType;
 	
@@ -13,18 +14,28 @@ public class Recipe {
 	
 	public Recipe()
 	{
+		m_iID 	= -1;
 		m_sName = "";
 		m_sType = "";
 		m_vRecipeStages = new Vector< RecipeStage >();
 		m_vAliments 	= new Vector< Aliment >();
 	}
 
-	public Recipe( String sName, String sType, Vector< RecipeStage > vRecipeStages , Vector<Aliment> vAliments ){
+	public Recipe( String sName, String sType, Vector< RecipeStage > vRecipeStages , Vector<Aliment> vAliments , int iID ){
 		m_sName = sName;
 		m_sType = sType;
+		m_iID 	= iID;
 		
 		m_vRecipeStages = vRecipeStages;
 		m_vAliments     = vAliments;
+	}
+	
+	public int getID() {
+		return m_iID;
+	}
+	
+	public void setID( int iID ) {
+		m_iID = iID;
 	}
 	
 	public Vector< Aliment > getAliments() {
