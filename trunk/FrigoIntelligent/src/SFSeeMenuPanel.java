@@ -47,7 +47,7 @@ public class SFSeeMenuPanel extends JPanel{
 	
 	public void Refresh(){
 	
-			Menu m = m_oParent.m_oParent.m_oSmartFridge.getMenus().elementAt( m_iID );
+			Menu m = m_oParent.m_oParent.m_oSmartFridge.getMenus().elementAt( m_iID - 1 );
 			
 			m_oTitle.setText( m.getName() );
 			
