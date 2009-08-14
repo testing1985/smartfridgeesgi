@@ -13,8 +13,7 @@ public class SmartFridgeApp {
 	
 	public SmartFridgeApp()
 	{
-		m_oApp 		   = new SFWindow();		
-				
+		m_oApp 		   = new SFWindow();				
 	}
 }
 

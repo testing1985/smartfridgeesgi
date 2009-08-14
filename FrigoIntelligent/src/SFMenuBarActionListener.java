@@ -60,10 +60,19 @@ public class SFMenuBarActionListener implements ActionListener {
 		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Dans un fichier..." ) ) {
 			try {
 				JFileChooser oFC = new JFileChooser( new File( "." ).getCanonicalPath() );
-				oFC.showSaveDialog( m_oParent );
-				File fSelected = oFC.getSelectedFile();
-				if( fSelected != null )
-					XMLManager.encodeToFile( m_oParent.m_oSmartFridge, fSelected.getName() );
+				oFC.addChoosableFileFilter( new SFXmlFilter(".xml" , ".xml") );
+				
+				if( oFC.showSaveDialog( m_oParent ) == JFileChooser.APPROVE_OPTION ) {
+					File fSelected = oFC.getSelectedFile();
+					if( fSelected != null ) {
+						if( fSelected.length() > 0 ) {
+							int iRes = JOptionPane.showConfirmDialog( m_oParent , "Le fichier n'est pas vide, voulez vous l'écraser ?", "Confirmation d'enregistrement", JOptionPane.YES_NO_OPTION );
+							if( iRes == JOptionPane.YES_OPTION ) {
+								XMLManager.encodeToFile( m_oParent.m_oSmartFridge, fSelected.getName() );
+							}
+						}
+					}
+				}
 			} catch ( FileNotFoundException e1 ) {
 				e1.printStackTrace();
 			} catch ( IOException e1 ) {
@@ -75,17 +84,24 @@ public class SFMenuBarActionListener implements ActionListener {
 		else if( ( (JMenuItem)(e.getSource())).getText().equals( "Depuis un fichier..." ) ) {
 			try {
 				JFileChooser oFC = new JFileChooser( new File( "." ).getCanonicalPath() );
-				oFC.showOpenDialog( m_oParent );
-				File fSelected = oFC.getSelectedFile();
-				if( fSelected != null ) {
-					m_oParent.m_oSmartFridge  = (SmartFridge) XMLManager.decodeFromFile( fSelected.getName() );
-					m_oParent.m_oSmartFridge.createMenusFromIDs();
+				oFC.addChoosableFileFilter( new SFXmlFilter(".xml" , ".xml") );
+				
+				if( oFC.showOpenDialog( m_oParent ) == JFileChooser.APPROVE_OPTION ) {
+					File fSelected = oFC.getSelectedFile();
+					if( fSelected != null ) {
+						SmartFridge oTemp = (SmartFridge) XMLManager.decodeFromFile( fSelected.getName() );
+						if( oTemp == null ) {
+							JOptionPane.showMessageDialog( m_oParent , "Impossible de lire ce fichier !" , "Erreur de chargement de la sauvegarde" , JOptionPane.ERROR_MESSAGE );
+						}
+						else {
+							m_oParent.m_oSmartFridge = oTemp;
+							m_oParent.m_oSmartFridge.createMenusFromIDs();	
+						}
+					}
 				}
 				m_oParent.listRecipeAction();
-			} catch( FileNotFoundException e1 ){
-				System.out.println( "Le fichier SmartFridge_db.xml n'existe pas" );
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			} catch ( Exception e2 ) {
+				JOptionPane.showMessageDialog( m_oParent , "Impossible de lire ce fichier !" , "Erreur de chargement de la sauvegarde" , JOptionPane.ERROR_MESSAGE );
 			}
 		}
 		
