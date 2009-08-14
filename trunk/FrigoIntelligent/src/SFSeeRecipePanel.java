@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import SmartFridgeAPI.Aliment;
 import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.RecipeStage;
 
@@ -45,10 +46,18 @@ public class SFSeeRecipePanel extends JPanel{
 	}
 	
 	public void Refresh(){
-		Recipe r = m_oParent.m_oParent.m_oSmartFridge.getRecipes().elementAt( m_iID );
+		Recipe r = m_oParent.m_oParent.m_oSmartFridge.getRecipes().elementAt( m_iID - 1 );
 		m_oTitle.setText( r.getType() + " : " + r.getName() );
 		
 		m_oDescription.setText( "" );
+		
+		int AlimentSize = r.getAliments().size();
+		for( int i = 0; i < AlimentSize; i++ ){
+			Aliment a = r.getAliments().elementAt( i );
+			m_oDescription.append( a.getQuantity() + " " + a.getUnite() + " : " + a.getName() + "\n" );
+		}
+		
+		m_oDescription.append( "\n" );
 		int size = r.getRecipeStages().size();
 		for( int i = 0; i < size; i++ ){
 			RecipeStage rs = r.getRecipeStages().elementAt( i );

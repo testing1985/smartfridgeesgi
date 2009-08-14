@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import SmartFridgeAPI.Aliment;
 import SmartFridgeAPI.Menu;
 import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.RecipeStage;
@@ -56,6 +57,15 @@ public class SFSeeMenuPanel extends JPanel{
 			for( int i = 0; i < size; i++ ){
 				Recipe r = m.getRecipes().elementAt( i );
 				m_oDescription.append( r.getName() + "\n"  ) ;
+				
+				int AlimentSize = r.getAliments().size();
+				for( int j = 0; j < AlimentSize; j++ ){
+					Aliment a = r.getAliments().elementAt( j );
+					m_oDescription.append( a.getQuantity() + " " + a.getUnite() + " : " + a.getName() + "\n" );
+				}
+				
+				m_oDescription.append( "\n" );
+				
 				
 				int recipeStages = r.getRecipeStages().size();
 				for( int j = 0; j < recipeStages; j++ ){
