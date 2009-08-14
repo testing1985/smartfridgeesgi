@@ -24,7 +24,6 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 	JButton 	m_oDeleteMenuButton			 = new JButton( "Effacer ce menu" );
 	
 	JTable 		m_oTable					 = new JTable();
-	JScrollPane m_oScrollPane				 = new JScrollPane();
 	
 	SFSeeMenuList( SFWindow oParent ){
 		super( new BorderLayout() );
@@ -38,10 +37,7 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 	    TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>( m_oTable.getModel() );
 	    m_oTable.setRowSorter( sorter );
     
-	    m_oScrollPane = new JScrollPane( m_oTable );
-		
-	    add( m_oScrollPane, BorderLayout.CENTER );
-	    
+	    add( new JScrollPane( m_oTable ), BorderLayout.CENTER );  
 	    
 	    JPanel oSouth = new JPanel();
 	    oSouth.setLayout( new GridLayout( 2, 1 ) );

@@ -14,7 +14,6 @@ public class SFSeeRecipePanel extends JPanel{
 
 	SFWindow m_oParent;
 	int m_iID;
-	JScrollPane m_oScrollPane = new JScrollPane();
 	JPanel m_oCenterPanel = new JPanel();
 	JLabel m_oTitle = new JLabel();
 	JTextArea m_oDescription = new JTextArea();
@@ -30,10 +29,8 @@ public class SFSeeRecipePanel extends JPanel{
 		
 		m_oCenterPanel.add( m_oDescription, BorderLayout.CENTER );
 		
-		m_oScrollPane = new JScrollPane( m_oCenterPanel );
 		add( m_oTitle, BorderLayout.NORTH );
-	    add( m_oScrollPane, BorderLayout.CENTER );
-		
+	    add( new JScrollPane( m_oCenterPanel ), BorderLayout.CENTER );
 	}
 	
 	public void ChangeID( String s ){

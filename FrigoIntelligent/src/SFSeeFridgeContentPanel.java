@@ -22,9 +22,6 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	JPanel 		m_oCenterPanel				 = new JPanel();
 	
 	JTable 		m_oTable					 = new JTable();
-	JScrollPane m_oScrollPane				 = new JScrollPane();
-	
-	
 	
 	SFSeeFridgeContentPanel( SFWindow oParent ){
 		super( new BorderLayout() );
@@ -40,9 +37,7 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	    TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>( m_oTable.getModel() );
 	    m_oTable.setRowSorter( sorter );
     
-	    m_oScrollPane = new JScrollPane( m_oTable );
-		
-	    add( m_oScrollPane, BorderLayout.CENTER );
+	    add( new JScrollPane( m_oTable ), BorderLayout.CENTER );
 		m_oDeleteAlimentButton.addActionListener( this );
 		add( m_oDeleteAlimentButton , BorderLayout.SOUTH );
 	}
