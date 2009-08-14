@@ -108,8 +108,21 @@ public class Session {
 				oMenu.setListRecipeID( vRecipeList );
 				oSF.addMenu( oMenu );
 			}
-			
 			oSF.createMenusFromIDs();
+			
+			Vector<Aliment> vAliments = new Vector<Aliment>();
+			String sGetAliment = "SELECT * FROM Aliment WHERE userAliment = " + m_iID + " AND recipeAliment = 0";
+			oRS = oST.executeQuery( sGetAliment );
+			while( oRS.next() ) {
+				Aliment oAliment = new Aliment();
+				oAliment.setName( oRS.getString("nameAliment") );
+				oAliment.setQuantity( oRS.getInt("quantityAliment") );
+				oAliment.setUnite( oRS.getString("uniteAliment") );
+				oAliment.setPeremption( oRS.getLong( "peremptionAliment" ) );
+				oAliment.setPrice( oRS.getFloat("priceAliment") );
+				vAliments.add(oAliment);				
+			}
+			oSF.setAliments( vAliments );		
 			
 		} catch ( SQLException e ) {
 			e.printStackTrace();
@@ -140,7 +153,11 @@ public class Session {
 				
 				sDelete = "" +
 				" DELETE FROM Aliment" +
-				" WHERE recipeAliment = " + idRecipe;
+				" WHERE recipeAliment = " + idRecipe +
+				" OR ( " +
+				" recipeAliment = 0 " +
+				" AND userAliment = " + m_iID +
+				" )";;
 				oST2.executeUpdate(sDelete);
 				
 				sDelete = "" +
@@ -210,6 +227,21 @@ public class Session {
 				oPST.setInt( 1 , m_iID );
 				oPST.setString( 2 , sRecipeIndexList );
 				oPST.setString(3, oMenu.getName() );
+				oPST.executeUpdate();
+			}
+			
+			Vector<Aliment> vAliments = oSF.getAliments();
+			for( int i = 0 ; i < vAliments.size() ; i++ ) {
+				Aliment oAliment = vAliments.elementAt(i);
+				String sAddAliment = "INSERT INTO Aliment( userAliment , recipeAliment , nameAliment , quantityAliment , priceAliment , uniteAliment , peremptionAliment ) VALUES(?,?,?,?,?,?,?)";
+				PreparedStatement oPST = oBDD.prepareStatement( sAddAliment );
+				oPST.setInt( 1 , m_iID );
+				oPST.setInt( 2 , 0 );
+				oPST.setString( 3 , oAliment.getName() );
+				oPST.setInt( 4 , oAliment.getQuantity() );
+				oPST.setFloat( 5 , oAliment.getPrice() );
+				oPST.setString( 6 , oAliment.getUnite() );
+				oPST.setLong( 7 , oAliment.getPeremption() );
 				oPST.executeUpdate();
 			}
 												
