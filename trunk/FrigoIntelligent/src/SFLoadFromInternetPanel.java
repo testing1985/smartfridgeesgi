@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -49,7 +50,7 @@ public class SFLoadFromInternetPanel extends JPanel implements ActionListener {
 			String sLogin  = m_oLogin.getText();
 			String sPasswd = m_oPasswd.getText();
 			if( ! m_oParent.m_oSession.connect( sLogin , sPasswd ) ) {
-				//
+				JOptionPane.showMessageDialog( this, "Cet utilisateur n'existe pas ou le mot de passe est incorrect !" , "Erreur de connexion" , JOptionPane.ERROR_MESSAGE );
 			}
 			else {
 				m_oParent.loadFromInternet();
