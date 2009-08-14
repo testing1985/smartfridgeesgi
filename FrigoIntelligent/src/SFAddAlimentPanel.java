@@ -19,33 +19,21 @@ public class SFAddAlimentPanel extends JPanel implements ActionListener{
 	SFWindow m_oParent;
 	JButton m_oGoBackButton = new JButton( "Retour" );
 	JButton m_oValidateAliment = new JButton( "Valider" );
-
-	JComboBox  m_oUnite    = new JComboBox();
-	JTextField m_oQuantity = new JTextField( "0" , 3);
-	JTextField m_oName 	   = new JTextField( "Mon ingrédient..." , 13);
 	
-
+	SFAddAlimentFromPanel m_oPanel;
+	
 	SFAddAlimentPanel(SFWindow oParent ){
 		super( new BorderLayout() );
 		m_oParent = oParent;
 		setPreferredSize( new Dimension( 500 , 500 ) );
-			
-		m_oUnite.addItem("");
-		m_oUnite.addItem("g");
-		m_oUnite.addItem("cl");
-		m_oUnite.addItem("1/2 sachets");
-		m_oUnite.setSelectedItem("g");
-		
+					
 		JPanel oCenterPanel = new JPanel();
-		oCenterPanel.setLayout( new GridLayout( 4, 2 ) );
+		oCenterPanel.setLayout( new BorderLayout() );
 		
-		oCenterPanel.add( new JLabel( "Ajout d'un aliment" ) );
-		oCenterPanel.add( new JLabel() );
-		oCenterPanel.add( new JLabel( "Nom :" ) );
-		oCenterPanel.add( m_oName );
-		oCenterPanel.add( m_oQuantity );
-		oCenterPanel.add( m_oUnite );
-		oCenterPanel.add( m_oValidateAliment );
+		m_oPanel = new SFAddAlimentFromPanel();
+		
+		oCenterPanel.add( m_oPanel, BorderLayout.CENTER );
+		oCenterPanel.add( m_oValidateAliment, BorderLayout.SOUTH );
 		
 		m_oGoBackButton.addActionListener( this );
 		m_oValidateAliment.addActionListener( this );
@@ -55,14 +43,21 @@ public class SFAddAlimentPanel extends JPanel implements ActionListener{
 	}
 	
 	public void reset(){
-		m_oUnite.setSelectedItem("g");
-		m_oQuantity.setText( "0" );
-		m_oName.setText( "Mon ingrédient..." );
+		m_oPanel.get_Unite().setSelectedItem( "g" );
+		m_oPanel.get_Quantity().setText( "0" );
+		m_oPanel.get_Name().setText( "Mon ingrédient..." );
 	}
 	
 	public void actionPerformed( ActionEvent e ) {
 		if( e.getSource().equals( m_oValidateAliment ) ){	
-			m_oParent.m_oParent.m_oSmartFridge.getAliments().addElement( new Aliment( m_oName.getText(), Integer.parseInt( m_oQuantity.getText() ), (float)1.0, 0, (String)m_oUnite.getSelectedItem() )	);
+			m_oParent.m_oParent.m_oSmartFridge.getAliments().addElement( 
+			new Aliment( 	m_oPanel.get_Name().getText(), 
+							Integer.parseInt( m_oPanel.get_Quantity().getText() ), 
+							(float)1.0, 
+							0,
+							(String)m_oPanel.get_Unite().getSelectedItem() )
+			
+			);
 			reset();
 		}	
 		if( e.getSource().equals( m_oGoBackButton ) ){	

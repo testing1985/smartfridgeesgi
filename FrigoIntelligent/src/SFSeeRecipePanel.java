@@ -13,10 +13,9 @@ import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.RecipeStage;
 
 @SuppressWarnings( "serial" )
-public class SFSeeRecipePanel extends JPanel implements ActionListener {
+public class SFSeeRecipePanel extends JPanel{
 
 	SFWindow m_oParent;
-	JButton m_oGoBackButton = new JButton( "Retour" );
 	int m_iID;
 	JScrollPane m_oScrollPane = new JScrollPane();
 	JPanel m_oCenterPanel = new JPanel();
@@ -38,8 +37,6 @@ public class SFSeeRecipePanel extends JPanel implements ActionListener {
 		add( m_oTitle, BorderLayout.NORTH );
 	    add( m_oScrollPane, BorderLayout.CENTER );
 		
-		m_oGoBackButton.addActionListener( this );
-		add( m_oGoBackButton , BorderLayout.SOUTH );
 	}
 	
 	public void ChangeID( String s ){
@@ -55,7 +52,6 @@ public class SFSeeRecipePanel extends JPanel implements ActionListener {
 		for( int i = 0; i < size; i++ ){
 			RecipeStage rs = r.getRecipeStages().elementAt( i );
 			
-			System.out.println( String.valueOf( rs.getDifficulty() ) );
 			m_oDescription.append( "Etape " + ( i + 1 ) + "\n"  ) ;
 			m_oDescription.append( "Difficulté " + rs.getDifficulty() + "\n"  );
 			m_oDescription.append( rs.getDescription() + "\n" );
@@ -63,12 +59,5 @@ public class SFSeeRecipePanel extends JPanel implements ActionListener {
 		}
 	}
 	
-	@Override
-	public void actionPerformed( ActionEvent e ){
-		if( e.getSource().equals( m_oGoBackButton ) ){	
-			m_oParent.SeeRecipeAction();
-		}
-	}
-
 }
 

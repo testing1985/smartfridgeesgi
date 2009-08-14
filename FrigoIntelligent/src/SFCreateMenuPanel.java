@@ -16,6 +16,7 @@ import SmartFridgeAPI.Menu;
 import SmartFridgeAPI.Recipe;
 
 
+@SuppressWarnings( "serial" )
 public class SFCreateMenuPanel extends JPanel implements ActionListener {
 
 	Vector<SFAddRecipeToMenuPanel> m_lRecipePanelList = null;
@@ -23,9 +24,9 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 	JPanel     m_oRecipeList  = new JPanel();
 	SFWindow   m_oParent 	  = null;
 	JTextField m_oName   	  = new JTextField( 15 );
-	JButton    m_oAddRecipeBt = new JButton("Ajouter une recette");
-	JButton    m_oValidMenuBt = new JButton("Ajouter le menu");	
-	JButton    m_oAutoBt      = new JButton("Menu automatique");
+	JButton    m_oAddRecipeBt = new JButton( "Ajouter une recette" );
+	JButton    m_oValidMenuBt = new JButton( "Ajouter le menu" );	
+	JButton    m_oAutoBt      = new JButton( "Menu automatique" );
 
 	public SFCreateMenuPanel( SFWindow oParent ) {
 		

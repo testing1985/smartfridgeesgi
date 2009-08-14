@@ -25,6 +25,8 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	JTable 		m_oTable					 = new JTable();
 	JScrollPane m_oScrollPane				 = new JScrollPane();
 	
+	
+	
 	SFSeeFridgeContentPanel( SFWindow oParent ){
 		super( new BorderLayout() );
 		m_oParent = oParent;

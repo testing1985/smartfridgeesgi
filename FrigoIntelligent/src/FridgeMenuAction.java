@@ -15,7 +15,7 @@ public class FridgeMenuAction implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Voir les menus" ) ){
-			m_oSmartFridge.m_oApp.SeeMenuAction();
+			m_oSmartFridge.m_oApp.SeeMenuListAction();
 		}
 		// Ajouter un aliment
 		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Créer un menu" )  ){

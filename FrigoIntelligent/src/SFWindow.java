@@ -40,8 +40,8 @@ public class SFWindow extends JFrame implements ActionListener {
 	SFCreateMenuPanel         m_oCreateMenuPanel	   = null;
 	
 	// BEGIN - Affichage des recettes
-	JTable table						 = new JTable();
-	JScrollPane scrollpane				 = new JScrollPane();
+	JTable m_oTable						 = new JTable();
+	JScrollPane m_oScrollpane			 = new JScrollPane();
 	JButton m_oSeeRecipe 				 = new JButton( "Voir la recette" );
 	// END - Affichage des recettes
 	
@@ -59,7 +59,17 @@ public class SFWindow extends JFrame implements ActionListener {
 	JPanel m_oAddAliment = new JPanel();
 	SFAddAlimentPanel m_oSFAddAliment;
 	// END - Ajout d'un aliment
-		
+
+	// BEGIN - Affichage des menus
+	JPanel m_oSeeMenuListPanel = new JPanel();
+	SFSeeMenuList m_oSFSeeMenuListPanel;
+	// END - Affichage des menus
+	
+	// BEGIN - Affichage d'un menu
+	JPanel m_oSeeMenuPanel = new JPanel();
+	SFSeeMenuPanel m_oSFSeeMenuPanel;
+	// END - Affichage d'un menu
+	
 	public JList list;
 	
 	public SFWindow( SmartFridgeApp oSF ){
@@ -68,7 +78,7 @@ public class SFWindow extends JFrame implements ActionListener {
 		FileAction 			oFileAction 		 = new FileAction( m_oParent );
 		FridgeContentAction oFridgeContentAction = new FridgeContentAction( m_oParent );
 		FridgeMenuAction    oFridgeMenuAction    = new FridgeMenuAction( m_oParent );
-		
+				
 		JMenuBar menuBar = new JMenuBar();
 		
 		// BEGIN - MENU FILE
@@ -102,7 +112,7 @@ public class SFWindow extends JFrame implements ActionListener {
 			// END - SAVE MENU
 		
 			// BEGIN - LOAD MENU
-		JMenu loadMenu = new JMenu ("Load");
+		JMenu loadMenu = new JMenu ( "Load" );
 		JMenuItem loadXmlMI = new JMenuItem( "From file" );
 		loadXmlMI.addActionListener( oFileAction );
 		loadMenu.add( loadXmlMI );
@@ -156,18 +166,18 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oRecipeListPanel.setLayout( new BorderLayout() );
 		m_oRecipeListPanel.add( new JLabel( "Liste des recettes" ), BorderLayout.NORTH );
 		 	    	    	    
-		table = new JTable();
+		m_oTable = new JTable();
 
-		table.setModel( new JRecipeTableModel () );
-	    table.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
-	    table.getTableHeader().setReorderingAllowed( false );
+		m_oTable.setModel( new JRecipeTableModel () );
+	    m_oTable.setAutoResizeMode( JTable.AUTO_RESIZE_ALL_COLUMNS );
+	    m_oTable.getTableHeader().setReorderingAllowed( false );
 	    
-	    TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>( table.getModel() );
-	    table.setRowSorter( sorter );
+	    TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>( m_oTable.getModel() );
+	    m_oTable.setRowSorter( sorter );
     
-	    scrollpane = new JScrollPane( table );
+	    m_oScrollpane = new JScrollPane( m_oTable );
 		
-	    m_oRecipeListPanel.add( scrollpane, BorderLayout.CENTER );
+	    m_oRecipeListPanel.add( m_oScrollpane, BorderLayout.CENTER );
 	    m_oSeeRecipe.addActionListener( this );
 	    m_oRecipeListPanel.add( m_oSeeRecipe, BorderLayout.SOUTH );
 	    
@@ -182,14 +192,8 @@ public class SFWindow extends JFrame implements ActionListener {
 		centerPanel.add( m_oSeeRecipePanel );
 		m_oSeeRecipePanel.setVisible( false );
 		// END - Affichage d'une recette : Panel du milieu
-		
-		
-		
-		
-		
-		
-		
-		// BEGIN - Affichage d'une recette : Panel du milieu
+				
+		// BEGIN - Affichage du contenu du frigo : Panel du milieu
 		m_oSFSeeFridgeContent = new SFSeeFridgeContentPanel( this );
 	
 		//m_oSeeFridgeContent.add( new JLabel( "Liste des aliments" ), BorderLayout.NORTH );
@@ -197,23 +201,34 @@ public class SFWindow extends JFrame implements ActionListener {
 		
 		centerPanel.add( m_oSeeFridgeContent );
 		m_oSeeFridgeContent.setVisible( false );
-		// END - Affichage d'une recette : Panel du milieu
+		// END - Affichage du contenu du frigo : Panel du milieu
 		
-		
-		// BEGIN - Ajout d'un aliment : Panel du milieu
-		//m_oSFSeeFridgeContent = new SFSeeFridgeContentPanel( this );
-		
-		//m_oSeeFridgeContent.add( new JLabel( "Liste des aliments" ), BorderLayout.NORTH );
+		// BEGIN - Ajout d'un aliment : Panel du milieu		
 		m_oSFAddAliment = new SFAddAlimentPanel( this );
 		m_oAddAliment.add( m_oSFAddAliment, BorderLayout.CENTER );
 		
 		centerPanel.add( m_oAddAliment );
 		m_oAddAliment.setVisible( false );
 		// END - Ajout d'un aliment : Panel du milieu
+			
+		// Begin - Ajout d'un menu : Panel du milieu
+		m_oSFSeeMenuListPanel = new SFSeeMenuList( this );
+	
+		m_oSeeMenuListPanel.add( m_oSFSeeMenuListPanel, BorderLayout.CENTER );
 		
+		centerPanel.add( m_oSeeMenuListPanel );
+		m_oSeeMenuListPanel.setVisible( false );
+		// END - Ajout d'un menu : Panel du milieu
+				
+		// Begin - Affichage d'un menu : Panel du milieu
+		m_oSFSeeMenuPanel = new SFSeeMenuPanel( this );
+	
+		m_oSeeMenuPanel.add( m_oSFSeeMenuPanel, BorderLayout.CENTER );
 		
-		
-		
+		centerPanel.add( m_oSeeMenuPanel );
+		m_oSeeMenuPanel.setVisible( false );
+		// END - Affichage d'un menu : Panel du milieu
+				
 		// BEGIN - Ajout d'une recette : Panel du milieu
 		m_oAddRecipePanel = new SFAddRecipePanel( this );
 		centerPanel.add( m_oAddRecipePanel );
@@ -248,10 +263,10 @@ public class SFWindow extends JFrame implements ActionListener {
 
 	public void actionPerformed( ActionEvent e ) {
 		if( e.getSource().equals( m_oSeeRecipe ) ){
-			if( table.getSelectedRow() != -1 ){
+			if( m_oTable.getSelectedRow() != -1 ){
 				hideAllPanel();
 								
-				m_oSFSeeRecipePanel.ChangeID( table.getValueAt( table.getSelectedRow(), 0 ).toString() );
+				m_oSFSeeRecipePanel.ChangeID( m_oTable.getValueAt( m_oTable.getSelectedRow(), 0 ).toString() );
 				m_oSFSeeRecipePanel.Refresh();
 				m_oSeeRecipePanel.setVisible( true );
 				
@@ -283,7 +298,7 @@ public class SFWindow extends JFrame implements ActionListener {
 	}
 
 	public void DrawRecipePanel(){
-		DefaultTableModel model = (DefaultTableModel)table.getModel();
+		DefaultTableModel model = (DefaultTableModel)m_oTable.getModel();
 			
 		int size = model.getRowCount();
 		for( int i = 0; i < size; i++ ){
@@ -332,6 +347,8 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oSeeRecipePanel.setVisible( false );
 		m_oSeeFridgeContent.setVisible( false );
 		m_oAddAliment.setVisible( false );
+		m_oSeeMenuListPanel.setVisible( false );
+		m_oSeeMenuPanel.setVisible( false );
 		m_oSaveInternetPanel.setVisible( false );
 		m_oLoadFromInternetPanel.setVisible( false );
 		m_oCreateMenuPanel.setVisible( false );
@@ -343,16 +360,27 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oAddRecipePanel.setVisible( true );
 	}
 	
-	public void SeeMenuAction() {
+	public void SeeMenuListAction(){
 		hideAllPanel();
+		m_oSeeMenuListPanel.setVisible( true );
+		
+		m_oSFSeeMenuListPanel.Refresh();
 	}
 	
+	public void SeeMenuAction(){
+		hideAllPanel();
+		//DefaultTableModel model = (DefaultTableModel)m_oSFSeeMenuListPanel.getTable().getModel();
+		//m_oSFSeeMenuPanel.ChangeID( model.getValueAt( model. , column ) );
+		m_oSFSeeMenuPanel.Refresh();
+		m_oSeeMenuPanel.setVisible( true );
+	}
+	
+
 	public void CreateMenuAction() {
 		hideAllPanel();
 		m_oCreateMenuPanel.reset();
 		m_oCreateMenuPanel.setVisible( true );
 	}
-	
 	
 	
 }

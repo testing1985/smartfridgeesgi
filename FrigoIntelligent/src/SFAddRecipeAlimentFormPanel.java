@@ -1,5 +1,3 @@
-import java.awt.FlowLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -7,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+@SuppressWarnings( "serial" )
 public class SFAddRecipeAlimentFormPanel extends JPanel {
 
 	int 	   m_iID;

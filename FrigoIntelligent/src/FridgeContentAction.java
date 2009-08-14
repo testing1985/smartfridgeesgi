@@ -3,7 +3,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
-
 public class FridgeContentAction implements ActionListener {
 
 	SmartFridgeApp m_oSmartFridge;
