@@ -75,38 +75,24 @@ public class SFWindow extends JFrame implements ActionListener {
 	public SFWindow( SmartFridgeApp oSF ){
 		m_oParent = oSF;
 		
-		FileAction 			oFileAction 		 = new FileAction( m_oParent );
-		FridgeContentAction oFridgeContentAction = new FridgeContentAction( m_oParent );
-		FridgeMenuAction    oFridgeMenuAction    = new FridgeMenuAction( m_oParent );
+		SFMenuBarActionListener oMenuBarActionListener = new SFMenuBarActionListener( this );
 				
 		JMenuBar menuBar = new JMenuBar();
 		
 		// BEGIN - MENU FILE
 		JMenu menuFile 			= new JMenu( "File" );
+		JMenu menuFridgeRecipe  = new JMenu( "Recettes" );
 		JMenu menuFridgeContent = new JMenu( "Contenu du frigo" );
 		JMenu menuFridgeMenu 	= new JMenu( "Menus" );
 		
-			// BEGIN - NEW MENU
-		JMenu newMenu  = new JMenu( "New" );
-		JMenuItem newRecipeMI = new JMenuItem( "New recipe" );
-		newRecipeMI.addActionListener( oFileAction );		
-		newMenu.add( newRecipeMI );
-		
-		JMenuItem newMenuMI = new JMenuItem( "New menu" );
-		newMenuMI.addActionListener( oFileAction );		
-		newMenu.add( newMenuMI );
-				
-		menuFile.add( newMenu );
-			// END - NEW MENU
-
 			// BEGIN - SAVE MENU
 		JMenu saveMenu = new JMenu ("Save");
 		JMenuItem saveXmlMI = new JMenuItem( "In file" );
-		saveXmlMI.addActionListener( oFileAction );
+		saveXmlMI.addActionListener( oMenuBarActionListener );
 		saveMenu.add( saveXmlMI );
 		
 		JMenuItem saveDbMI = new JMenuItem( "On internet" );
-		saveDbMI.addActionListener( oFileAction );
+		saveDbMI.addActionListener( oMenuBarActionListener );
 		saveMenu.add( saveDbMI );
 		menuFile.add( saveMenu );
 			// END - SAVE MENU
@@ -114,41 +100,52 @@ public class SFWindow extends JFrame implements ActionListener {
 			// BEGIN - LOAD MENU
 		JMenu loadMenu = new JMenu ( "Load" );
 		JMenuItem loadXmlMI = new JMenuItem( "From file" );
-		loadXmlMI.addActionListener( oFileAction );
+		loadXmlMI.addActionListener( oMenuBarActionListener );
 		loadMenu.add( loadXmlMI );
 		
 		JMenuItem loadDbMI = new JMenuItem( "From internet" );
-		loadDbMI.addActionListener( oFileAction );
+		loadDbMI.addActionListener( oMenuBarActionListener );
 		loadMenu.add( loadDbMI );		
 		menuFile.add( loadMenu );
 			// END - LOAD MENU
 		
 		JMenuItem quitMI = new JMenuItem( "Quit" );
-		quitMI.addActionListener( oFileAction );		
+		quitMI.addActionListener( oMenuBarActionListener );		
 		menuFile.add( quitMI );
 		// END - MENU FILE
 						
+		// BEGIN - FridgeRecipe MENU
+		JMenuItem seeRecipe = new JMenuItem(  "Voir les recettes"  );
+		seeRecipe.addActionListener( oMenuBarActionListener );
+		menuFridgeRecipe.add( seeRecipe );
+		
+		JMenuItem addRecipe = new JMenuItem( "Ajouter une recette" );
+		addRecipe.addActionListener( oMenuBarActionListener );
+		menuFridgeRecipe.add( addRecipe );
+		// END - FridgeRecipe MENU
+		
 		// BEGIN - FridgeContent MENU
 		JMenuItem seeContent = new JMenuItem(  "Voir le contenu"  );
-		seeContent.addActionListener( oFridgeContentAction );
+		seeContent.addActionListener( oMenuBarActionListener );
 		menuFridgeContent.add( seeContent );
 		
 		JMenuItem addAliment = new JMenuItem( "Ajouter un aliment" );
-		addAliment.addActionListener( oFridgeContentAction );
+		addAliment.addActionListener( oMenuBarActionListener );
 		menuFridgeContent.add( addAliment );
 		// END - FridgeContent MENU
 		
 		// BEGIN - FridgeMenu MENU
 		JMenuItem seeMenus = new JMenuItem(  "Voir les menus"  );
-		seeMenus.addActionListener( oFridgeMenuAction );
+		seeMenus.addActionListener( oMenuBarActionListener );
 		menuFridgeMenu.add( seeMenus );
 		
 		JMenuItem createMenu = new JMenuItem( "Créer un menu" );
-		createMenu.addActionListener( oFridgeMenuAction );
+		createMenu.addActionListener( oMenuBarActionListener );
 		menuFridgeMenu.add( createMenu );
 		// END - FridgeMenu MENU
 		
 		menuBar.add( menuFile );	
+		menuBar.add( menuFridgeRecipe );
 		menuBar.add( menuFridgeContent );
 		menuBar.add( menuFridgeMenu );
 		setJMenuBar( menuBar );
