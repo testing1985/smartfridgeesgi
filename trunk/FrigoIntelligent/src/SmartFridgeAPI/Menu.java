@@ -7,15 +7,13 @@ public class Menu {
 	private int[] 		   m_vTempRecipeID = null;
 	private Vector<Recipe> m_vRecipes 	   = null;
 	
-	public Menu()
-	{
+	public Menu(){
 		m_sName 		= "Menu";
 		m_vRecipes 	    = new Vector<Recipe>();		
 		m_vRecipes.add( new Recipe() );
 	}
 
-	public Menu( String name, Vector<Recipe> recipes )
-	{
+	public Menu( String name, Vector<Recipe> recipes ){
 		m_sName    = name;
 		m_vRecipes = recipes;
 	}
@@ -43,20 +41,19 @@ public class Menu {
 		return m_sName;
 	}
 
-	public void setName(String name) {
+	public void setName(String name){
 		m_sName = name;
 	}
 
-	public Vector<Recipe> getRecipes() {
+	public Vector<Recipe> getRecipes(){
 		return m_vRecipes;
 	}
 
-	public void setRecipes(Vector<Recipe> recipes) {
+	public void setRecipes(Vector<Recipe> recipes){
 		m_vRecipes = recipes;
 	}
 	
-	public void print()
-	{
+	public void print(){
 		System.out.println( m_sName ) ;
 		int size = m_vRecipes.size();
 		for( int i = 0; i < size; i++ ){
