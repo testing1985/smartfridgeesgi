@@ -1,9 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -42,11 +38,10 @@ public class SFSeeRecipePanel extends JPanel{
 	
 	public void ChangeID( String s ){
 		m_iID = Integer.parseInt( s );
-		//m_iID--;
 	}
 	
 	public void Refresh(){
-		Recipe r = m_oParent.m_oParent.m_oSmartFridge.getRecipes().elementAt( m_iID - 1 );
+		Recipe r = m_oParent.m_oSmartFridge.getRecipes().elementAt( m_iID - 1 );
 		m_oTitle.setText( r.getType() + " : " + r.getName() );
 		
 		m_oDescription.setText( "" );

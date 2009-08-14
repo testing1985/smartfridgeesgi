@@ -1,9 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -48,7 +44,7 @@ public class SFSeeMenuPanel extends JPanel{
 	
 	public void Refresh(){
 	
-			Menu m = m_oParent.m_oParent.m_oSmartFridge.getMenus().elementAt( m_iID - 1 );
+			Menu m = m_oParent.m_oSmartFridge.getMenus().elementAt( m_iID - 1 );
 			
 			m_oTitle.setText( m.getName() );
 			

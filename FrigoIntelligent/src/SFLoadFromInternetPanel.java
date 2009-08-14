@@ -1,3 +1,5 @@
+
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
+@SuppressWarnings("serial")
 public class SFLoadFromInternetPanel extends JPanel implements ActionListener {
 	
 	SFWindow   m_oParent = null;
@@ -45,12 +48,11 @@ public class SFLoadFromInternetPanel extends JPanel implements ActionListener {
 		if( e.getSource().equals( m_oLoad )) {
 			String sLogin  = m_oLogin.getText();
 			String sPasswd = m_oPasswd.getText();
-			if( ! m_oParent.m_oParent.m_oSession.connect( sLogin , sPasswd ) ) {
-				System.out.println("Identifiant incorrect");
+			if( ! m_oParent.m_oSession.connect( sLogin , sPasswd ) ) {
+				//
 			}
 			else {
-				System.out.println(m_oLogin.getText() + " connected" );
-				m_oParent.m_oParent.loadFromInternet();
+				m_oParent.loadFromInternet();
 				m_oParent.listRecipeAction();
 			}			
 		}		

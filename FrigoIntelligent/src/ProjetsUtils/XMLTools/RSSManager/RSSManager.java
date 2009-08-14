@@ -1,14 +1,13 @@
 package ProjetsUtils.XMLTools.RSSManager;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.xml.sax.SAXException;
-
-import java.io.IOException;
-import java.util.Map;
-import java.util.HashMap; 
-import java.util.Set;
 
 public class RSSManager {
 	

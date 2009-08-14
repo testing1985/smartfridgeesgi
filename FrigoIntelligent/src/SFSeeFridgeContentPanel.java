@@ -13,7 +13,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import SmartFridgeAPI.Aliment;
-import SmartFridgeAPI.Recipe;
 
 @SuppressWarnings( "serial" )
 public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
@@ -56,10 +55,10 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 			model.removeRow( 0 );
 		}
 		
-		size = m_oParent.m_oParent.m_oSmartFridge.getAliments().size();
+		size = m_oParent.m_oSmartFridge.getAliments().size();
 		for( int i = 0; i < size; i++ ){
 		    	Vector < String > aliment = new Vector < String >();
-		    	Aliment a = m_oParent.m_oParent.m_oSmartFridge.getAliments().elementAt( i );
+		    	Aliment a = m_oParent.m_oSmartFridge.getAliments().elementAt( i );
 		    	aliment.addElement( "" + ( i + 1 ) );
 		    	aliment.addElement( a.getName() );
 		    	aliment.addElement( a.getQuantity() + " " +  a.getUnite() );
@@ -72,7 +71,7 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e){
 		if( e.getSource().equals( m_oDeleteAlimentButton ) ){	
-			m_oParent.m_oParent.m_oSmartFridge.getAliments().remove( m_oTable.getSelectedRow() );
+			m_oParent.m_oSmartFridge.getAliments().remove( m_oTable.getSelectedRow() );
 			Refresh();
 		}
 	}

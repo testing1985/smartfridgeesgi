@@ -13,7 +13,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import SmartFridgeAPI.Aliment;
 import SmartFridgeAPI.Menu;
 import SmartFridgeAPI.Recipe;
 
@@ -64,10 +63,10 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 			model.removeRow( 0 );
 		}
 				
-		size = m_oParent.m_oParent.m_oSmartFridge.getMenus().size();
+		size = m_oParent.m_oSmartFridge.getMenus().size();
 		for( int i = 0; i < size; i++ ){
 		    	Vector < String > menu = new Vector < String >();
-		    	Menu m = m_oParent.m_oParent.m_oSmartFridge.getMenus().elementAt( i );
+		    	Menu m = m_oParent.m_oSmartFridge.getMenus().elementAt( i );
 		    	int stages = m.getRecipes().size();
 		    	int entree = 0, plat = 0, dessert = 0, boisson = 0, AmuseGueule = 0;
 		    	for( int j = 0; j < stages; j++ ){
@@ -105,10 +104,10 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 	
 	public void actionPerformed( ActionEvent e ){
 		if( e.getSource().equals( m_oSeeMenuButton ) ){	
-			m_oParent.m_oParent.m_oApp.SeeMenuAction();
+			m_oParent.SeeMenuAction();
 		}
 		else if( e.getSource().equals( m_oDeleteMenuButton ) ){	
-			m_oParent.m_oParent.m_oSmartFridge.getMenus().remove( m_oTable.getSelectedRow() );
+			m_oParent.m_oSmartFridge.getMenus().remove( m_oTable.getSelectedRow() );
 			Refresh();
 		}
 	}

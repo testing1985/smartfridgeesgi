@@ -2,12 +2,8 @@
 import javax.swing.*;
 
 import java.awt.BorderLayout;
-import java.awt.Choice;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -18,20 +14,21 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import SmartFridgeAPI.Aliment;
+import ProjetsUtils.XMLTools.RSSManager.RSSManager;
 import SmartFridgeAPI.Recipe;
-import SmartFridgeAPI.RecipeStage;
+import SmartFridgeAPI.SmartFridge;
 
 @SuppressWarnings( "serial" )
 public class SFWindow extends JFrame implements ActionListener {
 
-	SmartFridgeApp m_oParent;
+	RSSManager   m_oRSSManager;
+	SmartFridge  m_oSmartFridge;
+	Session      m_oSession = null;
+	
 	JPanel m_oRecipeListPanel;
 	
 	SFAddRecipePanel 		  m_oAddRecipePanel        = null;
@@ -72,8 +69,10 @@ public class SFWindow extends JFrame implements ActionListener {
 	
 	public JList list;
 	
-	public SFWindow( SmartFridgeApp oSF ){
-		m_oParent = oSF;
+	public SFWindow(){
+		m_oSmartFridge = new SmartFridge();
+		m_oSession	   = new Session();
+		initializeConnection();
 		
 		SFMenuBarActionListener oMenuBarActionListener = new SFMenuBarActionListener( this );
 				
@@ -272,25 +271,25 @@ public class SFWindow extends JFrame implements ActionListener {
 	}
 	
 	public void loadInternetShowPanel() {
-		if( ! m_oParent.m_oSession.isConnected() ) {
+		if( ! m_oSession.isConnected() ) {
 			hideAllPanel();
 			m_oLoadFromInternetPanel.reset();
 			m_oLoadFromInternetPanel.setVisible( true );
 		}
 		else {
-			m_oParent.loadFromInternet();
+			loadFromInternet();
 			listRecipeAction();
 		}
 	}
 	
 	public void saveInternetShowPanel() {
-		if( ! m_oParent.m_oSession.isConnected() ) {
+		if( ! m_oSession.isConnected() ) {
 			hideAllPanel();
 			m_oSaveInternetPanel.reset();
 			m_oSaveInternetPanel.setVisible( true );
 		}
 		else {
-			m_oParent.saveOnInternet();
+			saveOnInternet();
 		}
 	}
 
@@ -302,10 +301,10 @@ public class SFWindow extends JFrame implements ActionListener {
 			model.removeRow( 0 );
 		}
 		
-		size = m_oParent.m_oSmartFridge.getRecipes().size();
+		size = m_oSmartFridge.getRecipes().size();
 		for( int i = 0; i < size; i++ ){
 		    	Vector < String > recipe = new Vector < String >();
-		    	Recipe r = m_oParent.m_oSmartFridge.getRecipes().elementAt( i );
+		    	Recipe r = m_oSmartFridge.getRecipes().elementAt( i );
 		    	recipe.addElement( "" + ( i + 1 ) );
 		    	recipe.addElement( r.getName() );
 		    	recipe.addElement( r.getType() );
@@ -380,7 +379,49 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oCreateMenuPanel.setVisible( true );
 	}
 	
+	public RSSManager getRSSManager() {
+		return m_oRSSManager;
+	}
+
+	public void setRSSManager(RSSManager manager) {
+		m_oRSSManager = manager;
+	}
+
+	public SmartFridge getSmartFridge() {
+		return m_oSmartFridge;
+	}
+
+	public void setSmartFridge(SmartFridge fridge) {
+		m_oSmartFridge = fridge;
+	}
 	
+	public void quitAction() {
+		System.exit( 0 );
+	}
+	
+	public void saveOnInternet() {
+		if( m_oSession.isConnected() ) {
+			m_oSession.save( m_oSmartFridge );
+		}
+	}
+	
+	public void loadFromInternet() {
+		if( m_oSession.isConnected() ) {
+			m_oSmartFridge = new SmartFridge();
+			m_oSession.load( m_oSmartFridge );
+		}
+	}
+	
+	public void initializeConnection()
+	{
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String sURL = "jdbc:mysql://88.191.18.27:3306/smartfridge";
+			DBConnectionManager.getInstance().setConnectionData(sURL, "esgi", "g6f3s9j3");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 }
 	
 	

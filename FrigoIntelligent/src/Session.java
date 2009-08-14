@@ -1,4 +1,4 @@
-import java.sql.DriverManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +17,6 @@ public class Session {
 
 	private short   m_iID;
 	private boolean m_bIsConnected = false;
-	private String  m_sLogin = "";
-	private String  m_sPasswd = "";
 	
 	public Session(){}
 	public Session( String sLogin , String sPasswd )
@@ -32,8 +30,6 @@ public class Session {
 	
 	public boolean connect( String sLogin , String sPasswd )
 	{
-		m_sLogin  = sLogin;
-		m_sPasswd = sPasswd;
 		short iID = Session.userExists( sLogin, sPasswd );
 		
 		if( iID != -1 )

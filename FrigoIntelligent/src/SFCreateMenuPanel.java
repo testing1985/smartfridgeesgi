@@ -64,7 +64,7 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 		m_oName.setText("Son nom...");
 		
 		m_lRecipePanelList = new Vector<SFAddRecipeToMenuPanel>();
-		m_lRecipePanelList.addElement( new SFAddRecipeToMenuPanel ( m_oParent.m_oParent.m_oSmartFridge , 1 ) );
+		m_lRecipePanelList.addElement( new SFAddRecipeToMenuPanel ( m_oParent.m_oSmartFridge , 1 ) );
 		m_oRecipeList.removeAll();
 		m_oRecipeList.add( m_lRecipePanelList.firstElement() );
 	}
@@ -73,7 +73,7 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 		
 		// Ajout d'une recette dans le menu
 		if( e.getSource().equals( m_oAddRecipeBt ) ) {
-			m_lRecipePanelList.addElement( new SFAddRecipeToMenuPanel ( m_oParent.m_oParent.m_oSmartFridge , m_lRecipePanelList.size() + 1 ) );
+			m_lRecipePanelList.addElement( new SFAddRecipeToMenuPanel ( m_oParent.m_oSmartFridge , m_lRecipePanelList.size() + 1 ) );
 			m_oRecipeList.add( m_lRecipePanelList.lastElement() );
 			super.revalidate();		
 			m_oParent.repaint();
@@ -81,16 +81,16 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 		
 		// Ajout du menu dans le SmartFridge
 		else if( e.getSource().equals( m_oValidMenuBt ) ) {
-			if( ! m_oParent.m_oParent.m_oSmartFridge.getRecipes().isEmpty() ) {
+			if( ! m_oParent.m_oSmartFridge.getRecipes().isEmpty() ) {
 				Menu oMenu = new Menu();
 				oMenu.setName( m_oName.getText() );
 			
 				Vector<Recipe> vRecipes = new Vector<Recipe>();
 				for( int i = 0 ; i < m_lRecipePanelList.size() ; i++ ) {
-					vRecipes.add( m_oParent.m_oParent.m_oSmartFridge.getRecipes().elementAt( m_lRecipePanelList.elementAt(i).m_oRecipe.getSelectedIndex() ) );
+					vRecipes.add( m_oParent.m_oSmartFridge.getRecipes().elementAt( m_lRecipePanelList.elementAt(i).m_oRecipe.getSelectedIndex() ) );
 				}
 				oMenu.setRecipes( vRecipes );
-				m_oParent.m_oParent.m_oSmartFridge.addMenu( oMenu );
+				m_oParent.m_oSmartFridge.addMenu( oMenu );
 				m_oParent.SeeMenuAction();
 			}
 		}
