@@ -16,7 +16,7 @@ public class SFAddAlimentPanel extends JPanel implements ActionListener{
 	
 	SFAddAlimentFromPanel m_oPanel;
 	
-	SFAddAlimentPanel(SFWindow oParent ){
+	SFAddAlimentPanel( SFWindow oParent ){
 		super( new BorderLayout() );
 		m_oParent = oParent;
 		setPreferredSize( new Dimension( 500 , 500 ) );
