@@ -17,7 +17,6 @@ import SmartFridgeAPI.Aliment;
 public class SFAddAlimentPanel extends JPanel implements ActionListener{
 
 	SFWindow m_oParent;
-	JButton m_oGoBackButton = new JButton( "Retour" );
 	JButton m_oValidateAliment = new JButton( "Valider" );
 	
 	SFAddAlimentFromPanel m_oPanel;
@@ -35,10 +34,8 @@ public class SFAddAlimentPanel extends JPanel implements ActionListener{
 		oCenterPanel.add( m_oPanel, BorderLayout.CENTER );
 		oCenterPanel.add( m_oValidateAliment, BorderLayout.SOUTH );
 		
-		m_oGoBackButton.addActionListener( this );
 		m_oValidateAliment.addActionListener( this );
 		add( oCenterPanel, BorderLayout.NORTH );
-		add( m_oGoBackButton, BorderLayout.SOUTH );
 				
 	}
 	
@@ -60,8 +57,5 @@ public class SFAddAlimentPanel extends JPanel implements ActionListener{
 			);
 			reset();
 		}	
-		if( e.getSource().equals( m_oGoBackButton ) ){	
-			m_oParent.SeeRecipeAction();
-		}		
 	}
 }
