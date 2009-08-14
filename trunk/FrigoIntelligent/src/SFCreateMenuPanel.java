@@ -83,16 +83,18 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 		
 		// Ajout du menu dans le SmartFridge
 		else if( e.getSource().equals( m_oValidMenuBt ) ) {
-			Menu oMenu = new Menu();
-			oMenu.setName( m_oName.getText() );
+			if( ! m_oParent.m_oParent.m_oSmartFridge.getRecipes().isEmpty() ) {
+				Menu oMenu = new Menu();
+				oMenu.setName( m_oName.getText() );
 			
-			Vector<Recipe> vRecipes = new Vector<Recipe>();
-			for( int i = 0 ; i < m_lRecipePanelList.size() ; i++ ) {
-				vRecipes.add( m_oParent.m_oParent.m_oSmartFridge.getRecipes().elementAt( m_lRecipePanelList.elementAt(i).m_oRecipe.getSelectedIndex() ) );
+				Vector<Recipe> vRecipes = new Vector<Recipe>();
+				for( int i = 0 ; i < m_lRecipePanelList.size() ; i++ ) {
+					vRecipes.add( m_oParent.m_oParent.m_oSmartFridge.getRecipes().elementAt( m_lRecipePanelList.elementAt(i).m_oRecipe.getSelectedIndex() ) );
+				}
+				oMenu.setRecipes( vRecipes );
+				m_oParent.m_oParent.m_oSmartFridge.addMenu( oMenu );
+				m_oParent.SeeMenuAction();
 			}
-			oMenu.setRecipes( vRecipes );
-			m_oParent.m_oParent.m_oSmartFridge.addMenu( oMenu );
-			m_oParent.SeeMenuAction();
 		}
 		
 		else if( e.getSource().equals( m_oAutoBt ) ) {
