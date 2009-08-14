@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -20,7 +21,8 @@ import SmartFridgeAPI.Recipe;
 public class SFSeeMenuList extends JPanel implements ActionListener {
 
 	SFWindow 	m_oParent;
-	JButton 	m_oSeeMenu					 = new JButton( "Voir ce menu" );
+	JButton 	m_oSeeMenuButton			 = new JButton( "Voir ce menu" );
+	JButton 	m_oDeleteMenuButton			 = new JButton( "Effacer ce menu" );
 	
 	JTable 		m_oTable					 = new JTable();
 	JScrollPane m_oScrollPane				 = new JScrollPane();
@@ -41,9 +43,17 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 		
 	    add( m_oScrollPane, BorderLayout.CENTER );
 	    
-	    m_oSeeMenu.addActionListener( this );
+	    
+	    JPanel oSouth = new JPanel();
+	    oSouth.setLayout( new GridLayout( 2, 1 ) );
+	    
+	    m_oSeeMenuButton.addActionListener( this );
+	    m_oDeleteMenuButton.addActionListener( this );
+	    oSouth.add( m_oDeleteMenuButton );
+	    oSouth.add( m_oSeeMenuButton );
+	   
+		add( oSouth, BorderLayout.SOUTH );
 		
-		add( m_oSeeMenu, BorderLayout.SOUTH );
 	}
 	
 	public void Refresh(){
@@ -93,9 +103,13 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 		m_oTable = mOTable;
 	}
 	
-	public void actionPerformed(ActionEvent e){
-		if( e.getSource().equals( m_oSeeMenu ) ){	
+	public void actionPerformed( ActionEvent e ){
+		if( e.getSource().equals( m_oSeeMenuButton ) ){	
 			m_oParent.m_oParent.m_oApp.SeeMenuAction();
+		}
+		else if( e.getSource().equals( m_oDeleteMenuButton ) ){	
+			m_oParent.m_oParent.m_oSmartFridge.getMenus().remove( m_oTable.getSelectedRow() );
+			Refresh();
 		}
 	}
 }

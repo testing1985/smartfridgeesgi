@@ -19,7 +19,7 @@ import SmartFridgeAPI.Recipe;
 public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 
 	SFWindow 	m_oParent;
-	JButton 	m_oGoBackButton 			 = new JButton( "Retour" );
+	JButton 	m_oDeleteAlimentButton 			 = new JButton( "Retour" );
 	JPanel 		m_oCenterPanel				 = new JPanel();
 	
 	JTable 		m_oTable					 = new JTable();
@@ -44,8 +44,8 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	    m_oScrollPane = new JScrollPane( m_oTable );
 		
 	    add( m_oScrollPane, BorderLayout.CENTER );
-		m_oGoBackButton.addActionListener( this );
-		add( m_oGoBackButton , BorderLayout.SOUTH );
+		m_oDeleteAlimentButton.addActionListener( this );
+		add( m_oDeleteAlimentButton , BorderLayout.SOUTH );
 	}
 	
 	public void Refresh(){
@@ -71,8 +71,9 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		if( e.getSource().equals( m_oGoBackButton ) ){	
-			m_oParent.SeeRecipeAction();
+		if( e.getSource().equals( m_oDeleteAlimentButton ) ){	
+			m_oParent.m_oParent.m_oSmartFridge.getAliments().remove( m_oTable.getSelectedRow() );
+			Refresh();
 		}
 	}
 	
