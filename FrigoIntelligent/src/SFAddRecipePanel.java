@@ -9,6 +9,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -132,19 +133,34 @@ public class SFAddRecipePanel extends JPanel implements ActionListener {
 		else if( e.getSource().equals( m_oAddValidRecipeBt ) ) {
 			Vector<RecipeStage> vStages   = new Vector<RecipeStage>();
 			Vector<Aliment> 	vAliments = new Vector<Aliment>();
-			
-			for( int i = 0 ; i < m_lStageFormList.size() ; i++ ) {
-				SFAddRecipeStageFormPanel o = m_lStageFormList.elementAt(i);
-				vStages.add( new RecipeStage(Integer.parseInt(o.m_oDuree.getText()) , Integer.parseInt((String)o.m_oDifficulte.getSelectedItem()) , o.m_oContent.getText()));
+			try {
+				
+				for( int i = 0 ; i < m_lStageFormList.size() ; i++ ) {
+					SFAddRecipeStageFormPanel oPanel = m_lStageFormList.elementAt(i);
+					vStages.add( new RecipeStage(Integer.parseInt(oPanel.m_oDuree.getText()) , Integer.parseInt((String)oPanel.m_oDifficulte.getSelectedItem()) , oPanel.m_oContent.getText()));
+				}
+				
+				for( int i = 0 ; i < m_lAlimentFormList.size() ; i++ ) {
+					SFAddRecipeAlimentFormPanel oPanel = m_lAlimentFormList.elementAt(i);
+					if( oPanel.m_oName.getText().trim().equals("") ) {
+						JOptionPane.showMessageDialog( this , "Vous n'avez pas mis de nom à certains ingrédients !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
+						return;
+					} else {
+						vAliments.add( new Aliment(oPanel.m_oName.getText(), Integer.parseInt(oPanel.m_oQuantity.getText() ) , 0, 0, (String)oPanel.m_oUnite.getSelectedItem() ));
+					}
+				}
+				
+				if( m_oNewRecipeTitle.getText().trim().equals("") ) {
+					JOptionPane.showMessageDialog( this , "Vous n'avez pas mis de titre à la recette !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
+					return;
+				} else {
+					m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , (String)m_oAddRecipeType.getSelectedItem() , vStages , vAliments , m_oParent.m_oSmartFridge.getRecipes().size() ) );
+					m_oParent.listRecipeAction();
+				}
+				
+			} catch ( NumberFormatException ex ) {
+				JOptionPane.showMessageDialog( this , "Vérifiez les champs numériques !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
 			}
-			
-			for( int i = 0 ; i < m_lAlimentFormList.size() ; i++ ) {
-				SFAddRecipeAlimentFormPanel o = m_lAlimentFormList.elementAt(i);
-				vAliments.add( new Aliment(o.m_oName.getText(), Integer.parseInt( o.m_oQuantity.getText() ) , 0, 0, (String)o.m_oUnite.getSelectedItem() ));
-			}
-			
-			m_oParent.m_oSmartFridge.addRecipe( new Recipe( m_oNewRecipeTitle.getText() , (String)m_oAddRecipeType.getSelectedItem() , vStages , vAliments , m_oParent.m_oSmartFridge.getRecipes().size() ) );
-			m_oParent.listRecipeAction();
-		}	
+		}
 	}
 }

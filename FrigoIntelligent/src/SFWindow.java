@@ -293,7 +293,7 @@ public class SFWindow extends JFrame implements ActionListener {
 		}
 	}
 
-	public void DrawRecipePanel(){
+	public void refreshRecipePanel(){
 		DefaultTableModel model = (DefaultTableModel)m_oTable.getModel();
 			
 		int size = model.getRowCount();
@@ -303,36 +303,36 @@ public class SFWindow extends JFrame implements ActionListener {
 		
 		size = m_oSmartFridge.getRecipes().size();
 		for( int i = 0; i < size; i++ ){
-		    	Vector < String > recipe = new Vector < String >();
-		    	Recipe r = m_oSmartFridge.getRecipes().elementAt( i );
-		    	recipe.addElement( "" + ( i + 1 ) );
-		    	recipe.addElement( r.getName() );
-		    	recipe.addElement( r.getType() );
-		    	recipe.addElement( "" + r.getTime() + " minutes" );
-		    	recipe.addElement( "" + r.getDifficulty() );
-			  		
-				model.addRow( recipe );
+	    	Vector < String > recipe = new Vector < String >();
+	    	Recipe r = m_oSmartFridge.getRecipes().elementAt( i );
+	    	recipe.addElement( "" + ( i + 1 ) );
+	    	recipe.addElement( r.getName() );
+	    	recipe.addElement( r.getType() );
+	    	recipe.addElement( "" + r.getTime() + " minutes" );
+	    	recipe.addElement( "" + r.getDifficulty() );
+		  		
+			model.addRow( recipe );
 		}
 	}
 		
 	public void listRecipeAction() {
 		hideAllPanel();
-		DrawRecipePanel();
+		refreshRecipePanel();
 		m_oRecipeListPanel.setVisible( true );
 	}
 		
-	public void SeeRecipeAction() {
+	public void seeRecipeAction() {
 		hideAllPanel();
 		m_oRecipeListPanel.setVisible( true );
 	}
 	
-	public void SeeFridgeAction() {
+	public void seeFridgeAction() {
 		hideAllPanel();
 		m_oSeeFridgeContent.setVisible( true );
 		m_oSFSeeFridgeContent.Refresh();
 	}
 	
-	public void AddAlimentAction() {
+	public void addAlimentAction() {
 		hideAllPanel();
 		m_oAddAliment.setVisible( true );
 	}
@@ -356,14 +356,14 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oAddRecipePanel.setVisible( true );
 	}
 	
-	public void SeeMenuListAction(){
+	public void seeMenuListAction(){
 		hideAllPanel();
 		m_oSeeMenuListPanel.setVisible( true );
 		
 		m_oSFSeeMenuListPanel.Refresh();
 	}
 	
-	public void SeeMenuAction(){
+	public void seeMenuAction(){
 		hideAllPanel();
 		DefaultTableModel model = (DefaultTableModel)m_oSFSeeMenuListPanel.getTable().getModel();
 
