@@ -80,36 +80,36 @@ public class SFWindow extends JFrame implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		
 		// BEGIN - MENU FILE
-		JMenu menuFile 			= new JMenu( "File" );
+		JMenu menuFile 			= new JMenu( "Fichier" );
 		JMenu menuFridgeRecipe  = new JMenu( "Recettes" );
 		JMenu menuFridgeContent = new JMenu( "Contenu du frigo" );
 		JMenu menuFridgeMenu 	= new JMenu( "Menus" );
 		
 			// BEGIN - SAVE MENU
-		JMenu saveMenu = new JMenu ("Save");
-		JMenuItem saveXmlMI = new JMenuItem( "In file" );
+		JMenu saveMenu = new JMenu ("Sauvegarder");
+		JMenuItem saveXmlMI = new JMenuItem( "Dans un fichier..." );
 		saveXmlMI.addActionListener( oMenuBarActionListener );
 		saveMenu.add( saveXmlMI );
 		
-		JMenuItem saveDbMI = new JMenuItem( "On internet" );
+		JMenuItem saveDbMI = new JMenuItem( "Sur Internet" );
 		saveDbMI.addActionListener( oMenuBarActionListener );
 		saveMenu.add( saveDbMI );
 		menuFile.add( saveMenu );
 			// END - SAVE MENU
 		
 			// BEGIN - LOAD MENU
-		JMenu loadMenu = new JMenu ( "Load" );
-		JMenuItem loadXmlMI = new JMenuItem( "From file" );
+		JMenu loadMenu = new JMenu ( "Charger" );
+		JMenuItem loadXmlMI = new JMenuItem( "Depuis un fichier..." );
 		loadXmlMI.addActionListener( oMenuBarActionListener );
 		loadMenu.add( loadXmlMI );
 		
-		JMenuItem loadDbMI = new JMenuItem( "From internet" );
+		JMenuItem loadDbMI = new JMenuItem( "Depuis Internet" );
 		loadDbMI.addActionListener( oMenuBarActionListener );
 		loadMenu.add( loadDbMI );		
 		menuFile.add( loadMenu );
 			// END - LOAD MENU
 		
-		JMenuItem quitMI = new JMenuItem( "Quit" );
+		JMenuItem quitMI = new JMenuItem( "Quitter" );
 		quitMI.addActionListener( oMenuBarActionListener );		
 		menuFile.add( quitMI );
 		// END - MENU FILE

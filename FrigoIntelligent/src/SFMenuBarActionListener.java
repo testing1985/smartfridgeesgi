@@ -23,7 +23,7 @@ public class SFMenuBarActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 				
 		// Quitter l'application
-		if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Quit" ) )
+		if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Quitter" ) )
 		{
 			int answer = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment quitter le programme ?", "Quitter ?", JOptionPane.YES_NO_OPTION );
 			
@@ -47,17 +47,17 @@ public class SFMenuBarActionListener implements ActionListener {
 		}
 		
 		// Sauvegarde sur internet
-		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "On internet" ) ) {
+		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Sur Internet" ) ) {
 			m_oApp.saveInternetShowPanel();
 		}
 		
 		// Chargement depuis internet
-		else if( ((JMenuItem)(e.getSource())).getText().equals("From internet") ) {
+		else if( ((JMenuItem)(e.getSource())).getText().equals("Depuis Internet") ) {
 			m_oApp.loadInternetShowPanel();
 		}
 		
 		// Sauvegarde dans le fichier xml
-		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "In file" ) ) {
+		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Dans un fichier..." ) ) {
 			try {
 				JFileChooser oFC = new JFileChooser( new File( "." ).getCanonicalPath() );
 				oFC.showSaveDialog( m_oApp );
@@ -72,7 +72,7 @@ public class SFMenuBarActionListener implements ActionListener {
 		}
 		
 		// Chargement depuis le fichier xml
-		else if( ( (JMenuItem)(e.getSource())).getText().equals( "From file" ) ) {
+		else if( ( (JMenuItem)(e.getSource())).getText().equals( "Depuis un fichier..." ) ) {
 			try {
 				JFileChooser oFC = new JFileChooser( new File( "." ).getCanonicalPath() );
 				oFC.showOpenDialog( m_oApp );
