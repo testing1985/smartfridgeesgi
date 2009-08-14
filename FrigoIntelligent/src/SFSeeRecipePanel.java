@@ -41,6 +41,7 @@ public class SFSeeRecipePanel extends JPanel{
 	
 	public void ChangeID( String s ){
 		m_iID = Integer.parseInt( s );
+		//m_iID--;
 	}
 	
 	public void Refresh(){
