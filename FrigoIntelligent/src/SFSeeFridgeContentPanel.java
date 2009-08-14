@@ -19,7 +19,7 @@ import SmartFridgeAPI.Recipe;
 public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 
 	SFWindow 	m_oParent;
-	JButton 	m_oDeleteAlimentButton 			 = new JButton( "Retour" );
+	JButton 	m_oDeleteAlimentButton 	  	 = new JButton( "Supprimer un aliment" );
 	JPanel 		m_oCenterPanel				 = new JPanel();
 	
 	JTable 		m_oTable					 = new JTable();
