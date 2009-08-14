@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.Vector;
 
 import SmartFridgeAPI.Aliment;
+import SmartFridgeAPI.Menu;
 import SmartFridgeAPI.Recipe;
 import SmartFridgeAPI.RecipeStage;
 import SmartFridgeAPI.SmartFridge;
@@ -93,6 +94,21 @@ public class Session {
 				oSF.addRecipe( oRecipe );
 			}
 			
+			String sGetMenu = "SELECT * FROM Menu WHERE userMenu = " + m_iID;
+			oRS = oST.executeQuery( sGetMenu );
+			while( oRS.next() ) {
+				Menu oMenu = new Menu();
+				oMenu.setName( oRS.getString( "nameMenu" ) );
+				String sRecipeList = oRS.getString( "recipesMenu" );
+				String[] lRecipeIndexList = sRecipeList.split("-");
+				int[] vRecipeList = new int[lRecipeIndexList.length];
+				for( int j = 0 ; j < vRecipeList.length ; j++ ) {
+					vRecipeList[j] = Integer.parseInt( lRecipeIndexList[j] );
+				}
+				oMenu.setListRecipeID( vRecipeList );
+				oSF.addMenu( oMenu );
+			}
+			
 			oSF.createMenusFromIDs();
 			
 		} catch ( SQLException e ) {
@@ -107,12 +123,12 @@ public class Session {
 		
 		try {
 			
-			Statement oSt = oBDD.createStatement();
+			Statement oST = oBDD.createStatement();
 			String sGetRecipeIDs = "" +
 				 " SELECT idRecipe" +
 				 " FROM Recipe" +
 				 " WHERE userRecipe = " + m_iID;
-			ResultSet oRS = oSt.executeQuery( sGetRecipeIDs );
+			ResultSet oRS = oST.executeQuery( sGetRecipeIDs );
 			while( oRS.next() ) {
 				int idRecipe = oRS.getInt("idRecipe");
 				
@@ -133,6 +149,9 @@ public class Session {
 				oST2.executeUpdate(sDelete);
 				oST2.close();
 			}
+			
+			String sDeleteMenus = "DELETE FROM Menu WHERE userMenu = " + m_iID;
+			oST.executeUpdate( sDeleteMenus );
 			
 			Vector<Recipe> vRecipes = oSF.getRecipes();
 			
@@ -175,6 +194,23 @@ public class Session {
 					}
 					
 				}
+			}
+			
+			Vector<Menu> vMenus = oSF.getMenus();
+			for( int i = 0 ; i < vMenus.size() ; i++ ) {
+				Menu oMenu = vMenus.elementAt(i);
+				String sRecipeIndexList = "";
+				int[] vIndexList = oMenu.getListRecipeID();
+				for( int j = 0 ; j < vIndexList.length ; j++ ) {
+					sRecipeIndexList += vIndexList[j] + "-";
+				}
+				
+				String sAddMenu = "INSERT INTO Menu( userMenu , recipesMenu , nameMenu ) VALUES (?,?,?)";
+				PreparedStatement oPST = oBDD.prepareStatement( sAddMenu );
+				oPST.setInt( 1 , m_iID );
+				oPST.setString( 2 , sRecipeIndexList );
+				oPST.setString(3, oMenu.getName() );
+				oPST.executeUpdate();
 			}
 												
 		} catch ( SQLException e ) {
