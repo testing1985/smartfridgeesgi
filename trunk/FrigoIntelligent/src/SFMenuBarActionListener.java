@@ -107,16 +107,16 @@ public class SFMenuBarActionListener implements ActionListener {
 		
 		// Voir le contenu du frigo
 		if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Voir le contenu" ) ){
-			m_oParent.SeeFridgeAction();
+			m_oParent.seeFridgeAction();
 		}
 		// Ajouter un aliment
 		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Ajouter un aliment" )  ){
-			m_oParent.AddAlimentAction();
+			m_oParent.addAlimentAction();
 		}
 		
 		// Voir les menus enregistrés
 		if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Voir les menus" ) ){
-			m_oParent.SeeMenuListAction();
+			m_oParent.seeMenuListAction();
 		}
 		// Ajouter un menu
 		else if( ( (JMenuItem)( e.getSource() ) ).getText().equals( "Créer un menu" )  ){

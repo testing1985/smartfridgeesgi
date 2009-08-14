@@ -16,9 +16,3 @@ public class SmartFridgeApp {
 		m_oApp 		   = new SFWindow();				
 	}
 }
-
-
-
-
-
-

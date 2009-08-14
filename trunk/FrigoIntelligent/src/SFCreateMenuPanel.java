@@ -91,7 +91,7 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 				}
 				oMenu.setRecipes( vRecipes );
 				m_oParent.m_oSmartFridge.addMenu( oMenu );
-				m_oParent.SeeMenuAction();
+				m_oParent.seeMenuAction();
 			}
 		}
 	}
