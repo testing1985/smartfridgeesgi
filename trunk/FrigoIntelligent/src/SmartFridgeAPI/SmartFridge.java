@@ -14,6 +14,12 @@ public class SmartFridge {
 		m_vRecipes  = new Vector<Recipe>();
 	}
 		
+	public void createMenusFromIDs() {
+		for( int i = 0 ; i < m_vMenus.size() ; i++ ) {
+			m_vMenus.elementAt(i).setRecipeListFromIDs( m_vRecipes );
+		}
+	}
+	
 	public Vector<Menu> getMenus() {
 		return m_vMenus;
 	}

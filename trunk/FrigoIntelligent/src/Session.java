@@ -51,9 +51,11 @@ public class Session {
 			Statement oST = oBDD.createStatement();
 			String sGetRecipe = "SELECT * FROM Recipe WHERE userRecipe = " + m_iID;
 			ResultSet oRS = oST.executeQuery( sGetRecipe );
+			int i = 0;
 			while( oRS.next() ) {
 				Recipe oRecipe = new Recipe();
 				int idRecipe = oRS.getInt("idRecipe");
+				oRecipe.setID(i++);
 				oRecipe.setName( oRS.getString("nameRecipe") );
 				oRecipe.setType( oRS.getString("typeRecipe") );
 				Vector<RecipeStage> vStages = new Vector<RecipeStage>();
@@ -90,6 +92,8 @@ public class Session {
 				
 				oSF.addRecipe( oRecipe );
 			}
+			
+			oSF.createMenusFromIDs();
 			
 		} catch ( SQLException e ) {
 			e.printStackTrace();

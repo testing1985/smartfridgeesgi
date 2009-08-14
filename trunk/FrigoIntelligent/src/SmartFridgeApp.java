@@ -32,8 +32,8 @@ public class SmartFridgeApp {
 	
 	public SmartFridgeApp()
 	{
-		m_oApp 		   = new SFWindow( this );		
 		m_oSmartFridge = new SmartFridge();
+		m_oApp 		   = new SFWindow( this );		
 		m_oSession	   = new Session();
 		
 		initializeConnection();
