@@ -98,7 +98,7 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 				}
 				oMenu.setRecipes( vRecipes );
 				m_oParent.m_oSmartFridge.addMenu( oMenu );
-				m_oParent.seeMenuAction();
+				m_oParent.seeMenuListAction();
 			} else {
 				JOptionPane.showMessageDialog( this , "Aucune recette n'est enregistrée !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
 			}

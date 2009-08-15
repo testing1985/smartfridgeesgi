@@ -346,13 +346,15 @@ public class SFWindow extends JFrame implements ActionListener {
 		m_oSFSeeMenuListPanel.Refresh();
 	}
 	
-	public void seeMenuAction(){
-		hideAllPanel();
+	public void seeMenuAction(){		
 		DefaultTableModel model = (DefaultTableModel)m_oSFSeeMenuListPanel.getTable().getModel();
-
-		m_oSFSeeMenuPanel.ChangeID( (String) model.getValueAt(m_oSFSeeMenuListPanel.getTable().getSelectedRow() , 0 ) );
-		m_oSFSeeMenuPanel.Refresh();
-		m_oSFSeeMenuPanel.setVisible( true );
+		int iRow = m_oSFSeeMenuListPanel.getTable().getSelectedRow();
+		if( iRow != -1 ) {
+			hideAllPanel();
+			m_oSFSeeMenuPanel.ChangeID( (String) model.getValueAt( iRow , 0 ) );
+			m_oSFSeeMenuPanel.Refresh();
+			m_oSFSeeMenuPanel.setVisible( true );
+		}
 	}
 	
 

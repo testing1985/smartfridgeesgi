@@ -103,8 +103,11 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 			m_oParent.seeMenuAction();
 		}
 		else if( e.getSource().equals( m_oDeleteMenuButton ) ){	
-			m_oParent.m_oSmartFridge.getMenus().remove( m_oTable.getSelectedRow() );
-			Refresh();
+			int iRow = m_oTable.getSelectedRow();
+			if( iRow != -1 ) {
+				m_oParent.m_oSmartFridge.getMenus().remove( iRow );
+				Refresh();
+			}
 		}
 	}
 }
