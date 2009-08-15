@@ -65,11 +65,17 @@ public class SFMenuBarActionListener implements ActionListener {
 				if( oFC.showSaveDialog( m_oParent ) == JFileChooser.APPROVE_OPTION ) {
 					File fSelected = oFC.getSelectedFile();
 					if( fSelected != null ) {
+						String sFilename = fSelected.getPath();
+						if( ! sFilename.endsWith(".xml") ) sFilename += ".xml";
+						
 						if( fSelected.length() > 0 ) {
 							int iRes = JOptionPane.showConfirmDialog( m_oParent , "Le fichier n'est pas vide, voulez vous l'écraser ?", "Confirmation d'enregistrement", JOptionPane.YES_NO_OPTION );
 							if( iRes == JOptionPane.YES_OPTION ) {
-								XMLManager.encodeToFile( m_oParent.m_oSmartFridge, fSelected.getName() );
+								XMLManager.encodeToFile( m_oParent.m_oSmartFridge, sFilename );
 							}
+						}
+						else {
+							XMLManager.encodeToFile( m_oParent.m_oSmartFridge, sFilename );
 						}
 					}
 				}
