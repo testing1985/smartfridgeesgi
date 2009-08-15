@@ -69,11 +69,11 @@ public class SFSeeMenuList extends JPanel implements ActionListener {
 		    		Recipe r = m.getRecipes().elementAt( j );
 		    		if( r.getType().equals( "Entrée" ) )
 		    			entree++;
-		    		else if( r.getType().equals( "plat" ) )
+		    		else if( r.getType().equals( "Plat" ) )
 		    			plat++;
-		    		else if( r.getType().equals( "dessert" ) )
+		    		else if( r.getType().equals( "Dessert" ) )
 		    			dessert++;
-		    		else if( r.getType().equals( "boisson" ) )
+		    		else if( r.getType().equals( "Boisson" ) )
 		    			boisson++;
 		    		else if( r.getType().equals( "Amuse-gueule" ) )
 		    			AmuseGueule++;
