@@ -18,7 +18,7 @@ public class SFSaveOnInternetFormPanel extends JPanel implements ActionListener 
 	SFWindow   m_oParent = null;
 	JTextField m_oLogin  = null;
 	JTextField m_oPasswd = null;
-	JButton    m_oSave   = new JButton( "Save" );
+	JButton    m_oSave   = new JButton( "Enregistrer" );
 	
 	public SFSaveOnInternetFormPanel( SFWindow oParent ) {
 		super( new BorderLayout() );

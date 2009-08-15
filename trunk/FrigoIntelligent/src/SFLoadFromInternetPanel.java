@@ -18,7 +18,7 @@ public class SFLoadFromInternetPanel extends JPanel implements ActionListener {
 	SFWindow   m_oParent = null;
 	JTextField m_oLogin  = null;
 	JTextField m_oPasswd = null;
-	JButton    m_oLoad   = new JButton( "Load" );
+	JButton    m_oLoad   = new JButton( "Charger" );
 	
 	public SFLoadFromInternetPanel( SFWindow oParent ) {
 		super( new BorderLayout() );
