@@ -15,7 +15,7 @@ public class SmartFridgeApp {
 	
 	public SmartFridgeApp()
 	{
-		m_oApp 		   = new SFWindow();
+		m_oApp 		   = new SFWindow( false );
 		m_oApp.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	}
 }

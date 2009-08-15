@@ -24,7 +24,7 @@ import SmartFridgeAPI.SmartFridge;
 
 @SuppressWarnings( "serial" )
 public class SFWindow extends JFrame implements ActionListener {
-
+	
 	RSSManager   m_oRSSManager;
 	SmartFridge  m_oSmartFridge;
 	Session      m_oSession = null;
@@ -64,7 +64,7 @@ public class SFWindow extends JFrame implements ActionListener {
 
 	public JList list;
 	
-	public SFWindow(){
+	public SFWindow( Boolean bIsApplet ){
 		m_oSmartFridge = new SmartFridge();
 		m_oSession	   = new Session();
 		initializeConnection();
@@ -81,9 +81,11 @@ public class SFWindow extends JFrame implements ActionListener {
 		
 			// BEGIN - SAVE MENU
 		JMenu saveMenu = new JMenu ("Sauvegarder");
-		JMenuItem saveXmlMI = new JMenuItem( "Dans un fichier..." );
-		saveXmlMI.addActionListener( oMenuBarActionListener );
-		saveMenu.add( saveXmlMI );
+		if( ! bIsApplet ) {
+			JMenuItem saveXmlMI = new JMenuItem( "Dans un fichier..." );
+			saveXmlMI.addActionListener( oMenuBarActionListener );
+			saveMenu.add( saveXmlMI );
+		}
 		
 		JMenuItem saveDbMI = new JMenuItem( "Sur Internet" );
 		saveDbMI.addActionListener( oMenuBarActionListener );
@@ -93,9 +95,11 @@ public class SFWindow extends JFrame implements ActionListener {
 		
 			// BEGIN - LOAD MENU
 		JMenu loadMenu = new JMenu ( "Charger" );
-		JMenuItem loadXmlMI = new JMenuItem( "Depuis un fichier..." );
-		loadXmlMI.addActionListener( oMenuBarActionListener );
-		loadMenu.add( loadXmlMI );
+		if( ! bIsApplet ) {
+			JMenuItem loadXmlMI = new JMenuItem( "Depuis un fichier..." );
+			loadXmlMI.addActionListener( oMenuBarActionListener );
+			loadMenu.add( loadXmlMI );
+		}
 		
 		JMenuItem loadDbMI = new JMenuItem( "Depuis Internet" );
 		loadDbMI.addActionListener( oMenuBarActionListener );
@@ -103,9 +107,11 @@ public class SFWindow extends JFrame implements ActionListener {
 		menuFile.add( loadMenu );
 			// END - LOAD MENU
 		
-		JMenuItem quitMI = new JMenuItem( "Quitter" );
-		quitMI.addActionListener( oMenuBarActionListener );		
-		menuFile.add( quitMI );
+		if( ! bIsApplet ) {
+			JMenuItem quitMI = new JMenuItem( "Quitter" );
+			quitMI.addActionListener( oMenuBarActionListener );		
+			menuFile.add( quitMI );
+		}
 		// END - MENU FILE
 						
 		// BEGIN - FridgeRecipe MENU
