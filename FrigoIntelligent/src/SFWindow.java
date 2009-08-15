@@ -234,7 +234,6 @@ public class SFWindow extends JFrame implements ActionListener {
 		this.add( centerPanel , BorderLayout.CENTER );		
 		
 		setResizable( false );
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setVisible( true );
 		pack();
 	}
