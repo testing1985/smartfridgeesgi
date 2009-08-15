@@ -5,6 +5,6 @@ public class SmartFridgeApplet extends JApplet {
 		
     public void init(){
     	super.init();
-    	new SFWindow();
+    	new SFWindow( true );
     }
 }
