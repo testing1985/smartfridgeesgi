@@ -66,8 +66,10 @@ public class SFSeeFridgeContentPanel extends JPanel implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e){
 		if( e.getSource().equals( m_oDeleteAlimentButton ) ){	
-			m_oParent.m_oSmartFridge.getAliments().remove( m_oTable.getSelectedRow() );
-			Refresh();
+			if( m_oParent.m_oSmartFridge.getAliments().size() > 0 && m_oTable.getSelectedRow() != -1 ) {
+				m_oParent.m_oSmartFridge.getAliments().remove( m_oTable.getSelectedRow() );
+				Refresh();
+			}
 		}
 	}
 	
