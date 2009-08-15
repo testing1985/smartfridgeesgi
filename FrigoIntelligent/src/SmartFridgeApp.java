@@ -1,3 +1,4 @@
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 public class SmartFridgeApp {
@@ -7,12 +8,14 @@ public class SmartFridgeApp {
 	{	
 		Runnable r = new Runnable(){
 			public void run() { new SmartFridgeApp(); }
+			
 		};
 		SwingUtilities.invokeLater(r);
 	}
 	
 	public SmartFridgeApp()
 	{
-		m_oApp 		   = new SFWindow();				
+		m_oApp 		   = new SFWindow();
+		m_oApp.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	}
 }

@@ -234,7 +234,7 @@ public class SFWindow extends JFrame implements ActionListener {
 		this.add( centerPanel , BorderLayout.CENTER );		
 		
 		setResizable( false );
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		//setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setVisible( true );
 		pack();
 	}
@@ -246,7 +246,6 @@ public class SFWindow extends JFrame implements ActionListener {
 								
 				m_oSFSeeRecipePanel.ChangeID( m_oTable.getValueAt( m_oTable.getSelectedRow(), 0 ).toString() );
 				m_oSFSeeRecipePanel.Refresh();
-				//m_oSeeRecipePanel.setVisible( true );
 				m_oSFSeeRecipePanel.setVisible( true );
 				
 			}
