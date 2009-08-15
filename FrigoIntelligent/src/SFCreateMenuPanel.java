@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -83,6 +84,12 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 		else if( e.getSource().equals( m_oValidMenuBt ) ) {
 			if( ! m_oParent.m_oSmartFridge.getRecipes().isEmpty() ) {
 				Menu oMenu = new Menu();
+				
+				if( m_oName.getText().trim().equals("") ) {
+					JOptionPane.showMessageDialog( this , "Vous n'avez pas mis de nom au menu !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
+					return;
+				}
+				
 				oMenu.setName( m_oName.getText() );
 			
 				Vector<Recipe> vRecipes = new Vector<Recipe>();
@@ -92,6 +99,8 @@ public class SFCreateMenuPanel extends JPanel implements ActionListener {
 				oMenu.setRecipes( vRecipes );
 				m_oParent.m_oSmartFridge.addMenu( oMenu );
 				m_oParent.seeMenuAction();
+			} else {
+				JOptionPane.showMessageDialog( this , "Aucune recette n'est enregistrée !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import SmartFridgeAPI.Aliment;
 
@@ -42,15 +43,24 @@ public class SFAddAlimentPanel extends JPanel implements ActionListener{
 	
 	public void actionPerformed( ActionEvent e ) {
 		if( e.getSource().equals( m_oValidateAliment ) ){	
-			m_oParent.m_oSmartFridge.getAliments().addElement( 
-			new Aliment( 	m_oPanel.get_Name().getText(), 
-							Integer.parseInt( m_oPanel.get_Quantity().getText() ), 
-							(float)1.0, 
-							0,
-							(String)m_oPanel.get_Unite().getSelectedItem() )
 			
-			);
-			reset();
+			if( m_oPanel.m_oName.getText().trim().equals("") ) {
+				JOptionPane.showMessageDialog( this , "Vous n'avez pas mis de nom à l'aliment !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
+				return;
+			}
+			
+			try {
+				Aliment oAliment = new Aliment();
+				oAliment.setName( m_oPanel.get_Name().getText() );
+				oAliment.setQuantity( Integer.parseInt( m_oPanel.get_Quantity().getText() ) );
+				oAliment.setPrice( 1.0f );
+				oAliment.setPeremption( 0 );
+				oAliment.setUnite( (String)m_oPanel.get_Unite().getSelectedItem() );				
+				m_oParent.m_oSmartFridge.getAliments().addElement( oAliment );
+				reset();
+			} catch ( NumberFormatException ex ) {
+				JOptionPane.showMessageDialog( this , "Vérifiez les champs numériques !" , "Erreur de vérification du formulaire" , JOptionPane.ERROR_MESSAGE );
+			}
 		}	
 	}
 }
