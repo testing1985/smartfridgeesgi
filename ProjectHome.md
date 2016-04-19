@@ -1,0 +1,1 @@
+A simple smart fridge java application.
